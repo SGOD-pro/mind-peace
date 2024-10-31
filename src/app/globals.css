@@ -142,9 +142,14 @@ body {
 .login-button {
 	@apply bg-[#ff6f7d] rounded-xl hover:bg-[#ff9ea8] tracking-widest font-bold;
 }
-
+.therapist-filters {
+	@apply capitalize px-4 py-1 bg-[#d1f5f1] hover:bg-[#95d4ce] rounded-md font-black font-leagueSpartan;
+}
+.top-rated-card {
+	background-color: #f4f4f4;
+}
 .scrollbar {
-	--sb-track-color: #f9f9f9;
+	--sb-track-color: #f9f9f900;
 	--sb-thumb-color: #ff6876;
 	--sb-size: 7px;
 }

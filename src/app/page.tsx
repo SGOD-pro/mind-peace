@@ -10,12 +10,13 @@ import LocomotiveScroll from "locomotive-scroll";
 import LastSection from "@/components/LastSection";
 import Link from "next/link";
 import LandingAnimation from "@/components/LandingAnimation";
+import Carousel from "@/components/Carosel";
 
 export default function Home() {
 	const locomotive = new LocomotiveScroll();
 	return (
-		<main className="bg-[#F9F9F9] scrollbar relative">
-			{/* <LandingAnimation/> */}
+		<main className="bg-[#F9F9F9] scrollbar relative text-black">
+			<LandingAnimation/>
 			<section
 				className="flex h-dvh w-full items-center font-leagueSpartan"
 				data-scroll
@@ -23,11 +24,11 @@ export default function Home() {
 				<Section1 />
 			</section>
 
-			<section className="w-full min-h-dvh h-dvh p-8 pb-12 pt-0 sticky top-2 z-0">
+			<section className="w-full min-h-dvh h-dvh p-8 pb-12 pt-0 z-0">
 				<Section2 />
 			</section>
 			<div className="relative">
-				<section className="h-[60dvh] bg-[#5A191F] p-10 relative z-10">
+				<section className="h-[60dvh] bg-[#5A191F] p-8 relative z-10">
 					<div className="w-full h-full relative">
 						<div
 							className="absolute text-white top-0 left-0"
@@ -39,6 +40,7 @@ export default function Home() {
 								Caring is always free
 							</p>
 						</div>
+						<Carousel/>
 					</div>
 				</section>
 
@@ -54,13 +56,7 @@ export default function Home() {
 					<LastSection />
 				</section>
 
-				<footer className="p-4 text-center bg-[#0C023A]">
-					<p className="text-[#6F61F4] font-leagueSpartan font-bold text-xl tracking-widest">
-						This website is created by{" "}
-						<Link href="https://github.com/AnirudhH">Souvik Karmakar </Link>
-						with love.
-					</p>
-				</footer>
+			
 
 
 			</div>

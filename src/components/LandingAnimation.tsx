@@ -35,13 +35,16 @@ function LandingAnimation() {
 				opacity: 1,
 				scale: 1,
 				rotation: Math.random() * 20 - 10,
-				duration: 0.5,
+				duration: 0.8,
 				ease: "power2.inOut",
 				y: `${yPosition}%`,
 				x: `${xPosition}%`,
 				delay: index * 0.2,
 			});
 		});
+		gsap.set(yellowScreen.current,{
+			height: "90%",
+		})
 		const t1 = gsap.timeline();
 		t1.from(
 			mainImg.current,
@@ -60,7 +63,7 @@ function LandingAnimation() {
 				opacity: 0,
 				y: "110%",
 				ease: "power2",
-				duration: 0.5,
+				duration: 0.6,
 			},
 			"a"
 		);
@@ -70,7 +73,7 @@ function LandingAnimation() {
 				opacity: 0,
 				y: "-110%",
 				ease: "power2",
-				duration: 0.5,
+				duration: 0.8,
 			},
 			"a"
 		);
@@ -91,7 +94,6 @@ function LandingAnimation() {
 		t2.to(
 			mainImg.current,
 			{
-				// y: "100%",
 				scale:3,
 				opacity: 0,
 				ease: "power2",
@@ -140,7 +142,7 @@ function LandingAnimation() {
 	return (
 		<div className="fixed inset-0 z-[9999] " ref={main}>
 			<div
-				className="absolute inset-0 h-[90%] bg-[#f7e3a6] -z-10 top-0 left-0"
+				className="absolute inset-0 h-dvh bg-[#f7e3a6] -z-10 top-0 left-0"
 				ref={yellowScreen}
 			></div>
 			<Image

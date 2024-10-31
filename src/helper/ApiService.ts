@@ -85,45 +85,68 @@ class ApiService<Tx> {
 		endpoint = "",
 		data,
 		showToast = true,
+		isMultipart = false,
 	}: {
 		endpoint?: string;
 		data: any;
 		showToast?: boolean;
+		isMultipart?: boolean;
 	}): Promise<ApiServicesResponse<T>> {
 		const action = "POST";
 		try {
-			const response: AxiosResponse<ApiServicesResponse<T>> =
-				await this.axiosInstance.post(endpoint, data);
+			let requestData = data;
+			if (isMultipart) {
+				requestData = new FormData();
+				for (const key in data) {
+					if (data.hasOwnProperty(key)) {
+						requestData.append(key, data[key]);
+					}
+				}
+			}
+			const config = isMultipart
+				? { headers: { 'Content-Type': 'multipart/form-data' } }
+				: {};
+			const response: AxiosResponse<ApiServicesResponse<T>> = await this.axiosInstance.post(
+				endpoint,
+				requestData,
+				config
+			);
+	
 			const result = {
 				success: response.data.success,
 				data: response.data.data,
 				message: response.data.message,
 			};
-			if (showToast)
+			
+			if (showToast) {
 				this.showToast({
 					success: result.success,
 					message: result.message,
 					action,
 				});
+			}
+			
 			return result;
 		} catch (error: any) {
 			const result = {
 				success: false,
 				error: new Error(
-					error.response?.data?.message ||
-						error.message ||
-						"An unknown error occurred"
+					error.response?.data?.message || error.message || "An unknown error occurred"
 				),
 			};
-			if (showToast)
+	
+			if (showToast) {
 				this.showToast({
 					success: result.success,
 					message: result.error.message,
 					action,
 				});
+			}
+			
 			return result as ApiServicesResponse<T>;
 		}
 	}
+	
 
 	async put<T>({
 		endpoint = "",

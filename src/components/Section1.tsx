@@ -5,16 +5,10 @@ function Section1() {
 	return (
 		<>
 			<div className="px-10 w-[40%]" data-scroll data-scroll-speed="-.2">
-				<h1
-					className="text-8xl leading-[5rem] font-lemon text-[#FFB4BB]"
-				
-				>
+				<h1 className="text-8xl leading-[5rem] font-lemon text-[#FFB4BB]">
 					Mental health <span className="text-[#3D282A]">is wealth</span>
 				</h1>
-				<p
-					className="font-bold text-2xl mt-8"
-				
-				>
+				<p className="font-bold text-2xl mt-8">
 					Nurture your mind, find balance, and live fully
 				</p>
 			</div>
@@ -25,6 +19,7 @@ function Section1() {
 					width={800}
 					height={800}
 					className="w-full h-full object-contain"
+					priority={true}
 				></Image>
 			</div>
 		</>

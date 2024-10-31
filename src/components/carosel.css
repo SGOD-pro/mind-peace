@@ -1,0 +1,24 @@
+.carousel {
+    overflow: hidden;
+    width: 100%;
+    height: 300px; /* Set a height for the carousel */
+    position: relative;
+  }
+  
+  .slide-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .slide {
+    min-width: 100%;
+    transition: transform 0.5s ease;
+  }
+  
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  

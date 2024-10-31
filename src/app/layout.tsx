@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import Navbar from "@/components/Navbar";
 import Main from "./Main";
+import Footer from "@/components/Footer";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
@@ -50,7 +51,7 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} ${lemon.variable} antialiased ${lexend.variable} ${lexendDeca.variable} ${lexendExa.variable} ${leagueSpartan.variable}`}
+				className={`${geistSans.variable} ${geistMono.variable} ${lemon.variable} antialiased ${lexend.variable} ${lexendDeca.variable} ${lexendExa.variable} ${leagueSpartan.variable} `}
 			>
 				<ThemeProvider
 					attribute="class"
@@ -62,6 +63,7 @@ export default function RootLayout({
 					<Toaster />
 					<Main />
 					{children}
+					<Footer />
 				</ThemeProvider>
 			</body>
 		</html>

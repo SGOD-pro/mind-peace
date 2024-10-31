@@ -24,7 +24,6 @@ import Signup from "./forms/Signup";
 			<div className="w-full mt-4">
 				<button
 					type="button"
-					onClick={() => setIsCreateAccount(!isCreateAccount)}
 					className="bg-[#FFF3F3] rounded-xl flex items-center justify-center gap-2 h-9 px-4 py-2 w-full"
 				>
 					<Image src={"/google.svg"} alt="Google" width={20} height={20} />
