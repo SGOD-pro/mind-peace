@@ -11,6 +11,9 @@ interface Auth extends Document {
 	refreshToken: string;
 	createdAt: Date;
 	updatedAt: Date;
+	isPasswordCorrect(password: string): Promise<boolean>;
+	generateAccessToken(): string;
+	generateRefreshToken(): string;
 }
 
 const AuthSchema = new Schema<Auth>(
@@ -25,7 +28,7 @@ const AuthSchema = new Schema<Auth>(
 			default: "email",
 			enum: ["email", "google"],
 		},
-		refreshToken: { type: String, required: true },
+		refreshToken: { type: String },
 	},
 	{ timestamps: true }
 );
@@ -42,7 +45,7 @@ AuthSchema.methods.isPasswordCorrect = async function (password: string) {
 
 AuthSchema.methods.generateAccessToken = function () {
 	return jwt.sign(
-		{ _id: this._id, email: this.email },
+		{ _id: this._id, email: this.email, role: this.role },
 		process.env.ACCESS_TOKEN_SECRET!,
 		{ expiresIn: process.env.ACCESS_TOKEN_EXP }
 	);
