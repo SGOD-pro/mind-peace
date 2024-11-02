@@ -11,6 +11,5 @@ interface UserWithId{
 	email:string,
 	role:string,
 	id:string,
-	accesstoken:string
-	refreshtoken:string
+	avatar:string
 }

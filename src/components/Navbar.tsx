@@ -20,7 +20,7 @@ function Navbar() {
 		gsap.from(nav.current, {
 			opacity: 0,
 			y: "-100%",
-			delay: 4.8,
+			// delay: 4.8,
 			ease: "power2.inOut",
 		});
 	}, []);
@@ -70,7 +70,7 @@ function Navbar() {
 					</li>
 				</ul>
 			</div>
-			<div className="">
+			<div className=" flex items-center">
 				<LoginFormBtn />
 			</div>
 		</nav>

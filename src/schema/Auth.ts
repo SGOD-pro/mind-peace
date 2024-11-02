@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 interface Auth extends Document {
 	email: string;
-	password: string;
+	password?: string;
 	role: number;
 	avatar: string;
 	provider: string;
@@ -34,7 +34,7 @@ const AuthSchema = new Schema<Auth>(
 );
 
 AuthSchema.pre("save", async function (next) {
-	if (this.isModified("password")) {
+	if (this.isModified("password")&&this.password) {
 		this.password = await bcrypt.hash(this.password, 10);
 	}
 	next();

@@ -95,14 +95,14 @@ class ApiService<Tx> {
 		const action = "POST";
 		try {
 			let requestData = data;
-			if (isMultipart) {
-				requestData = new FormData();
-				for (const key in data) {
-					if (data.hasOwnProperty(key)) {
-						requestData.append(key, data[key]);
-					}
-				}
-			}
+			// if (isMultipart) {
+			// 	requestData = new FormData();
+			// 	for (const key in data) {
+			// 		if (data.hasOwnProperty(key)) {
+			// 			requestData.append(key, data[key]);
+			// 		}
+			// 	}
+			// }
 			const config = isMultipart
 				? { headers: { 'Content-Type': 'multipart/form-data' } }
 				: {};

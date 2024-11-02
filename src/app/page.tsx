@@ -16,7 +16,7 @@ export default function Home() {
 	const locomotive = new LocomotiveScroll();
 	return (
 		<main className="bg-[#F9F9F9] scrollbar relative text-black">
-			<LandingAnimation/>
+			{/* <LandingAnimation/> */}
 			<section
 				className="flex h-dvh w-full items-center font-leagueSpartan"
 				data-scroll
