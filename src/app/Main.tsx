@@ -2,6 +2,7 @@
 import React, { memo, useEffect, useRef } from "react";
 import { useLoginForm } from "@/store/LoginForm";
 import LoginForm from "@/components/login-form";
+import { verifySession } from "@/helper/LoginWithGoogle";
 
 function Main() {
 	const isOpen = useLoginForm((state) => state.isOpen);
@@ -29,6 +30,7 @@ function Main() {
 			document.removeEventListener("click", handleClickOutside);
 		};
 	}, [setIsOpen]);
+	
 
 	return (
 		<div

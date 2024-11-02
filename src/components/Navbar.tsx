@@ -9,9 +9,9 @@ import gsap from "gsap";
 
 function Navbar() {
 	const pathname = usePathname();
-	if (pathname.includes("/dashboard") || pathname.includes("/admin")) {
-		return null;
-	}
+	if (pathname.includes("/dashboard") || pathname.includes("/admin") || pathname.includes("/not-authorized") || pathname === "/404") {
+        return null;
+    }
 	const nav = useRef(null);
 	useGSAP(() => {
 		if (pathname!=="/") {

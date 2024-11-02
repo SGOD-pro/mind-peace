@@ -2,7 +2,7 @@ import mongoose, { Document, Schema, Model } from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-interface Auth extends Document {
+interface AuthSchemaInterface extends Document {
 	email: string;
 	password?: string;
 	role: number;
@@ -16,10 +16,10 @@ interface Auth extends Document {
 	generateRefreshToken(): string;
 }
 
-const AuthSchema = new Schema<Auth>(
+const AuthSchema = new Schema<AuthSchemaInterface>(
 	{
 		email: { type: String, required: true },
-		password: { type: String},
+		password: { type: String },
 		avatar: { type: String },
 		role: { type: Number, required: true, default: 0 }, // NOTE: 0 = user, 1 = therapist, 2 = admin
 		provider: {
@@ -34,7 +34,7 @@ const AuthSchema = new Schema<Auth>(
 );
 
 AuthSchema.pre("save", async function (next) {
-	if (this.isModified("password")&&this.password) {
+	if (this.isModified("password") && this.password) {
 		this.password = await bcrypt.hash(this.password, 10);
 	}
 	next();
@@ -57,6 +57,7 @@ AuthSchema.methods.generateRefreshToken = function () {
 	});
 };
 
-const AuthModel: Model<Auth> =
-	mongoose.models.attendences || mongoose.model<Auth>("auths", AuthSchema);
+const AuthModel: Model<AuthSchemaInterface> =
+    mongoose.models.auths || mongoose.model<AuthSchemaInterface>("auths", AuthSchema);
+
 export default AuthModel;

@@ -8,7 +8,6 @@ import Section1 from "@/components/Section1";
 import Section2 from "@/components/Section2";
 import LocomotiveScroll from "locomotive-scroll";
 import LastSection from "@/components/LastSection";
-import Link from "next/link";
 import LandingAnimation from "@/components/LandingAnimation";
 import Carousel from "@/components/Carosel";
 
@@ -19,7 +18,6 @@ export default function Home() {
 			{/* <LandingAnimation/> */}
 			<section
 				className="flex h-dvh w-full items-center font-leagueSpartan"
-				data-scroll
 			>
 				<Section1 />
 			</section>

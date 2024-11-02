@@ -5,7 +5,6 @@ import {
 } from "firebase/auth";
 import { auth } from "@/config/firebase";
 import ApiService from "./ApiService";
-// TODO: add apiservise for save the info into db besically call the login route after that save in the info in store in client side..!
 const apiservise = new ApiService("/api/auth/");
 import { getAuthStore } from "@/store/Auth";
 const authStore = getAuthStore();
@@ -35,23 +34,31 @@ export async function signInWithGoogle() {
 	}
 }
 export async function verifySession() {
+	// Check if user already exists in authStore, exit early if so
+	if (authStore.user) return;
+  
 	return new Promise<void>((resolve) => {
-		const unsubscribe = onAuthStateChanged(auth, async (user) => {
-			if (user) {
-				const res = await apiservise.post<UserWithId>({
-					endpoint: "/register",
-					data: {
-						email: user?.email,
-						provider: "google",
-					},
-				});
-				if (res.data) {
-					authStore.setUser(res.data);
-				}
-				return user;
+	  const unsubscribe = onAuthStateChanged(auth, async (user) => {
+		if (user) {
+		  try {
+			const res = await apiservise.post<UserWithId>({
+			  endpoint: "/login",
+			  data: {
+				email: user.email,
+				provider: "google",
+			  },
+			});
+			
+			if (res.data) {
+			  authStore.setUser(res.data); 
 			}
-			return null;
-		});
-		return () => unsubscribe();
+		  } catch (error) {
+			console.error("Error in verifySession API call:", error);
+		  }
+		}
+		resolve(); 
+	  });
+  
+	  return () => unsubscribe();
 	});
-}
+  }
