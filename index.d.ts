@@ -12,4 +12,5 @@ interface UserWithId{
 	role:string,
 	id:string,
 	avatar:string
+	provider:string;
 }

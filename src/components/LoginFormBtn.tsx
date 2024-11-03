@@ -1,5 +1,5 @@
 "use client";
-import React, { memo, useEffect } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { useLoginForm } from "@/store/LoginForm";
 import {
@@ -12,25 +12,33 @@ import {
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
 import { LogOut } from "lucide-react";
-import Link from "next/link";
 import useAuthStore from "@/store/Auth";
-import { verifySession } from "@/helper/LoginWithGoogle";
-
+import ApiService from "@/helper/ApiService";
+import Loader from "@/app/loading";
+const apiService = new ApiService("/api/auth/");
 function LoginFormBtn() {
 	const { setIsOpen } = useLoginForm();
 	const { user, ishydrated } = useAuthStore();
+	const [disable, setDisable] = useState(false);
 	useEffect(() => {
-		if (!ishydrated) {
-			verifySession();
+		async function sessioin() {
+			if (!ishydrated) {
+				setDisable(true);
+				const res = await apiService.post({ endpoint: "/verifySession" });
+				setDisable(false);
+			}
 		}
+		sessioin();
 	}, []);
 	return (
 		<>
+			{disable && <Loader />}
 			{!user ? (
 				<Button
 					variant="outline"
 					className="bg-transparent  border-[#410041] rounded-lg hover:bg-[#410041] hover:text-white text-xl font-semibold login-btn"
 					onClick={() => setIsOpen(true)}
+					disabled={disable || user !== null}
 				>
 					Sign In/Up
 				</Button>

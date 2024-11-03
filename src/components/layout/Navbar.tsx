@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { memo, useRef } from "react";
-import LoginFormBtn from "./LoginFormBtn";
+import LoginFormBtn from "@/components/LoginFormBtn";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 

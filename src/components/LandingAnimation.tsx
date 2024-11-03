@@ -1,15 +1,8 @@
 "use client";
 import { useGSAP } from "@gsap/react";
-import { stagger } from "framer-motion";
 import gsap from "gsap";
 import Image from "next/image";
 import React, { useRef } from "react";
-const corners = [
-	{ l: 0, t: 0 },
-	{ l: "100%", t: 0 },
-	{ l: 0, t: "100%" },
-	{ l: "100%", t: "100%" },
-];
 
 function LandingAnimation() {
 	const iconContainer = useRef<HTMLDivElement>(null);

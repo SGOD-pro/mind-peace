@@ -2,6 +2,7 @@ import {
 	onAuthStateChanged,
 	signInWithPopup,
 	GoogleAuthProvider,
+	signOut,
 } from "firebase/auth";
 import { auth } from "@/config/firebase";
 import ApiService from "./ApiService";
@@ -36,29 +37,39 @@ export async function signInWithGoogle() {
 export async function verifySession() {
 	// Check if user already exists in authStore, exit early if so
 	if (authStore.user) return;
-  
+
 	return new Promise<void>((resolve) => {
-	  const unsubscribe = onAuthStateChanged(auth, async (user) => {
-		if (user) {
-		  try {
-			const res = await apiservise.post<UserWithId>({
-			  endpoint: "/login",
-			  data: {
-				email: user.email,
-				provider: "google",
-			  },
-			});
-			
-			if (res.data) {
-			  authStore.setUser(res.data); 
+		const unsubscribe = onAuthStateChanged(auth, async (user) => {
+			if (user) {
+				try {
+					const res = await apiservise.post<UserWithId>({
+						endpoint: "/login",
+						data: {
+							email: user.email,
+							provider: "google",
+						},
+					});
+
+					if (res.data) {
+						authStore.setUser(res.data);
+					}
+				} catch (error) {
+					console.error("Error in verifySession API call:", error);
+				}
 			}
-		  } catch (error) {
-			console.error("Error in verifySession API call:", error);
-		  }
-		}
-		resolve(); 
-	  });
-  
-	  return () => unsubscribe();
+			resolve();
+		});
+
+		return () => unsubscribe();
 	});
-  }
+}
+export async function logout() {
+	try {
+		await signOut(auth);
+		authStore.setUser(null);
+		return { success: true };
+	} catch (error) {
+		console.error("Error during Google Sign-Out:", error);
+		return { success: false, error: error as Error };
+	}
+}

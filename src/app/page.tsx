@@ -2,7 +2,6 @@
 import ExpandableCardDemo from "@/components/Section3";
 import Section4 from "@/components/Section4";
 
-import { useEffect, useRef } from "react";
 // import LocomotiveScroll from "locomotive-scroll";
 import Section1 from "@/components/Section1";
 import Section2 from "@/components/Section2";
@@ -12,7 +11,7 @@ import LandingAnimation from "@/components/LandingAnimation";
 import Carousel from "@/components/Carosel";
 
 export default function Home() {
-	const locomotive = new LocomotiveScroll();
+	new LocomotiveScroll();
 	return (
 		<main className="bg-[#F9F9F9] scrollbar relative text-black">
 			{/* <LandingAnimation/> */}

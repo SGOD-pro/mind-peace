@@ -2,6 +2,7 @@
 import React, { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import Image from "next/image";
 const slides = [
 	{ image: "/slide1.jpg", alt: "doc1" },
 	{ image: "/slide2.png", alt: "doc1" },
@@ -110,7 +111,9 @@ const Carousel = () => {
 					<div className="flex h-full" ref={slideContainerRef}>
 						{slides.map((slide, index) => (
 							<div className="min-w-full h-full" key={index}>
-								<img
+								<Image
+								width={400}
+								height={400}
 									src={slide.image}
 									alt={slide.alt}
 									className="w-full h-full object-cover"

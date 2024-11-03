@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import AuthModel from "@/schema/Auth";
+import { options } from "@/constants";
 
 export const generateTokens = async (
 	userId: string
@@ -20,7 +21,7 @@ export const generateTokens = async (
 };
 
 export async function cookieResponse(user: any) {
-	const { accToken } = await generateTokens(user._id);
+	const { accToken, refreshToken } = await generateTokens(user._id);
 	if (!accToken) {
 		return NextResponse.json(
 			{ message: "Token generation failed" },
@@ -29,17 +30,11 @@ export async function cookieResponse(user: any) {
 	}
 
 	const response = NextResponse.json(
-		{ message: "Registration successful", data: user,success:true },
+		{ message: "Registration successful", data: user, success: true },
 		{ status: 201 }
 	);
 
-	// Set cookie on the response and return it
-	response.cookies.set("accessToken", accToken, {
-		httpOnly: true,
-		secure: process.env.NODE_ENV === "production",
-		maxAge: 60 * 60 * 24, // 1 day in seconds
-		path: "/",
-	});
-
+	response.cookies.set("accessToken", accToken, options);
+	response.cookies.set("refreshToken", refreshToken, options);
 	return response;
 }
