@@ -28,7 +28,6 @@ const Carousel = () => {
 		const slideCount = slides.length;
 		const interval = setInterval(() => {
 			setSlideIndex((prevIndex) => {
-				console.log(prevIndex);
 				const newIndex = (prevIndex + 1) % slideCount;
 
 				// Animate the slide change
@@ -50,7 +49,7 @@ const Carousel = () => {
 
 				return newIndex;
 			});
-		}, 3000); // Adjust the interval (3000ms = 3 seconds)
+		}, 7000); // Adjust the interval (3000ms = 3 seconds)
 
 		return () => clearInterval(interval);
 	}, [slides.length]);

@@ -9,7 +9,7 @@ interface CardProps {
 
 interface UserWithId{
 	email:string,
-	role:string,
+	role:number,
 	id:string,
 	avatar:string
 	provider:string;

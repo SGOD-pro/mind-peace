@@ -1,4 +1,3 @@
-import { options } from "@/constants";
 import connectDb from "@/db";
 import AuthModel from "@/schema/Auth";
 import jwt, { JwtPayload } from "jsonwebtoken";
@@ -16,7 +15,7 @@ export async function POST(req: NextRequest) {
 		}
 		const decodedToken = jwt.verify(
 			token,
-			process.env.REFRESH_TOKEN!
+			process.env.ACCESS_TOKEN!
 		) as JwtPayload;
 		await AuthModel.findByIdAndUpdate(
 			decodedToken?._id,
@@ -24,8 +23,7 @@ export async function POST(req: NextRequest) {
 				$unset: {
 					refreshToken: 1,
 				},
-			},
-			{ new: true }
+			}
 		);
 		const res = NextResponse.json(
 			{ success: true, message: "Logged out successfully" },

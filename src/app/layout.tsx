@@ -61,8 +61,7 @@ export default function RootLayout({
 				>
 					<Navbar />
 					<Toaster />
-					<Main />
-					{children}
+					<Main>{children}</Main>
 					<Footer />
 				</ThemeProvider>
 			</body>

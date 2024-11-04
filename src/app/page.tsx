@@ -1,17 +1,16 @@
 "use client";
 import ExpandableCardDemo from "@/components/Section3";
 import Section4 from "@/components/Section4";
-
-// import LocomotiveScroll from "locomotive-scroll";
 import Section1 from "@/components/Section1";
 import Section2 from "@/components/Section2";
 import LocomotiveScroll from "locomotive-scroll";
 import LastSection from "@/components/LastSection";
 import LandingAnimation from "@/components/LandingAnimation";
 import Carousel from "@/components/Carosel";
+import Loading from "./loading";
 
 export default function Home() {
-	new LocomotiveScroll();
+	const loco=new LocomotiveScroll();
 	return (
 		<main className="bg-[#F9F9F9] scrollbar relative text-black">
 			{/* <LandingAnimation/> */}
@@ -33,7 +32,7 @@ export default function Home() {
 							data-scroll-speed={(Math.random() * 0.08).toString()}
 							data-scroll-direction="horizontal"
 						>
-							<p className="border-2 uppercase px-3 py-1 rounded-full">
+							<p className="border-2 uppercase px-3 py-1 rounded-full border-[#f4f4f4]">
 								Caring is always free
 							</p>
 						</div>

@@ -1,46 +1,36 @@
 "use client";
-import React, { memo, useEffect, useRef } from "react";
-import { useLoginForm } from "@/store/LoginForm";
-import LoginForm from "@/components/login-form";
+import React,{useEffect} from "react";
+import useShowLoader from "@/hooks/ShowLoader";
+import ApiService from "@/helper/ApiService";
+const apiService = new ApiService("/api/auth/");
+import useAuthStore from "@/store/Auth";
+import ShowLoginForm from "@/components/ShowLoginForm";
 
-function Main() {
-	const isOpen = useLoginForm((state) => state.isOpen);
-	const setIsOpen = useLoginForm((state) => state.setIsOpen);
-	const content = useRef<HTMLDivElement>(null);
+function Main({ children }: { children: React.ReactNode }) {
+	const { Loader } = useShowLoader();
+	const { user, ishydrated,setUser } = useAuthStore();
+	const {setShow,show}=useShowLoader();
 	useEffect(() => {
-		const handleClickOutside = (event: MouseEvent) => {
-			const target = event.target as HTMLElement;
-
-			// Check if click is outside the content ref and not on a button with class "login-btn"
-			if (
-				content.current &&
-				!content.current.contains(target) &&
-				!target.classList.contains("login-btn") // Use classList to check for class
-			) {
-				setIsOpen(false);
+		async function sessioin() {
+			if (!ishydrated) {
+				setShow(true);
+				const res = await apiService.post<UserWithId>({ endpoint: "/verifySession" });
+				if (res.data) {
+					setUser(res.data);
+				}
+				console.log(res);
+				setShow(false);
 			}
-		};
-
-		// Add click event listener
-		document.addEventListener("click", handleClickOutside);
-
-		// Cleanup function to remove the event listener
-		return () => {
-			document.removeEventListener("click", handleClickOutside);
-		};
-	}, [setIsOpen]);
-	
-
+		}
+		sessioin();
+	}, []);
 	return (
-		<div
-			className={`fixed top-1/2 right-10 transition-all -translate-y-1/2 z-50 ${
-				isOpen ? "opacity-100 -translate-x-0" : "opacity-0 translate-x-[120%] "
-			}`}
-			ref={content}
-		>
-			<LoginForm />
-		</div>
+		<main className="bg-[#F9F9F9] w-full min-h-dvh">
+			<Loader />
+			<ShowLoginForm />
+			{children}
+		</main>
 	);
 }
 
-export default memo(Main);
+export default Main;

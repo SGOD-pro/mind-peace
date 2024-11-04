@@ -26,10 +26,10 @@ class ApiResponse {
 	}
 	static error({
 		message,
-		statusCode = 400,
+		statusCode = 500,
 	}: {
 		message: string;
-		statusCode: number;
+		statusCode?: number;
 	}): Response {
 		const responseBody: ErrorResponse = {
 			success: false,

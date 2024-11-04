@@ -16,7 +16,6 @@ export async function POST(req: NextRequest) {
 	await connectDb();
 	try {
 		const token = req.cookies.get("refreshToken")?.value;
-
 		if (!token) {
 			return NextResponse.json(
 				{ message: "Refresh token missing" },
@@ -29,20 +28,15 @@ export async function POST(req: NextRequest) {
 		)) as DecodedToken;
 
 		const userId = decodedToken?._id;
-		const user = await AuthModel.findById(userId).select(
-			"-password -refreshToken"
-		);
+		const user = await AuthModel.findById(userId).select("-password");
 		if (!userId) {
 			return NextResponse.json(
 				{ message: "Invalid refresh token" },
-				{ status: 401 }
+				{ status: 404 }
 			);
 		}
 		if (user?.refreshToken !== token) {
-			return NextResponse.json(
-				{ message: "Invalid refresh token" },
-				{ status: 401 }
-			);
+			return NextResponse.json({ message: "Token not valid" }, { status: 401 });
 		}
 		const { accToken, refreshToken } = await generateTokens(userId);
 
@@ -54,7 +48,17 @@ export async function POST(req: NextRequest) {
 		}
 
 		const response = NextResponse.json(
-			{ message: "Token refreshed successfully", success: true, data: user },
+			{
+				message: "Token refreshed successfully",
+				success: true,
+				data: {
+					email: user.email,
+					avatar: user.avatar,
+					provider: user.provider,
+					role: user.role,
+					_id: user._id,
+				},
+			},
 			{ status: 200 }
 		);
 

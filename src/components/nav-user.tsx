@@ -22,6 +22,7 @@ import {
 	useSidebar,
 } from "@/components/ui/sidebar";
 import { ModeToggle } from "./ui/them-toggle";
+import LogoutBtn from "./LogoutBtn";
 
 export function NavUser({
 	user,
@@ -82,8 +83,11 @@ export function NavUser({
 						<DropdownMenuSeparator />
 
 						<DropdownMenuItem>
+						<LogoutBtn className="w-full h-full flex items-center gap-2">
+
 							<LogOut />
 							Log out
+						</LogoutBtn>
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>

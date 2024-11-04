@@ -1,5 +1,5 @@
 "use client";
-import React, { memo, useEffect, useState } from "react";
+import React, { memo } from "react";
 import { Button } from "./ui/button";
 import { useLoginForm } from "@/store/LoginForm";
 import {
@@ -13,32 +13,19 @@ import {
 import Image from "next/image";
 import { LogOut } from "lucide-react";
 import useAuthStore from "@/store/Auth";
-import ApiService from "@/helper/ApiService";
-import Loader from "@/app/loading";
-const apiService = new ApiService("/api/auth/");
+import LogoutBtn from "./LogoutBtn";
+import Link from "next/link";
+
 function LoginFormBtn() {
 	const { setIsOpen } = useLoginForm();
-	const { user, ishydrated } = useAuthStore();
-	const [disable, setDisable] = useState(false);
-	useEffect(() => {
-		async function sessioin() {
-			if (!ishydrated) {
-				setDisable(true);
-				const res = await apiService.post({ endpoint: "/verifySession" });
-				setDisable(false);
-			}
-		}
-		sessioin();
-	}, []);
+	const { user } = useAuthStore();
 	return (
 		<>
-			{disable && <Loader />}
 			{!user ? (
 				<Button
 					variant="outline"
 					className="bg-transparent  border-[#410041] rounded-lg hover:bg-[#410041] hover:text-white text-xl font-semibold login-btn"
 					onClick={() => setIsOpen(true)}
-					disabled={disable || user !== null}
 				>
 					Sign In/Up
 				</Button>
@@ -61,10 +48,28 @@ function LoginFormBtn() {
 					<DropdownMenuContent className="bg-white text-black border-[#410041]">
 						<DropdownMenuLabel>{user.email}</DropdownMenuLabel>
 						<DropdownMenuSeparator className="bg-[#410041]" />
-						<DropdownMenuItem>Dashboard</DropdownMenuItem>
 						<DropdownMenuItem>
-							<LogOut />
-							Sign out
+							{" "}
+							<Link
+								href={
+									user?.role === 0
+										? "/dashboard/user"
+										: user?.role === 1
+										? "/dashboard/therapist"
+										: user?.role === 2
+										? "/dashboard/admin"
+										: "/"
+								}
+								className="w-full h-full"
+							>
+								Dashboard
+							</Link>
+						</DropdownMenuItem>
+						<DropdownMenuItem>
+							<LogoutBtn className="flex items-center">
+								<LogOut />
+								Sign out
+							</LogoutBtn>
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
