@@ -3,14 +3,13 @@ import ExpandableCardDemo from "@/components/Section3";
 import Section4 from "@/components/Section4";
 import Section1 from "@/components/Section1";
 import Section2 from "@/components/Section2";
-import LocomotiveScroll from "locomotive-scroll";
 import LastSection from "@/components/LastSection";
 import LandingAnimation from "@/components/LandingAnimation";
 import Carousel from "@/components/Carosel";
 import Loading from "./loading";
 
 export default function Home() {
-	const loco=new LocomotiveScroll();
+
 	return (
 		<main className="bg-[#F9F9F9] scrollbar relative text-black">
 			{/* <LandingAnimation/> */}

@@ -1,7 +1,7 @@
 import connectDb from "@/db";
 import AuthModel from "@/schema/Auth";
 import { NextRequest, NextResponse } from "next/server";
-import { cookieResponse } from "@/helper/GenrateTokens";
+import { cookieResponse } from "@/helper/Tokens";
 
 export async function POST(req: NextRequest) {
 	await connectDb();
@@ -21,8 +21,6 @@ export async function POST(req: NextRequest) {
 			const res = await cookieResponse(existingUser);
 			return res;
 		}
-
-		// Create new user (password hashing handled by Mongoose middleware)
 		const newUser = new AuthModel({
 			email,
 			password,
@@ -31,7 +29,6 @@ export async function POST(req: NextRequest) {
 		});
 		await newUser.save();
 
-		// Return a response with a cookie for the new user
 		const res = await cookieResponse(newUser);
 		return res;
 	} catch (error) {

@@ -7,8 +7,8 @@ function Loder() {
 			x="0px"
 			y="0px"
 			viewBox="0 0 50 31.25"
-			height="31.25"
-			width="50"
+			height="80.25"
+			width="100"
 			preserveAspectRatio="xMidYMid meet"
 		>
 			<path

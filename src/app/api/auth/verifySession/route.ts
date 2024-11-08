@@ -1,7 +1,7 @@
 // app/api/auth/refreshToken.ts
 
 import { NextRequest, NextResponse } from "next/server";
-import { generateTokens } from "@/helper/GenrateTokens"; // Adjust the path as needed
+import { generateTokens } from "@/helper/Tokens"; // Adjust the path as needed
 import connectDb from "@/db";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import AuthModel from "@/schema/Auth";
@@ -65,7 +65,10 @@ export async function POST(req: NextRequest) {
 		// Set new access and refresh tokens in cookies
 		response.cookies.set("accessToken", accToken, options);
 
-		response.cookies.set("refreshToken", refreshToken, options);
+		response.cookies.set("refreshToken", refreshToken, {
+			...options,
+			maxAge: 60 * 60 * 24 * 7,
+		});
 
 		return response;
 	} catch (error) {

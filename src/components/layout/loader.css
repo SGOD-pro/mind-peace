@@ -1,10 +1,10 @@
 .container-svg {
 	--uib-size: 45px;
-	--uib-color: #da4856;
+	--uib-color: #da3142;
 	--uib-speed: 1.75s;
 	--uib-bg-opacity: 0.1;
-	height: 31.25px;
-	width: 50px;
+	height:60px;
+	width: 100px;
 	transform-origin: center;
 	overflow: visible;
 }

@@ -1,37 +1,30 @@
-class StoreHelper<T> {
-    private array: T[] = [];
-
-    constructor(initialData: T[] = []) {
-        this.array = initialData;
-    }
-
-    setItems(items: T[]): void {
-        this.array = items;
-    }
-
-    addItem(item: T): void {
-        this.array.push(item);
-    }
-
-    removeItem(index: number): void {
-        if (index >= 0 && index < this.array.length) {
-            this.array.splice(index, 1);
-        }
-    }
-
-    updateItem(index: number, newItem: T): void {
-        if (index >= 0 && index < this.array.length) {
-            this.array[index] = newItem;
-        }
-    }
-
-    getItems(): T[] {
-        return this.array;
-    }
-
-    clear(): void {
-        this.array = [];
-    }
-}
-
-export default StoreHelper
+// StoreHelper.ts
+export default class StoreHelper<T extends { _id: string }> {
+	private items: T[] = [];
+  
+	constructor(initialItems: T[] = []) {
+	  this.items = initialItems;
+	}
+  
+	addItem(item: T): void {
+	  this.items.push(item);
+	}
+  
+	removeItem(id: string): void {
+	  this.items = this.items.filter((item: any) => item._id !== id); // Assumes items have an `id` field
+	}
+  
+	updateItem(updatedItem: T): void {
+	  const index = this.items.findIndex((item: any) => item._id === updatedItem._id);
+	  if (index !== -1) this.items[index] = updatedItem;
+	}
+  
+	setItems(items: T[]): void {
+	  this.items = items;
+	}
+  
+	getItems(): T[] {
+	  return this.items;
+	}
+  }
+  

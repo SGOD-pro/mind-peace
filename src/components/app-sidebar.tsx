@@ -27,10 +27,10 @@ import {
 	SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { usePathname } from "next/navigation";
+import useAuthStore from "@/store/Auth";
 
 const data = {
 	user: {
-		name: "shadcn",
 		email: "m@example.com",
 		avatar: "/avatars/shadcn.jpg",
 	},
@@ -107,7 +107,12 @@ const navMain = [
 ];
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	const pathname = usePathname();
-
+	const user = useAuthStore();
+	console.log(user.user)
+	React.useEffect(() => {
+	  console.log(user.user)
+	}, [user.user])
+	
 	return (
 		<Sidebar variant="inset" {...props}>
 			<SidebarHeader>
@@ -140,7 +145,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				<NavSecondary items={data.navSecondary} className="mt-auto" />
 			</SidebarContent>
 			<SidebarFooter>
-				<NavUser user={data.user} />
+				<NavUser user={user.user||data.user} />
 			</SidebarFooter>
 		</Sidebar>
 	);

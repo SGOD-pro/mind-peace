@@ -12,7 +12,7 @@ function LoginForm() {
 		<div className="relative max-w-[400px] bg-[#ffe8ea] rounded-3xl min-h-96 px-6 py-9 overflow-hidden shadow-md shadow-black/60 text-black">
 			<div className="w-full h-full ">
 				<div
-					className={`flex w-[calc(200%+2rem)] flex-nowrap transition-transform duration-500 ease-in-out justify-between ${
+					className={`flex w-[calc(200%+2rem)] gap-4 flex-nowrap transition-transform duration-500 ease-in-out justify-between ${
 						isCreateAccount ? "transform -translate-x-[calc(50%+.5rem)]" : ""
 					}`}
 				>
@@ -21,10 +21,10 @@ function LoginForm() {
 				</div>
 			</div>
 			{/* Toggle Button */}
-			<div className="w-full mt-4">
+			<div className="w-full mt-4 pr-2">
 				<button
 					type="button"
-					className="bg-[#FFF3F3] rounded-xl flex items-center justify-center gap-2 h-9 px-4 py-2 w-full"
+					className="bg-[#ffffff] shadow shadow-black/20 hover:shadow-none transition-colors rounded-xl flex items-center justify-center gap-2 h-9 px-4 py-2 w-full"
 					onClick={signInWithGoogle}
 				>
 					<Image src={"/google.svg"} alt="Google" width={20} height={20} />

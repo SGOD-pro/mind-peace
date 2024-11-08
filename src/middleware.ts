@@ -8,21 +8,18 @@ export async function middleware(request: NextRequest) {
         accessTokenCookie?.value ||
         request.headers.get("Authorization")?.replace("Bearer ", "");
 
-    // Redirect to login if there's no token
     if (!token) {
         return NextResponse.redirect(new URL("/404", request.url));
     }
 
     try {
         const { payload } = await jwtVerify(token, new TextEncoder().encode(process.env.ACCESS_TOKEN!));
-
         const pathname = request.nextUrl.pathname;
 
-        console.log(payload.role);
         if (
             (payload.role === 2 && pathname.startsWith("/dashboard/admin")) ||
             (payload.role === 0 && pathname.startsWith("/dashboard/user")) ||
-            (payload.role === 3 && pathname.startsWith("/dashboard/therapist"))
+            (payload.role === 1 && pathname.startsWith("/dashboard/therapist"))
         ) {
             return NextResponse.next();
         } else {

@@ -2,16 +2,11 @@
 import AllTherapistTable from "@/app/dashboard/admin/components/AllDoctors";
 import { Button } from "@/components/ui/button";
 import React from "react";
-import {
-	Dialog,
-	DialogContent,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from "@/components/ui/dialog";
+
 import { CirclePlus } from "lucide-react";
 
 import AddTherapistForm from "@/components/forms/AddTherapistForm";
+import DialogComp from "@/components/DialogComp";
 
 function Admin() {
 	return (
@@ -53,19 +48,11 @@ function Admin() {
 			</div>
 			<div className="flex-1 rounded-xl bg-muted/50 md:min-h-min p-4">
 				<div className="text-right">
-					<Dialog>
-						<DialogTrigger>
-							<Button>
-								Add new <CirclePlus />
-							</Button>
-						</DialogTrigger>
-						<DialogContent className="">
-							<DialogHeader>
-								<DialogTitle>Add new therapist</DialogTitle>
-							</DialogHeader>
-							<AddTherapistForm />
-						</DialogContent>
-					</Dialog>
+					<DialogComp content={<AddTherapistForm />} title="Add new therapist">
+						<Button>
+							Add new <CirclePlus />
+						</Button>
+					</DialogComp>
 				</div>
 				<div className=" border rounded-lg mt-4">
 					<AllTherapistTable />

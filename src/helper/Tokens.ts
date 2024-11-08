@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import AuthModel from "@/schema/Auth";
 import { options } from "@/constants";
-
+import jwt, { JwtPayload } from "jsonwebtoken";
 export const generateTokens = async (
 	userId: string
 ): Promise<{ accToken: string; refreshToken: string }> => {
@@ -30,11 +30,44 @@ export async function cookieResponse(user: any) {
 	}
 
 	const response = NextResponse.json(
-		{ message: "Registration successful", data: user, success: true },
+		{
+			message:
+				user.provider === "google"
+					? "Google login successful"
+					: "Registration successful",
+			data: user,
+			success: true,
+		},
 		{ status: 201 }
 	);
 
 	response.cookies.set("accessToken", accToken, options);
-	response.cookies.set("refreshToken", refreshToken, options);
+	response.cookies.set("refreshToken", refreshToken, {
+		...options,
+		maxAge: 60 * 60 * 24 * 7,
+	});
 	return response;
 }
+
+export const verifyAccessToken = async (token: string) => {
+	try {
+		return jwt.verify(token, process.env.ACCESS_TOKEN!);
+	} catch (error) {
+		return null;
+	}
+};
+import { NextRequest } from "next/server";
+
+export const verifyRole = (req: NextRequest): number | null => {
+	const token = req.cookies.get("accessToken")?.value;
+	if (!token) {
+		return null;
+	}
+
+	try {
+		const payload = jwt.verify(token, process.env.ACCESS_TOKEN!) as JwtPayload;
+		return payload.role;
+	} catch (error) {
+		return null;
+	}
+};

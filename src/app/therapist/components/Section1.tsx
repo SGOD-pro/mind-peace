@@ -28,7 +28,8 @@ function Section1() {
 			<h2
 				className="text-5xl font-lexend tracking-tighter absolute bg-[#EBFFFD] px-6 py-3 rounded-2xl bottom-2 left-2"
 				data-scroll
-				data-scroll-speed=".7"
+				data-scroll-speed=".08"
+				data-scroll-direction="horizontal"
 			>
 				Our Therapist
 			</h2>

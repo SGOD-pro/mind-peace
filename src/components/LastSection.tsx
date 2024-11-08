@@ -39,9 +39,9 @@ function LastSection() {
 					>
 						Query us
 					</DialogTrigger>
-					<DialogContent className="bg-[#c4c4c4]">
+					<DialogContent className="bg-[#140756]/50 backdrop-blur">
 						<DialogHeader>
-							<DialogTitle>
+							<DialogTitle className="text-white">
 								Is there anything you would like to ask us?
 							</DialogTitle>
 						</DialogHeader>

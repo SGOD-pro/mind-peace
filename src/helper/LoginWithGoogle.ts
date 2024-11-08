@@ -4,7 +4,7 @@ import {
 	GoogleAuthProvider,
 	signOut,
 } from "firebase/auth";
-import { auth } from "@/config/firebase";
+import { auth } from "@/config/client/firebase";
 import ApiService from "./ApiService";
 const apiservise = new ApiService("/api/auth/");
 import { getAuthStore } from "@/store/Auth";

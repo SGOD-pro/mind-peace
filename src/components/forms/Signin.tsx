@@ -17,17 +17,18 @@ import {
 import { Input } from "@/components/ui/input";
 import ApiService from "@/helper/ApiService";
 import { useRouter } from "next/navigation";
+import useAuthStore from "@/store/Auth";
 const apiService = new ApiService("/api/auth/");
 const FormSchema = z.object({
-	email: z.string().min(2, {
-		message: "Username must be at least 2 characters.",
-	}),
+	email: z.string().email({ message: "Invalid email address." }),
 	password: z.string().min(6, {
 		message: "Password must be at least 6 characters.",
 	}),
 });
+
 function Signin() {
 	const router = useRouter();
+	const setUser=useAuthStore((state)=>state.setUser);
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -38,22 +39,19 @@ function Signin() {
 	async function onSubmit(data: z.infer<typeof FormSchema>) {
 		const res = await apiService.post<UserWithId>({
 			data: data,
+			endpoint: "/login",
 		});
+		if (res.data) {
+			setUser(res.data);
+		}
 		router.push("/");
-		toast({
-			title: "You submitted the following values:",
-			description: (
-				<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-					<code className="text-white">{JSON.stringify(data, null, 2)}</code>
-				</pre>
-			),
-		});
+		
 	}
 	return (
 		<Form {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className="grid gap-4 w-full font-lexend flex-1 px-4"
+				className="grid gap-4 w-full font-lexend flex-1"
 			>
 				<h1 className="text-3xl font-bold text-center tracking-wider">
 					SIGN IN

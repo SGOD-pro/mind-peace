@@ -1,88 +1,107 @@
+import DialogComp from "@/components/DialogComp";
+import AddTherapistForm from "@/components/forms/AddTherapistForm";
+import { DeleteIcon } from "@/components/icons/DeleteIcon";
+import { SquarePenIcon } from "@/components/icons/EditIcon";
+import { Button } from "@/components/ui/button";
+
 import {
-    Table,
-    TableBody,
-    TableCaption,
-    TableCell,
-    TableFooter,
-    TableHead,
-    TableHeader,
-    TableRow,
-  } from "@/components/ui/table"
-  
-  const invoices = [
-    {
-      invoice: "INV001",
-      paymentStatus: "Paid",
-      totalAmount: "$250.00",
-      paymentMethod: "Credit Card",
-    },
-    {
-      invoice: "INV002",
-      paymentStatus: "Pending",
-      totalAmount: "$150.00",
-      paymentMethod: "PayPal",
-    },
-    {
-      invoice: "INV003",
-      paymentStatus: "Unpaid",
-      totalAmount: "$350.00",
-      paymentMethod: "Bank Transfer",
-    },
-    {
-      invoice: "INV004",
-      paymentStatus: "Paid",
-      totalAmount: "$450.00",
-      paymentMethod: "Credit Card",
-    },
-    {
-      invoice: "INV005",
-      paymentStatus: "Paid",
-      totalAmount: "$550.00",
-      paymentMethod: "PayPal",
-    },
-    {
-      invoice: "INV006",
-      paymentStatus: "Pending",
-      totalAmount: "$200.00",
-      paymentMethod: "Bank Transfer",
-    },
-    {
-      invoice: "INV007",
-      paymentStatus: "Unpaid",
-      totalAmount: "$300.00",
-      paymentMethod: "Credit Card",
-    },
-  ]
-  
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from "@/components/ui/table";
+import ApiService from "@/helper/ApiService";
+import useTherapistStore,{useTherapist} from "@/store/Therapist";
+import { memo, useCallback, useEffect, useState } from "react";
+
+const apiService = new ApiService("/api/therapist");
+
 function AllTherapistTable() {
-    return (
-      <Table>
-        <TableCaption>A list of your recent invoices.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Invoice</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className="font-medium">{invoice.invoice}</TableCell>
-              <TableCell>{invoice.paymentStatus}</TableCell>
-              <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell className="text-right">{invoice.totalAmount}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableCell colSpan={3}>Total</TableCell>
-            <TableCell className="text-right">$2,500.00</TableCell>
-          </TableRow>
-        </TableFooter>
-      </Table>
-    )
-  }
-  export default AllTherapistTable
+	const { setAllItems } = useTherapistStore();
+	const getAllUsers = useTherapistStore((state) => state.getAllUsers);
+	const removeItem = useTherapistStore((state) => state.removeItem);
+	const hydrated = useTherapistStore((state) => state.hydrated);
+	// const [users, setUsers] = useState<Therapists[]>(getAllUsers());
+	useEffect(() => {
+		if (!hydrated) {
+			const getData = async () => {
+				const res = await apiService.get<Therapists[]>({});
+				if (res.data) {
+					setAllItems(res.data);
+					// setUsers(res.data);
+				}
+			};
+			getData();
+		}
+	}, [hydrated, setAllItems]);
+
+	// useEffect(() => {
+	// 	setUsers(getAllUsers());
+	// }, [getAllUsers]);
+	const Rows = memo(({ data }: { data: Therapists }) => {
+		const remove = useCallback(
+			async (id: string) => {
+				const res = await apiService.delete({
+					endpoint: `?id=${id}`,
+				});
+				if (res.success) {
+					removeItem(id);
+					// setUsers(getAllUsers());
+				}
+			},
+			[removeItem]
+		);
+
+		return (
+			<TableRow key={data._id}>
+				<TableCell className="font-medium">{data.name}</TableCell>
+				<TableCell>{data.email}</TableCell>
+				<TableCell>{data.speciality}</TableCell>
+				<TableCell>{data.contactNo}</TableCell>
+				<TableCell className="text-right">
+					<div className="flex items-center">
+						<DialogComp
+							content={<AddTherapistForm defaultValues={data} />}
+							title="Edit Therapist"
+						>
+							<Button className="ml-2" variant="outline" size={"icon"}>
+								<SquarePenIcon />
+							</Button>
+						</DialogComp>
+						<Button
+							className="ml-2"
+							variant="destructive"
+							size={"icon"}
+							onClick={() => remove(data._id)}
+						>
+							<DeleteIcon />
+						</Button>
+					</div>
+				</TableCell>
+			</TableRow>
+		);
+	});
+
+	return (
+		<Table>
+			<TableHeader>
+				<TableRow>
+					<TableHead>Name</TableHead>
+					<TableHead>Email</TableHead>
+					<TableHead>Speciality</TableHead>
+					<TableHead>Contact No</TableHead>
+					<TableHead>Action</TableHead>
+				</TableRow>
+			</TableHeader>
+			<TableBody>
+				{getAllUsers().map((data) => (
+					<Rows key={data._id} data={data} />
+				))}
+			</TableBody>
+		</Table>
+	);
+}
+
+export default memo(AllTherapistTable);

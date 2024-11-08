@@ -18,7 +18,7 @@ interface AuthSchemaInterface extends Document {
 
 const AuthSchema = new Schema<AuthSchemaInterface>(
 	{
-		email: { type: String, required: true },
+		email: { type: String, required: true ,unique: true},
 		password: { type: String },
 		avatar: { type: String },
 		role: { type: Number, required: true, default: 0 }, // NOTE: 0 = user, 1 = therapist, 2 = admin
@@ -40,7 +40,7 @@ AuthSchema.pre("save", async function (next) {
 	next();
 });
 AuthSchema.methods.isPasswordCorrect = async function (password: string) {
-	return bcrypt.compare(password, this.password);
+	return await bcrypt.compare(password, this.password);
 };
 
 AuthSchema.methods.generateAccessToken = function () {

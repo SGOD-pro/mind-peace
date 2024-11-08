@@ -36,24 +36,23 @@ class ApiService<Tx> {
 
 	async get<T>({
 		endpoint = "",
-		showToast = true,
+		showSuccessToast = true,
+		showErrorToast = true,
 	}: {
 		endpoint?: string;
-		showToast?: boolean;
+		showSuccessToast?: boolean;
+		showErrorToast?: boolean;
 	}): Promise<ApiServicesResponse<T>> {
 		const action = "GET";
 		try {
 			const response: AxiosResponse<ApiServicesResponse<T>> =
 				await this.axiosInstance.get(endpoint);
-			console.log("Data" + response.data.data);
-			console.log("message" + response.data.message);
-			console.log("success" + response.data.success);
 			const result = {
 				success: response.data.success,
 				data: response.data.data,
 				message: response.data.message,
 			};
-			if (showToast)
+			if (showSuccessToast)
 				this.showToast({
 					success: result.success,
 					message: result.message,
@@ -71,7 +70,7 @@ class ApiService<Tx> {
 						"An unknown error occurred"
 				),
 			};
-			if (showToast)
+			if (showErrorToast)
 				this.showToast({
 					success: result.success,
 					message: result.error.message,
@@ -84,12 +83,14 @@ class ApiService<Tx> {
 	async post<T>({
 		endpoint = "",
 		data,
-		showToast = true,
+		showSuccessToast = true,
+		showErrorToast = true,
 		isMultipart = false,
 	}: {
 		endpoint?: string;
 		data?: any;
-		showToast?: boolean;
+		showSuccessToast?: boolean;
+		showErrorToast?: boolean;
 		isMultipart?: boolean;
 	}): Promise<ApiServicesResponse<T>> {
 		const action = "POST";
@@ -110,7 +111,7 @@ class ApiService<Tx> {
 				message: response.data.message,
 			};
 
-			if (showToast) {
+			if (showSuccessToast) {
 				this.showToast({
 					success: result.success,
 					message: result.message,
@@ -120,16 +121,18 @@ class ApiService<Tx> {
 
 			return result;
 		} catch (error: any) {
+			console.log(error.response.data.error);
 			const result = {
 				success: false,
 				error: new Error(
 					error.response?.data?.message ||
+						error.response.data.error ||
 						error.message ||
 						"An unknown error occurred"
 				),
 			};
 
-			if (showToast) {
+			if (showErrorToast) {
 				this.showToast({
 					success: result.success,
 					message: result.error.message,
@@ -144,11 +147,13 @@ class ApiService<Tx> {
 	async put<T>({
 		endpoint = "",
 		data,
-		showToast = true,
+		showSuccessToast = true,
+		showErrorToast = true,
 	}: {
 		endpoint?: string;
 		data: any;
-		showToast?: boolean;
+		showSuccessToast?: boolean;
+		showErrorToast?: boolean;
 	}): Promise<ApiServicesResponse<T>> {
 		const action = "PUT";
 		try {
@@ -159,7 +164,7 @@ class ApiService<Tx> {
 				data: response.data.data,
 				message: response.data.message,
 			};
-			if (showToast)
+			if (showSuccessToast)
 				this.showToast({
 					success: result.success,
 					message: result.message,
@@ -171,11 +176,12 @@ class ApiService<Tx> {
 				success: false,
 				error: new Error(
 					error.response?.data?.message ||
+						error.response.data.error ||
 						error.message ||
 						"An unknown error occurred"
 				),
 			};
-			if (showToast)
+			if (showErrorToast)
 				this.showToast({
 					success: result.success,
 					message: result.error.message,
@@ -187,10 +193,12 @@ class ApiService<Tx> {
 
 	async delete<T>({
 		endpoint = "",
-		showToast = true,
+		showSuccessToast = true,
+		showErrorToast = true,
 	}: {
 		endpoint?: string;
-		showToast?: boolean;
+		showSuccessToast?: boolean;
+		showErrorToast?: boolean;
 	}): Promise<ApiServicesResponse<T>> {
 		const action = "DELETE";
 		try {
@@ -200,7 +208,7 @@ class ApiService<Tx> {
 				success: response.data.success,
 				message: response.data.message,
 			};
-			if (showToast)
+			if (showSuccessToast)
 				this.showToast({
 					success: result.success,
 					message: result.message,
@@ -212,11 +220,12 @@ class ApiService<Tx> {
 				success: false,
 				error: new Error(
 					error.response?.data?.message ||
+						error.response.data.error ||
 						error.message ||
 						"An unknown error occurred"
 				),
 			};
-			if (showToast)
+			if (showErrorToast)
 				this.showToast({
 					success: result.success,
 					message: result.error.message,

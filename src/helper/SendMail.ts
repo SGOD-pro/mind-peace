@@ -1,36 +1,38 @@
-import nodemailer from 'nodemailer';
-import { render } from '@react-email/render';
-import  NewTherapist  from '@/email/NewTherapist';
+import nodemailer from "nodemailer";
+import { render } from "@react-email/render";
+import NewTherapist from "@/email/NewTherapist";
 
-
-export async function SendMail({type, data,recipientEmail}:{type:string,data?:any,recipientEmail:string}) {
+export async function SendMail<T>({
+	type,
+	data,
+	recipientEmail,
+}: {
+	type: string;
+	data?: T;
+	recipientEmail: string;
+}) {
 	try {
-		// Create a Nodemailer transporter using Gmail SMTP
 		const transporter = nodemailer.createTransport({
 			service: "gmail",
 			auth: {
-				user: process.env.GMAIL_USER, // Your Gmail address
-				pass: process.env.GMAIL_APP_PASSWORD, // Your Gmail app password (or OAuth2 token)
+				user: process.env.GMAIL_USER, 
+				pass: process.env.GMAIL_APP_PASSWORD, 
 			},
 		});
+		const emailHtml =await render(NewTherapist(data));
 
-		// Render the email component as HTML
-		const emailHtml = render(<NewTherapist>);
-
-		// Email options
 		const mailOptions = {
-			from: '"Your App Name" <your-email@gmail.com>',
+			from: '"Mind Peace" <mindpeace@india.com>',
 			to: recipientEmail,
 			subject: "Welcome to Our Service!",
-			html: emailHtml,
+			html: `${emailHtml}`,
 		};
 
 		// Send the email
 		await transporter.sendMail(mailOptions);
-		return {success:true}
-
+		return { success: true };
 	} catch (error) {
 		console.error("Failed to send email:", error);
-		return {success:false,error:error as Error}
+		return { success: false, error: error as Error };
 	}
 }

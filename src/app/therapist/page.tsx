@@ -6,11 +6,12 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
+import AllSection from "./components/AllSection";
+
 
 function TherapistPage() {
 	gsap.registerPlugin(ScrollTrigger);
 	const topRatedContainer = useRef<HTMLDivElement>(null);
-	const showTherapistContainer = useRef<HTMLDivElement>(null);
 	useGSAP(() => {
 		if (!topRatedContainer.current) {
 			return;
@@ -27,28 +28,7 @@ function TherapistPage() {
 			},
 		});
 	}, []);
-	useGSAP(() => {
-		if (!showTherapistContainer.current) {
-			return;
-		}
-		const childrens: HTMLDivElement[] = gsap.utils.toArray(
-			showTherapistContainer.current.children
-		);
-		console.log(childrens);
-		childrens.forEach((child) => {
-			gsap.from(child, {
-				opacity: 0,
-				duration:.4,
-				y: 50,
-				scrollTrigger: {
-					trigger: child,
-					start: "top 80%",
-					end: "top 80%",
-					// markers: true,
-				},
-			});
-		});
-	}, []);
+
 
 	return (
 		<>
@@ -134,188 +114,8 @@ function TherapistPage() {
 						</div>
 					</div>
 				</section>
-				<section className="">
-					<h2 className="text-4xl font-lexend tracking-tighter">
-						All therapists
-					</h2>
-					<nav className="flex mx-auto w-[90%] justify-end items-center">
-						<ul className="flex gap-4 flex-nowrap">
-							<li className=" flex-shrink-0">
-								<button className="therapist-filters">All</button>
-							</li>
-							<li className=" flex-shrink-0">
-								<button className="therapist-filters">Psychiatrist</button>
-							</li>
-							<li>
-								<button className=" therapist-filters">Psychologist</button>
-							</li>
-							<li>
-								<button className="therapist-filters">Neuropsych</button>
-							</li>
-							<li>
-								<button className="therapist-filters">Family Therapist</button>
-							</li>
-							<li>
-								<button className="therapist-filters">Psychiatrist</button>
-							</li>
-						</ul>
-						<Input className="w-[240px] ml-3" placeholder="Search.."></Input>
-					</nav>
-					<div className="max-w-7xl m-auto mt-7">
-						<div
-							className="grid md:grid-cols-2 lg:grid-cols-3 gap-4"
-							ref={showTherapistContainer}
-						>
-							<div className="relative rounded-lg shadow shadow-black/50 hover:scale-105  hover:shadow-md p-3">
-								<div className="rounded-full overflow-hidden border w-44 h-44 p-2 m-auto border-blue-500">
-									<Image
-										src={"/doc/doc1.png"}
-										alt="doc1"
-										width={400}
-										height={500}
-										className="w-full h-full object-cover object-top rounded-full"
-									></Image>{" "}
-								</div>
-
-								<h2 className="text-3xl font-lexend">
-									Dr.<span className="">Sarmila sen</span>
-								</h2>
-								<p className="">Psychiatrist</p>
-								<div className="text-right">
-									<button className=" px-4 py-2 rounded-md bg-blue-500 text-white bottom-2 right-2">
-										View Profile
-									</button>
-								</div>
-							</div>
-							<div className="relative rounded-lg shadow shadow-black/50 hover:scale-105   hover:shadow-md p-3">
-								<div className="rounded-full overflow-hidden border w-44 h-44 p-2 m-auto border-blue-500">
-									<Image
-										src={"/doc/doc3.png"}
-										alt="doc1"
-										width={400}
-										height={500}
-										className="w-full h-full object-cover object-top rounded-full"
-									></Image>{" "}
-								</div>
-
-								<h2 className="text-3xl font-lexend">
-									Dr.<span className="">Sarmila sen</span>
-								</h2>
-								<p className="">Psychiatrist</p>
-								<div className="text-right">
-									<button className=" px-4 py-2 rounded-md bg-blue-500 text-white bottom-2 right-2">
-										View Profile
-									</button>
-								</div>
-							</div>
-							<div className="relative rounded-lg shadow shadow-black/50 hover:scale-105   hover:shadow-md p-3">
-								<div className="rounded-full overflow-hidden border w-44 h-44 p-2 m-auto border-blue-500">
-									<Image
-										src={"/doc/doc4.png"}
-										alt="doc1"
-										width={400}
-										height={500}
-										className="w-full h-full object-cover object-top rounded-full"
-									></Image>{" "}
-								</div>
-
-								<h2 className="text-3xl font-lexend">
-									Dr.<span className="">Sarmila sen</span>
-								</h2>
-								<p className="">Psychiatrist</p>
-								<div className="text-right">
-									<button className=" px-4 py-2 rounded-md bg-blue-500 text-white bottom-2 right-2">
-										View Profile
-									</button>
-								</div>
-							</div>
-							<div className="relative rounded-lg shadow shadow-black/50 hover:scale-105   hover:shadow-md p-3">
-								<div className="rounded-full overflow-hidden border w-44 h-44 p-2 m-auto border-blue-500">
-									<Image
-										src={"/doc/doc5.png"}
-										alt="doc1"
-										width={400}
-										height={500}
-										className="w-full h-full object-cover object-top rounded-full"
-									></Image>{" "}
-								</div>
-
-								<h2 className="text-3xl font-lexend">
-									Dr.<span className="">Sarmila sen</span>
-								</h2>
-								<p className="">Psychiatrist</p>
-								<div className="text-right">
-									<button className=" px-4 py-2 rounded-md bg-blue-500 text-white bottom-2 right-2">
-										View Profile
-									</button>
-								</div>
-							</div>
-							<div className="relative rounded-lg shadow shadow-black/50 hover:scale-105   hover:shadow-md p-3">
-								<div className="rounded-full overflow-hidden border w-44 h-44 p-2 m-auto border-blue-500">
-									<Image
-										src={"/doc/doc6.png"}
-										alt="doc1"
-										width={400}
-										height={500}
-										className="w-full h-full object-cover object-top rounded-full"
-									></Image>{" "}
-								</div>
-
-								<h2 className="text-3xl font-lexend">
-									Dr.<span className="">Sarmila sen</span>
-								</h2>
-								<p className="">Psychiatrist</p>
-								<div className="text-right">
-									<button className=" px-4 py-2 rounded-md bg-blue-500 text-white bottom-2 right-2">
-										View Profile
-									</button>
-								</div>
-							</div>
-							<div className="relative rounded-lg shadow shadow-black/50 hover:scale-105   hover:shadow-md p-3">
-								<div className="rounded-full overflow-hidden border w-44 h-44 p-2 m-auto border-blue-500">
-									<Image
-										src={"/doc/doc2.png"}
-										alt="doc1"
-										width={400}
-										height={500}
-										className="w-full h-full object-cover object-top rounded-full"
-									></Image>{" "}
-								</div>
-
-								<h2 className="text-3xl font-lexend">
-									Dr.<span className="">Sarmila sen</span>
-								</h2>
-								<p className="">Psychiatrist</p>
-								<div className="text-right">
-									<button className=" px-4 py-2 rounded-md bg-blue-500 text-white bottom-2 right-2">
-										View Profile
-									</button>
-								</div>
-							</div>
-							<div className="relative rounded-lg shadow shadow-black/50 hover:scale-105   hover:shadow-md p-3">
-								<div className="rounded-full overflow-hidden border w-44 h-44 p-2 m-auto border-blue-500">
-									<Image
-										src={"/doc/doc7.png"}
-										alt="doc1"
-										width={400}
-										height={500}
-										className="w-full h-full object-cover object-top rounded-full"
-									></Image>{" "}
-								</div>
-
-								<h2 className="text-3xl font-lexend">
-									Dr.<span className="">Sarmila sen</span>
-								</h2>
-								<p className="">Psychiatrist</p>
-								<div className="text-right">
-									<button className=" px-4 py-2 rounded-md bg-blue-500 text-white bottom-2 right-2">
-										View Profile
-									</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</section>
+				
+					<AllSection/>
 			</main>
 		</>
 	);

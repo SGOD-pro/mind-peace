@@ -14,3 +14,23 @@ interface UserWithId{
 	avatar:string
 	provider:string;
 }
+
+interface TherapistFormInterface {
+	name: string;
+	qualification: string;
+	experience: number;
+	speciality: string;
+	email: string;
+	contactNo: string;
+	timing: {
+		from: string;
+		to: string;
+	};
+	days: string[];
+	clinicLocation: string;
+	charges: number;
+	image?: string;
+}
+interface Therapists extends TherapistFormInterface {
+	_id: string;
+}

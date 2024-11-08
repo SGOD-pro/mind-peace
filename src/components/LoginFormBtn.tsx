@@ -33,7 +33,7 @@ function LoginFormBtn() {
 				<DropdownMenu>
 					<DropdownMenuTrigger>
 						<div className="w-10 h-10 border p-1 border-[#410041] rounded-full overflow-hidden">
-							<Image
+							{user.avatar ?<Image
 								src={
 									user?.avatar ||
 									"https://imgs.search.brave.com/MMkxHwgzwk6QqSayQnY2xfHf-25v5f1EDRPuclBEydQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS1waG90/by9waWN0dXJlLWRv/Y3Rvci13aXRoLWds/YXNzZXMtc3RldGhv/c2NvcGVfMTEwMzI5/MC0xMTI4NTEuanBn/P3NpemU9NjI2JmV4/dD1qcGc"
@@ -42,7 +42,11 @@ function LoginFormBtn() {
 								width={50}
 								height={50}
 								className="w-full h-full object-cover rounded-full"
-							/>
+							/>:
+							<div className="w-full h-full bg-white rounded-full flex items-center justify-center text-xl">
+								{user?.email[0]}
+							</div>
+							}
 						</div>
 					</DropdownMenuTrigger>
 					<DropdownMenuContent className="bg-white text-black border-[#410041]">

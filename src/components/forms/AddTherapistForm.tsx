@@ -1,5 +1,4 @@
 "use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -33,6 +32,10 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import FileInput from "../ui/FileInput";
+import ApiService from "@/helper/ApiService";
+import { memo, useState } from "react";
+import useTherapistStore from "@/store/Therapist";
+
 // Define Zod schema for validation
 const FormSchema = z.object({
 	name: z.string().min(2, { message: "Full Name is required" }),
@@ -52,36 +55,53 @@ const FormSchema = z.object({
 	days: z.array(z.string()),
 	clinicLocation: z.string().min(1, { message: "Clinic Location is required" }),
 	charges: z.number().min(1, { message: "Charges are required" }),
-	image: z.instanceof(File).optional()
+	image: z.instanceof(File).optional(),
 });
-
-function AddTherapistForm() {
+export type TherapistFormInterface = z.infer<typeof FormSchema>;
+const apiService = new ApiService("/api/therapist/");
+function AddTherapistForm({ defaultValues }: { defaultValues?: Therapists }) {
+	const addItem = useTherapistStore((state) => state.addItem);
+	const updateItem = useTherapistStore((state) => state.updateItem);
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
-			name: "",
-			qualification: "",
-			experience: 0,
-			speciality: "",
-			email: "",
-			contactNo: "",
-			timing: { from: "", to: "" },
-			days: [],
-			clinicLocation: "",
-			charges: 0,
+			name: defaultValues?.name || "",
+			qualification: defaultValues?.qualification || "",
+			experience: defaultValues?.experience || 0,
+			speciality: defaultValues?.speciality || "",
+			email: defaultValues?.email || "",
+			contactNo: defaultValues?.contactNo || "",
+			timing: {
+				from: defaultValues?.timing?.from || "",
+				to: defaultValues?.timing?.to || "",
+			},
+			days: defaultValues?.days || [],
+			clinicLocation: defaultValues?.clinicLocation || "",
+			charges: defaultValues?.charges || 0,
 			image: undefined,
 		},
 	});
-
-	function onSubmit(data: z.infer<typeof FormSchema>) {
-		toast({
-			title: "You submitted the following values:",
-			description: (
-				<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-					<code className="text-white">{JSON.stringify(data, null, 2)}</code>
-				</pre>
-			),
-		});
+	const [key, setKey] = useState(0);
+	async function onSubmit(data: z.infer<typeof FormSchema>) {
+		if (defaultValues) {
+			const response = await apiService.put<Therapists>({
+				data,
+				endpoint: `/id=${defaultValues._id}`,
+			});
+			if (response.success && response.data) {
+				updateItem(response.data);
+			}
+		} else {
+			const response = await apiService.post<Therapists>({
+				data,
+				isMultipart: true,
+			});
+			if (response.success && response.data) {
+				form.reset();
+				setKey((prev) => prev + 1);
+				addItem(response.data);
+			}
+		}
 	}
 
 	return (
@@ -89,6 +109,7 @@ function AddTherapistForm() {
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="grid sm:grid-cols-2 gap-3"
+				key={key}
 			>
 				<FormField
 					control={form.control}
@@ -146,7 +167,11 @@ function AddTherapistForm() {
 						<FormItem>
 							<FormLabel>Experience</FormLabel>
 							<FormControl>
-								<Input type="number" value={field.value.toString()}  onChange={e=>field.onChange(Number(e.target.value))} />
+								<Input
+									type="number"
+									value={field.value.toString()}
+									onChange={(e) => field.onChange(Number(e.target.value))}
+								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -168,26 +193,14 @@ function AddTherapistForm() {
 										<SelectValue placeholder="Select speciality" />
 									</SelectTrigger>
 									<SelectContent>
-										<SelectItem value="Clinical Psychology">
-											Clinical Psychology
-										</SelectItem>
-										<SelectItem value="Neuropsychology">
-											Neuropsychology
-										</SelectItem>
-										<SelectItem value="Educational Psychology">
-											Educational Psychology
-										</SelectItem>
-										<SelectItem value="Social Psychology">
-											Social Psychology
-										</SelectItem>
-										<SelectItem value="Child Psychology">
-											Child Psychology
+										<SelectItem value="Neuropsych">Neuropsychology</SelectItem>
+										<SelectItem value="Psychologist">Psychologist</SelectItem>
+										<SelectItem value="Psychotherapist">
+											Psychotherapist
 										</SelectItem>
 										<SelectItem value="Psychiatry">Psychiatry</SelectItem>
-										<SelectItem value="Psychotherapy">Psychotherapy</SelectItem>
-										<SelectItem value="Psychoanalyst">Psychoanalyst</SelectItem>
-										<SelectItem value="Addiction Psychiatry">
-											Addiction Psychiatry
+										<SelectItem value="Family Therapist">
+											Family Therapist
 										</SelectItem>
 									</SelectContent>
 								</Select>
@@ -218,7 +231,12 @@ function AddTherapistForm() {
 						<FormItem>
 							<FormLabel>Contact Number</FormLabel>
 							<FormControl>
-								<Input type="tel" placeholder="At least 10 digits" maxLength={10}  {...field}/>
+								<Input
+									type="tel"
+									placeholder="At least 10 digits"
+									maxLength={10}
+									{...field}
+								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -330,7 +348,11 @@ function AddTherapistForm() {
 						<FormItem>
 							<FormLabel>Charges</FormLabel>
 							<FormControl>
-								<Input type="number" value={field.value.toString()}  onChange={e=>field.onChange(Number(e.target.value))}/>
+								<Input
+									type="number"
+									value={field.value.toString()}
+									onChange={(e) => field.onChange(Number(e.target.value))}
+								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
@@ -344,16 +366,25 @@ function AddTherapistForm() {
 						<FormItem>
 							<FormLabel>Image</FormLabel>
 							<FormControl>
-								<FileInput  onChange={field.onChange} accept="image/*" />
+								<FileInput
+									onChange={field.onChange}
+									accept="image/*"
+									disabled={defaultValues ? true : false}
+								/>
 							</FormControl>
 							<FormMessage />
 						</FormItem>
 					)}
 				/>
 
-				<Button type="submit">Submit</Button>
+				<Button
+					type="submit"
+					disabled={!form.formState.isValid || form.formState.isSubmitting}
+				>
+					Submit
+				</Button>
 			</form>
 		</Form>
 	);
 }
-export default AddTherapistForm;
+export default memo(AddTherapistForm);
