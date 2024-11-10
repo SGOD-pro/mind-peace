@@ -15,8 +15,8 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import ApiService from "@/helper/ApiService";
 import { useRouter } from "next/navigation";
+import ApiService from "@/helper/ApiService";
 import useAuthStore from "@/store/Auth";
 const apiService = new ApiService("/api/auth/");
 const FormSchema = z.object({
@@ -28,7 +28,7 @@ const FormSchema = z.object({
 
 function Signin() {
 	const router = useRouter();
-	const setUser=useAuthStore((state)=>state.setUser);
+	const setUser = useAuthStore((state) => state.setUser);
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -44,8 +44,6 @@ function Signin() {
 		if (res.data) {
 			setUser(res.data);
 		}
-		router.push("/");
-		
 	}
 	return (
 		<Form {...form}>
@@ -90,7 +88,11 @@ function Signin() {
 						</FormItem>
 					)}
 				/>
-				<Button type="submit" className={"login-button"}>
+				<Button
+					type="submit"
+					className={"login-button"}
+					disabled={!form.formState.isValid || form.formState.isSubmitting}
+				>
 					Login
 				</Button>
 			</form>

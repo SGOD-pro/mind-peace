@@ -4,8 +4,8 @@ import Link from "next/link";
 function Section2() {
 	return (
 		<>
-			<div className="rounded-3xl bg-[#F8E6E4] w-full h-full p-8 pt-0 flex items-center">
-				<div className="w-1/2" data-scroll data-scroll-speed="-.1">
+			<div className="rounded-3xl bg-[#F8E6E4] w-full h-full p-4 md:p-8 pt-10 lg:pt-0 flex lg:flex-row flex-col-reverse items-center overflow-hidden">
+				<div className="lg:w-1/2" data-scroll data-scroll-speed="-.1">
 					<Image
 						src="/doc2.jpg"
 						alt="doc2"
@@ -14,18 +14,18 @@ function Section2() {
 						className="w-full h-full object-contain"
 					/>
 				</div>
-				<div className="px-10 w-1/2">
+				<div className="px-10 lg:w-1/2 text-center lg:text-right">
 					<h1
-						className="text-7xl leading-[5rem] font-lemon text-[#2F2041]"
+						className="text-5xl leading-[2.5rem] lg:text-7xl lg:leading-[5rem] font-lemon text-[#2F2041]"
 						data-scroll
-						data-scroll-speed=".08"
+						data-scroll-speed=".05"
 					>
 						How <span className="text-[#3B46A0]"> can we</span> help you?
 					</h1>
 					<p
-						className="font-lexend text-lg my-5 tracking-tighter"
+						className="font-lexend lg:text-lg my-5 tracking-tighter"
 						data-scroll
-						data-scroll-speed=".04"
+						data-scroll-speed=".02"
 					>
 						Explore our therapist-led services designed to support your mental
 						well-being, from therapy sessions to mindfulness practices.

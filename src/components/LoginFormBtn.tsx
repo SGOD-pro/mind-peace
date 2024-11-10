@@ -11,23 +11,24 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Image from "next/image";
-import { LogOut } from "lucide-react";
+import { LogOut,LogIn } from "lucide-react";
 import useAuthStore from "@/store/Auth";
 import LogoutBtn from "./LogoutBtn";
 import Link from "next/link";
 
 function LoginFormBtn() {
-	const { setIsOpen } = useLoginForm();
+	const { setIsOpen,isOpen } = useLoginForm();
 	const { user } = useAuthStore();
 	return (
 		<>
 			{!user ? (
 				<Button
 					variant="outline"
-					className="bg-transparent  border-[#410041] rounded-lg hover:bg-[#410041] hover:text-white text-xl font-semibold login-btn"
-					onClick={() => setIsOpen(true)}
+					className="bg-transparent  border-[#410041] rounded-lg hover:bg-[#410041] hover:text-white text-xl font-semibold login-btn h-11 w-11 md:h-fit sm:w-fit backdrop-blur shadow-md shadow-black/20 flex items-center justify-center"
+					onClick={() => setIsOpen(!isOpen)}
 				>
-					Sign In/Up
+					<span className="hidden md:inline">Sign In/Up</span>
+					<LogIn className="md:hidden w-11 h-11"/>
 				</Button>
 			) : (
 				<DropdownMenu>
@@ -43,7 +44,7 @@ function LoginFormBtn() {
 								height={50}
 								className="w-full h-full object-cover rounded-full"
 							/>:
-							<div className="w-full h-full bg-white rounded-full flex items-center justify-center text-xl">
+							<div className="w-full text-black h-full bg-white rounded-full flex items-center justify-center text-xl">
 								{user?.email[0]}
 							</div>
 							}

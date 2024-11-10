@@ -11,7 +11,7 @@ import {
 import ContactForm from "./forms/ContactUs";
 function LastSection() {
 	return (
-		<div className="w-full h-dvh  relative">
+		<div className="w-full h-[60dvh] md:h-dvh  relative">
 			<div className="absolute inset-0 bg-black top-0 left-0">
 				<Image
 					src={"/last.jpg"}
@@ -21,9 +21,9 @@ function LastSection() {
 					height={1080}
 				></Image>
 			</div>
-			<div className="absolute flex justify-center top-20 w-full">
+			<div className="absolute flex justify-center top-5 sm:top-20 w-full">
 				<h2
-					className="text-5xl text-center w-1/2 text-[#5747E6] font-lexend-exa   z-10"
+					className="text-4xl md:text-5xl leading-none text-center md:w-1/2 text-[#5747E6] font-lexend-exa  z-10"
 					data-scroll
 					data-scroll-speed=".05"
 				>

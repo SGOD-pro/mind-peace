@@ -1,3 +1,4 @@
+"use client";
 import { AppSidebar } from "@/components/app-sidebar";
 import {
 	Breadcrumb,
@@ -13,12 +14,14 @@ import {
 	SidebarProvider,
 	SidebarTrigger,
 } from "@/components/ui/sidebar";
+import { usePathname } from "next/navigation";
 
 export default function DashboardLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
+	const pathName = usePathname();
 	return (
 		<>
 			<SidebarProvider>
@@ -30,20 +33,25 @@ export default function DashboardLayout({
 							<Separator orientation="vertical" className="mr-2 h-4" />
 							<Breadcrumb>
 								<BreadcrumbList>
-									<BreadcrumbItem className="hidden md:block">
-										<BreadcrumbLink href="#">
-											Building Your Application
-										</BreadcrumbLink>
-									</BreadcrumbItem>
-									<BreadcrumbSeparator className="hidden md:block" />
-									<BreadcrumbItem>
-										<BreadcrumbPage>Data Fetching</BreadcrumbPage>
-									</BreadcrumbItem>
+									{pathName.split("/").map((item, index) => (
+										<>
+											{index !== 0 && (
+												<BreadcrumbSeparator className="hidden md:block" />
+											)}
+											<BreadcrumbItem className="hidden md:block" key={index}>
+												<BreadcrumbLink href="#" className="capitalize">
+													{item}
+												</BreadcrumbLink>
+											</BreadcrumbItem>
+										</>
+									))}
 								</BreadcrumbList>
 							</Breadcrumb>
 						</div>
 					</header>
-					<div className="p-4 pt-0  w-full relative overflow-auto">{children}</div>
+					<div className="p-4 pt-0  w-full relative overflow-auto">
+						{children}
+					</div>
 				</SidebarInset>
 			</SidebarProvider>
 		</>

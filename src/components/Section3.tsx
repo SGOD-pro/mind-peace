@@ -39,31 +39,31 @@ export default function ExpandableCardDemo() {
 				id="cards-parent"
 				ref={parent}
 			>
-				<div className="lg:col-span-2 " data-sctoll data-scroll-speed="-.1">
+				<div className="lg:col-span-2 h-96 sm:h-full" data-sctoll data-scroll-speed="-.1">
 					<motion.div
 						className="h-full employees-gradient rounded-xl cursor-pointer hover:scale-[.98] transition-all card"
 						onClick={(e) => setActive(cards[0])}
 						layoutId={`card-Employers & Employee-${id}`}
 					>
-						<div className="flex items-center h-full w-full p-4 justify-around">
-							<div className="w-72 rounded-lg overflow-hidden">
+						<div className="flex items-center h-full w-full sm:p-4 justify-around relative">
+							<div className="w-full h-full sm:w-72 rounded-lg overflow-hidden">
 								<Image
 									src={"/employee.jpg"}
 									alt="employee"
 									width={400}
 									height={400}
-									className="object-cover aspect-[1/1]"
+									className="object-cover w-full h-full"
 								></Image>
 							</div>
 							<div
-								className="w-1/2"
+								className="absolute sm:static top-0	left-0 w-full sm:w-1/2 p-2 text-center md:text-left"
 								data-scroll
-								data-scroll-speed={((Math.random() * 0.06) + 0.02).toString()}
+								data-scroll-speed={(Math.random() * 0.04 + 0.01).toString()}
 							>
-								<h2 className="text-4xl font-lemon leading-none">
+								<h2 className=" sm:static text-4xl font-lemon leading-none">
 									Employers & Employee
 								</h2>
-								<p className="mt-4 leading-none font-lexend">
+								<p className="mt-4 leading-none font-lexend hidden sm:block">
 									Prioritize mental health at work by setting boundaries,
 									practicing mindfulness, and communicating openly. Take breaks,
 									stay active, and build positive relationships to create a
@@ -73,9 +73,12 @@ export default function ExpandableCardDemo() {
 						</div>
 					</motion.div>
 				</div>
-				<div className=" lg:col-span-1" data-sctoll data-scroll-speed=".1">
+				<div className="lg:col-span-1 h-96 sm:h-fit"
+					data-sctoll
+					data-scroll-speed=".1"
+				>
 					<motion.div
-						className=" bg-[#F6FFFE] relative rounded-xl overflow-hidden cursor-pointer hover:scale-[.98] transition-all card"
+						className=" bg-[#F6FFFE] relative rounded-xl overflow-hidden cursor-pointer hover:scale-[.98] transition-all card h-full"
 						onClick={(e) => setActive(cards[1])}
 						layoutId={`card-Yoga for Wellness-${id}`}
 					>
@@ -96,7 +99,10 @@ export default function ExpandableCardDemo() {
 						</div>
 					</motion.div>
 				</div>
-				<div className="lg:col-span-1" data-sctoll data-scroll-speed=".1">
+				<div className="lg:col-span-1 h-96 sm:h-fit"
+					data-sctoll
+					data-scroll-speed=".1"
+				>
 					<motion.div
 						className="h-full bg-[#CFE19E] rounded-xl overflow-hidden relative cursor-pointer hover:scale-[.98] transition-all card"
 						onClick={(e) => setActive(cards[2])}
@@ -119,7 +125,7 @@ export default function ExpandableCardDemo() {
 						</div>
 					</motion.div>
 				</div>
-				<div className="lg:col-span-2" data-sctoll data-scroll-speed="-.1">
+				<div className="lg:col-span-2 h-96 sm:h-full" data-sctoll data-scroll-speed="-.1">
 					<motion.div
 						className="h-full student-gradient px-4 rounded-xl cursor-pointer hover:scale-[.98] transition-all card"
 						onClick={(e) => setActive(cards[3])}
@@ -136,14 +142,14 @@ export default function ExpandableCardDemo() {
 								></Image>
 							</div>
 							<div
-								className="w-1/2"
+								className="absolute sm:static top-0	left-0 w-full sm:w-1/2 p-2 text-center md:text-left"
 								data-scroll
-								data-scroll-speed={((Math.random() * 0.06) + 0.02).toString()}
+								data-scroll-speed={(Math.random() * 0.04 + 0.01).toString()}
 							>
 								<h2 className="text-4xl font-lemon leading-none">
 									Learners & Students
 								</h2>
-								<p className="mt-4 leading-none font-lexend">
+								<p className="mt-4 leading-none font-lexend hidden sm:block">
 									Balance study with self-care. Practice mindfulness,
 									communicate, take breaks, and build positive relationships for
 									better mental health.

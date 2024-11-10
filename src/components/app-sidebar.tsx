@@ -96,23 +96,24 @@ const navMain = [
 	},
 	{
 		title: "Therapists",
-		url: "/dashboard/admin",
+		url: "/dashboard/admin/therapists",
 		icon: Stethoscope,
 	},
 	{
 		title: "Reviews",
-		url: "/dashboard/admin",
+		url: "/dashboard/admin/reviews",
 		icon: Star,
 	},
 ];
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	const pathname = usePathname();
 	const user = useAuthStore();
-	console.log(user.user)
+	console.log(user.user);
 	React.useEffect(() => {
-	  console.log(user.user)
-	}, [user.user])
-	
+		console.log(user.user);
+	}, [user.user]);
+
 	return (
 		<Sidebar variant="inset" {...props}>
 			<SidebarHeader>
@@ -124,6 +125,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 									<Command className="size-4" />
 								</div>
 								<div className="grid flex-1 text-left text-sm leading-tight">
+									
 									<span className="truncate font-semibold">Mind peace</span>
 									<span className="truncate text-xs">Enterprise</span>
 								</div>
@@ -132,7 +134,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 					</SidebarMenuItem>
 				</SidebarMenu>
 			</SidebarHeader>
-			<SidebarContent className="scrollbar">
+			<SidebarContent className="">
 				<NavMain
 					items={
 						pathname.includes("/dashboard/admin")
@@ -145,7 +147,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 				<NavSecondary items={data.navSecondary} className="mt-auto" />
 			</SidebarContent>
 			<SidebarFooter>
-				<NavUser user={user.user||data.user} />
+				<NavUser user={user.user || data.user} />
 			</SidebarFooter>
 		</Sidebar>
 	);

@@ -15,7 +15,9 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
+import ApiService from "@/helper/ApiService";
+import useAuthStore from "@/store/Auth";
+const apiService = new ApiService("/api/auth/");
 const passwordRegex =
 	/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{6,}$/;
 
@@ -45,15 +47,15 @@ function Signup() {
 		},
 	});
 
-	function onSubmit(data: z.infer<typeof FormSchema>) {
-		toast({
-			title: "You submitted the following values:",
-			description: (
-				<pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-					<code className="text-white">{JSON.stringify(data, null, 2)}</code>
-				</pre>
-			),
+	const setUser=useAuthStore((state)=>state.setUser);
+	async function onSubmit(data: z.infer<typeof FormSchema>) {
+		const res = await apiService.post<UserWithId>({
+			data: data,
+			endpoint: "/register",
 		});
+		if (res.data) {
+			setUser(res.data);
+		}
 	}
 	return (
 		<Form {...form}>
@@ -118,6 +120,7 @@ function Signup() {
 				<Button
 					type="submit"
 					className="login-button"
+					disabled={!form.formState.isValid || form.formState.isSubmitting}
 				>
 					Create
 				</Button>

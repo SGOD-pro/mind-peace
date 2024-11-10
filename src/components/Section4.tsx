@@ -36,12 +36,12 @@ function Section4() {
 
 			<div className="mx-auto w-[95%]">
 				<div className="" data-scroll data-scroll-speed=".1">
-					<span className="text-xl font-lexend-exa uppercase tracking-wider border-2 rounded-full border-black px-4 py-2">
+					<span className="md:text-xl font-lexend-exa uppercase tracking-wider border-2 rounded-full border-black px-4 py-2">
 						practices
 					</span>
 				</div>
 				<h2
-					className="text-6xl font-lexend-decad w-[440px] leading-[3rem] mt-8"
+					className="text-5xl md:text-6xl font-lexend-decad md:w-[440px] leading-[3rem] mt-8"
 					data-scroll
 					data-scroll-speed=".06"
 				>

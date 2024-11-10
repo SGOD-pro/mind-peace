@@ -1,4 +1,5 @@
 "use client";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Image from "next/image";
@@ -11,33 +12,37 @@ function LandingAnimation() {
 	const mainImg = useRef<HTMLImageElement>(null);
 	const welcome = useRef<HTMLHeadingElement>(null);
 	const desc = useRef<HTMLParagraphElement>(null);
-
+	const isMobile = useIsMobile();
+	console.log(isMobile);
 	useGSAP(() => {
 		if (!iconContainer.current || !mainImg.current) return;
 		const icons: HTMLDivElement[] = gsap.utils.toArray(
 			iconContainer.current.children
 		);
-		icons.forEach((icon, index) => {
-			const randomXOffset = Math.random() * 50 + 100; // Range: 10-20%
-			const randomYOffset = Math.random() * 40 + 20; // Range: 10-20%
-			const xPosition = index % 2 === 0 ? randomXOffset : -randomXOffset;
-			const yPosition = index < 2 ? randomYOffset : -randomYOffset;
+		if (isMobile) {
+			iconContainer.current.style.display = "none";
+			icons.forEach((icon, index) => {
+				const randomXOffset = Math.random() * 50 + 100; // Range: 10-20%
+				const randomYOffset = Math.random() * 40 + 20; // Range: 10-20%
+				const xPosition = index % 2 === 0 ? randomXOffset : -randomXOffset;
+				const yPosition = index < 2 ? randomYOffset : -randomYOffset;
 
-			gsap.to(icon, {
-				position: "absolute",
-				opacity: 1,
-				scale: 1,
-				rotation: Math.random() * 20 - 10,
-				duration: 0.8,
-				ease: "power2.inOut",
-				y: `${yPosition}%`,
-				x: `${xPosition}%`,
-				delay: index * 0.2,
+				gsap.to(icon, {
+					position: "absolute",
+					opacity: 1,
+					rotation: Math.random() * 20 - 10,
+					duration: 0.8,
+					scale: 1,
+					ease: "power2.inOut",
+					y: `${yPosition}%`,
+					x: `${xPosition}%`,
+					delay: index * 0.2,
+				});
 			});
-		});
-		gsap.set(yellowScreen.current,{
+		}
+		gsap.set(yellowScreen.current, {
 			height: "90%",
-		})
+		});
 		const t1 = gsap.timeline();
 		t1.from(
 			mainImg.current,
@@ -47,14 +52,14 @@ function LandingAnimation() {
 				duration: 1.2,
 				y: "80%",
 			},
-			"b"
+			isMobile ? "a" : "b"
 		);
 
 		t1.from(
 			welcome.current,
 			{
 				opacity: 0,
-				y: "110%",
+				y: isMobile ? "-110%" : "110%",
 				ease: "power2",
 				duration: 0.6,
 			},
@@ -87,12 +92,12 @@ function LandingAnimation() {
 		t2.to(
 			mainImg.current,
 			{
-				scale:3,
+				scale: 3,
 				opacity: 0,
 				ease: "power2",
 				onComplete: () => {
 					t1.set(mainImg.current, { display: "none" });
-				}
+				},
 			},
 			"fadeOut1"
 		);
@@ -133,7 +138,7 @@ function LandingAnimation() {
 		masterTimeline.add(t1).add(t2, ">");
 	}, []);
 	return (
-		<div className="fixed inset-0 z-[9999] " ref={main}>
+		<div className="fixed inset-0 z-[9999] h-dvh" ref={main}>
 			<div
 				className="absolute inset-0 h-dvh bg-[#f7e3a6] -z-10 top-0 left-0"
 				ref={yellowScreen}
@@ -146,7 +151,10 @@ function LandingAnimation() {
 				height={2000}
 				className="h-full w-full object-cover relative z-0 opacity-1"
 			></Image>
-			<div className={`"absolute inset-0 left-0 top-0"`} ref={iconContainer}>
+			<div
+				className={"absolute inset-0 left-0 top-0 hidden lg:block"}
+				ref={iconContainer}
+			>
 				<div className={`absolute top-0 left-0 w-32  h-40 scale-0 opacity-0`}>
 					<Image
 						src={"/icons/icon4.png"}
@@ -174,7 +182,9 @@ function LandingAnimation() {
 						className="w-full h-full object-contain hover:scale-95 transition-all"
 					/>
 				</div>
-				<div className={`absolute bottom-0 right-0 w-32 h-40 scale-0 opacity-0`}>
+				<div
+					className={`absolute bottom-0 right-0 w-32 h-40 scale-0 opacity-0`}
+				>
 					<Image
 						src={"/icons/icon5.png"}
 						alt="icon"
@@ -184,15 +194,15 @@ function LandingAnimation() {
 					/>
 				</div>
 			</div>
-			<div className="absolute bottom-20 flex justify-center w-full z-10">
+			<div className="absolute bottom-[75%]  md:bottom-20 flex justify-center w-full z-10">
 				<h3
-					className="text-7xl font-lexend-deca  font-medium text-[#65EBA9]"
+					className="text-5xl text-center md:text-7xl font-lexend-deca  font-medium text-[#65EBA9]"
 					ref={welcome}
 				>
 					Welcome to Mind Peace
 				</h3>
 			</div>
-			<div className="w-full flex justify-center absolute top-20 z-10">
+			<div className="w-full justify-center absolute top-20 z-10 hidden md:flex">
 				<p
 					className="font-lexend-exa tracking-tight leading-none font-semibold w-2/3 text-center text-3xl text-[#FD7B55]"
 					ref={desc}

@@ -32,7 +32,7 @@ function Main() {
 		<>
 		
 			<div
-				className={`fixed top-1/2 right-10 transition-all -translate-y-1/2 z-50 ${
+				className={`fixed top-1/2 right-3 md:right-10 transition-all -translate-y-1/2 z-50 ${
 					isOpen
 						? "opacity-100 -translate-x-0"
 						: "opacity-0 translate-x-[120%] "

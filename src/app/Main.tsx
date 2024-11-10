@@ -27,7 +27,7 @@ function Main({ children }: { children: React.ReactNode }) {
 		}
 		sessioin();
 	}, []);
-	const loco = new LocomotiveScroll();
+	// const loco = new LocomotiveScroll();
 	return (
 		<main className="bg-[#F9F9F9] w-full min-h-dvh">
 			<Loader />

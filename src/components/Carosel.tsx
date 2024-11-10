@@ -55,44 +55,44 @@ const Carousel = () => {
 	}, [slides.length]);
 
 	return (
-		<div className="flex justify-around w-full h-full gap-4">
+		<div className="flex justify-around lg:flex-row flex-col-reverse w-full h-full gap-4">
 			<div className=" flex flex-col justify-center text-[#f9f9f9]">
-				<div className="w-2/3">
+				<div className="min-w-full sm:min-w-[24rem] w-2/3 m-auto lg:m-0">
 					<div className="h-[calc(2.75rem*2)] overflow-hidden" data-scroll data-scroll-speed=".02">
 						<div className="h-full"  ref={slideHeadingRef}>
-							<div className="font-lemon pl-1">
-								<h2 className="text-4xl leading-tighter py-1 h-full">
+							<div className="font-lemon pl-1 flex flex-col ">
+								<h2 className="text-4xl leading-tighter py-1 h-[calc(2.75rem*2)]">
 									{h1s[0]}
 								</h2>
-								<h2 className="text-4xl leading-tighter py-1 h-full">
+								<h2 className="text-4xl leading-tighter py-1 h-[calc(2.75rem*2)]">
 									{h1s[1]}
 								</h2>
-								<h2 className="text-4xl leading-tighter py-1 h-full">
+								<h2 className="text-4xl leading-tighter py-1 h-[calc(2.75rem*2)]">
 									{h1s[2]}
 								</h2>
 							</div>
 						</div>
 					</div>
-					<div className="h-[calc(1.25rem*2)] overflow-hidden mt-5" data-scroll data-scroll-speed="-.02">
+					<div className="h-[calc(1.25rem*3)] sm:h-[calc(1.25rem*2)] overflow-hidden mt-5" data-scroll data-scroll-speed="-.02">
 						<div className="font-lexend-deca h-full" ref={slideDecRef}>
 							<div className="font-thin" >
-								<h2 className="text-sm min-h-full">{ps[0]}</h2>
-								<h2 className="text-sm min-h-full">{ps[1]}</h2>
-								<h2 className="text-sm min-h-full">{ps[2]}</h2>
+								<h2 className="text-sm h-[calc(1.25rem*3)] sm:h-[calc(1.25rem*2)]">{ps[0]}</h2>
+								<h2 className="text-sm h-[calc(1.25rem*3)] sm:h-[calc(1.25rem*2)]">{ps[1]}</h2>
+								<h2 className="text-sm h-[calc(1.25rem*3)] sm:h-[calc(1.25rem*2)]">{ps[2]}</h2>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div className="flex justify-between gap-9">
-				<div className="h-full w-2 grid grid-rows-3 gap-3">
+			<div className="flex justify-between lg:flex-row flex-col-reverse lg:gap-9 mt-10 lg:mt-0">
+				<div className="h-full  lg:w-2 grid grid-cols-3 lg:grid-rows-3 lg:grid-cols-1 gap-10 lg:gap-3 place-items-center mt-4 lg:mt-0 m-auto">
 					{slides.map((_, index) => (
 						<label
 							key={index}
 							htmlFor={`p${index + 1}`}
 							className={`${
 								slideIndex === index ? "bg-slate-200" : "bg-slate-200/30"
-							} rounded-full w-full h-full`}
+							} rounded-full w-5 h-5 lg:w-full lg:h-full`}
 						></label>
 					))}
 					{slides.map((_, index) => (
@@ -106,7 +106,7 @@ const Carousel = () => {
 						/>
 					))}
 				</div>
-				<div className="aspect-square rounded-2xl overflow-hidden"  data-scroll data-scroll-speed=".06">
+				<div className="w-full aspect-square rounded-2xl overflow-hidden h-[50dvh] m-auto"  data-scroll data-scroll-speed=".06">
 					<div className="flex h-full" ref={slideContainerRef}>
 						{slides.map((slide, index) => (
 							<div className="min-w-full h-full" key={index}>
