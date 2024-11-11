@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React, { useEffect, useId, useRef, useState } from "react";
+import React, {  useId, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import ExpandableCard from "./ExpandableCard";
 import { useGSAP } from "@gsap/react";
@@ -42,7 +42,7 @@ export default function ExpandableCardDemo() {
 				<div className="lg:col-span-2 h-96 sm:h-full" data-sctoll data-scroll-speed="-.1">
 					<motion.div
 						className="h-full employees-gradient rounded-xl cursor-pointer hover:scale-[.98] transition-all card"
-						onClick={(e) => setActive(cards[0])}
+						onClick={() => setActive(cards[0])}
 						layoutId={`card-Employers & Employee-${id}`}
 					>
 						<div className="flex items-center h-full w-full sm:p-4 justify-around relative">
@@ -79,7 +79,7 @@ export default function ExpandableCardDemo() {
 				>
 					<motion.div
 						className=" bg-[#F6FFFE] relative rounded-xl overflow-hidden cursor-pointer hover:scale-[.98] transition-all card h-full"
-						onClick={(e) => setActive(cards[1])}
+						onClick={() => setActive(cards[1])}
 						layoutId={`card-Yoga for Wellness-${id}`}
 					>
 						<div className="absolute uppercase tracking-wider font-leagueSpartan font-extrabold bg-[#b0e2d7] rounded-lg px-4 py-2 top-3 left-2 leading-tight flex items-center justify-center">
@@ -105,7 +105,7 @@ export default function ExpandableCardDemo() {
 				>
 					<motion.div
 						className="h-full bg-[#CFE19E] rounded-xl overflow-hidden relative cursor-pointer hover:scale-[.98] transition-all card"
-						onClick={(e) => setActive(cards[2])}
+						onClick={() => setActive(cards[2])}
 						layoutId={`card-Exercise for Health-${id}`}
 					>
 						<div className="absolute uppercase tracking-wider font-leagueSpartan font-extrabold bg-[#D3FF6C] rounded-lg px-4 py-2 top-3 left-2 leading-tight flex items-center justify-center">
@@ -128,7 +128,7 @@ export default function ExpandableCardDemo() {
 				<div className="lg:col-span-2 h-96 sm:h-full" data-sctoll data-scroll-speed="-.1">
 					<motion.div
 						className="h-full student-gradient px-4 rounded-xl cursor-pointer hover:scale-[.98] transition-all card"
-						onClick={(e) => setActive(cards[3])}
+						onClick={() => setActive(cards[3])}
 						layoutId={`card-Healthy Habits for Students-${id}`}
 					>
 						<div className="flex items-center h-full w-full p-4 justify-around">
@@ -223,7 +223,7 @@ const cards: CardProps[] = [
 						<br />
 						<strong>3. Seek Support:</strong> If you are feeling overwhelmed,
 						reach out to a colleague, friend, or mental health professional.
-						It's okay to ask for help.
+						It{`'`}s okay to ask for help.
 						<br />
 						<br />
 						<strong>4. Stay Active:</strong> Physical activity can help improve
@@ -293,7 +293,7 @@ const cards: CardProps[] = [
 						</li>
 					</ul>
 					<br />
-					Whether you're looking to reduce stress or improve physical fitness,
+					Whether you{`'`}re looking to reduce stress or improve physical fitness,
 					yoga offers numerous benefits for the mind and body. Dedicate a few
 					minutes each day to your practice and experience the positive changes.
 				</p>
@@ -377,7 +377,7 @@ const cards: CardProps[] = [
 		content: () => {
 			return (
 				<p>
-					Being a student is a busy and exciting time, but it's also essential
+					Being a student is a busy and exciting time, but it{`'`}s also essential
 					to maintain a healthy lifestyle to succeed academically and
 					personally. Here are some helpful tips and benefits for students:
 					<br />
@@ -423,7 +423,7 @@ const cards: CardProps[] = [
 						</li>
 						<li>
 							Seek help when needed—don’t hesitate to reach out to teachers or
-							friends if you're struggling with a subject.
+							friends if you{`'`}re struggling with a subject.
 						</li>
 					</ul>
 					<br />

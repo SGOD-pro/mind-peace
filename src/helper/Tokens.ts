@@ -15,7 +15,7 @@ export const generateTokens = async (
 		user.refreshToken = refreshToken;
 		await user.save({ validateBeforeSave: false });
 		return { accToken, refreshToken };
-	} catch (error) {
+	} catch (_) {
 		throw new Error("Something went wrong during token generation");
 	}
 };
@@ -52,7 +52,7 @@ export async function cookieResponse(user: any) {
 export const verifyAccessToken = async (token: string) => {
 	try {
 		return jwt.verify(token, process.env.ACCESS_TOKEN!);
-	} catch (error) {
+	} catch (_) {
 		return null;
 	}
 };
@@ -67,7 +67,7 @@ export const verifyRole = (req: NextRequest): number | null => {
 	try {
 		const payload = jwt.verify(token, process.env.ACCESS_TOKEN!) as JwtPayload;
 		return payload.role;
-	} catch (error) {
+	} catch (_) {
 		return null;
 	}
 };

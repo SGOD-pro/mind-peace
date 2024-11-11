@@ -19,7 +19,7 @@ function generateCustomPassword(): string {
 	}).join("");
 	return `MP-${numberPart}${mixedPart}`;
 }
-export async function GET(req: NextRequest) {
+export async function GET(_: NextRequest) {
 	await connectDb();
 	try {
 		const Therapist = await TherapistModel.aggregate([

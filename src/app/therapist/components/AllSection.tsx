@@ -7,6 +7,7 @@ import useTherapistStore from "@/store/Therapist";
 import ApiService from "@/helper/ApiService";
 import FilterButton from "./FilterButon";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Loder from "@/components/layout/Loder";
 const apiService = new ApiService("/api/therapist");
 
 const filterOptions = [
@@ -16,6 +17,7 @@ const filterOptions = [
 	{ label: "Neuropsych", value: "neuropsych" },
 	{ label: "Family Therapist", value: "familyTherapist" },
 ];
+
 function AllSection() {
 	gsap.registerPlugin(ScrollTrigger);
 	const allitems = useTherapistStore((state) => state.getAllUsers);
@@ -82,6 +84,11 @@ function AllSection() {
 			</nav>
 
 			<div className="max-w-7xl m-auto mt-7">
+				{!hydrated && (
+					<div className="h-dvh flex items-center justify-center">
+						<Loder />
+					</div>
+				)}
 				<div
 					className="grid md:grid-cols-2 lg:grid-cols-3 gap-4"
 					ref={showTherapistContainer}
@@ -92,6 +99,7 @@ function AllSection() {
 							speciality={item.speciality}
 							image={item.image || "/icons/icon6.png"}
 							_id={item._id}
+							key={item._id}
 						/>
 					))}
 				</div>

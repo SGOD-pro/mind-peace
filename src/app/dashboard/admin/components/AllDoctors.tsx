@@ -13,8 +13,8 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import ApiService from "@/helper/ApiService";
-import useTherapistStore,{useTherapist} from "@/store/Therapist";
-import { memo, useCallback, useEffect, useState } from "react";
+import useTherapistStore from "@/store/Therapist";
+import { memo, useCallback, useEffect } from "react";
 
 const apiService = new ApiService("/api/therapist");
 
@@ -83,7 +83,7 @@ function AllTherapistTable() {
 			</TableRow>
 		);
 	});
-
+Rows.displayName="Rows"
 	return (
 		<Table>
 			<TableHeader>

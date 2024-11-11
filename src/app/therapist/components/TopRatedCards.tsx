@@ -18,7 +18,7 @@ function TopRatedCards({name,speciality,image,rating}:{name:string,speciality:st
 			</h4>
 			<p>{speciality}</p>
 			<span className="absolute text-lg px-3 rounded-md bg-[#f9f9f9] bottom-2 right-2 pr-0">
-				4.0 ⭐
+				4.0 ⭐{rating}
 			</span>
 		</div>
 	);

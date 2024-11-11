@@ -9,7 +9,6 @@ import gsap from "gsap";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { MenuIcon } from "../icons/MenuIcon";
 import { links } from "@/constants";
-import { set } from "mongoose";
 const Icon = memo(() => {
 	return (
 		<div className="w-12 h-12">
@@ -137,7 +136,6 @@ useEffect(() => {
 					ref={nav}
 				>
 					<Icon />
-
 					<div className="">
 						<Links />
 					</div>

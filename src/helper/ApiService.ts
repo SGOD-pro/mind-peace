@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosResponse, AxiosError } from "axios";
+import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { toast } from "@/hooks/use-toast"; // Adjust this based on your toast import
 
 interface ApiServicesResponse<T> {
@@ -7,7 +7,7 @@ interface ApiServicesResponse<T> {
 	message?: string;
 	error?: Error;
 }
-class ApiService<Tx> {
+class ApiService{
 	private baseUrl: string;
 	private axiosInstance: AxiosInstance;
 
@@ -95,7 +95,7 @@ class ApiService<Tx> {
 	}): Promise<ApiServicesResponse<T>> {
 		const action = "POST";
 		try {
-			let requestData = data;
+			const requestData = data;
 			const config = {
 				headers: isMultipart
 					? { "Content-Type": "multipart/form-data" }

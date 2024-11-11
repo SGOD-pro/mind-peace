@@ -17,17 +17,20 @@ function Section4() {
 		const childs: HTMLDivElement[] = gsap.utils.toArray(
 			parent.current.children
 		);
-		gsap.from(childs, {
-			opacity: 0,
-			y: 100,
-			ease: "power2.inOut",
-			stagger: 0.2,
-			duration: 0.5,
-			scrollTrigger: {
-				trigger: parent.current,
-				start: "top 72%",
-				// markers: true,
-			},
+		childs.forEach((child) => {
+			gsap.from(child, {
+				opacity: 0,
+				y: 100,
+				duration: 0.5,
+				
+				scrollTrigger: {
+					trigger: child,
+					start: "top 80%",
+					scrub:true,
+					end: "10% 70%",
+					// markers: true,
+				},
+			})
 		});
 	}, []);
 	return (
@@ -56,7 +59,7 @@ function Section4() {
 						<div className="" key={index}>
 							<motion.div
 								className={`w-full h-full relative overflow-hidden rounded-2xl shadow-custom hover:shadow-none transition-all hover:scale-[.99] cursor-pointer`}
-								onClick={(e) => setActive(cards[index])}
+								onClick={() => setActive(cards[index])}
 								layoutId={`card-${card.title}-${id}`}
 								style={{ backgroundColor: card.bgColor }}
 							>

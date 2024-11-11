@@ -21,14 +21,14 @@ export default function Home() {
 
 	return (
 		<main className="bg-[#F9F9F9] scrollbar relative text-black">
-			{/* <LandingAnimation/> */}
+			<LandingAnimation/>
 			<section className="flex lg:flex-row flex-col lg:h-dvh w-full items-center font-leagueSpartan relative">
 				<Suspense fallback={<Skeleton className="w-full h-full" />}>
 				<Section1 />
 				</Suspense>
 			</section>
 
-			<section className="w-full lg:min-h-dvh lg:h-dvh p-8 md:pb-12 pt-0 z-0">
+			<section className="w-full lg:min-h-dvh lg:h-dvh p-3 md:p-8 md:pb-12 pt-0 z-0">
 				<Suspense fallback={<Skeleton className="w-full h-full" />}>
 					<Section2 />
 				</Suspense>

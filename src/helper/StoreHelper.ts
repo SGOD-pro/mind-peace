@@ -11,11 +11,11 @@ export default class StoreHelper<T extends { _id: string }> {
 	}
   
 	removeItem(id: string): void {
-	  this.items = this.items.filter((item: any) => item._id !== id); // Assumes items have an `id` field
+	  this.items = this.items.filter((item: T) => item._id !== id); // Assumes items have an `id` field
 	}
   
 	updateItem(updatedItem: T): void {
-	  const index = this.items.findIndex((item: any) => item._id === updatedItem._id);
+	  const index = this.items.findIndex((item: T) => item._id === updatedItem._id);
 	  if (index !== -1) this.items[index] = updatedItem;
 	}
   

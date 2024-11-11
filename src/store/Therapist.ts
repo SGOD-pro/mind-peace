@@ -13,7 +13,7 @@ interface ExampleState {
 }
 
 const useTherapistStore = create<ExampleState>()(
-  immer((set, get) => {
+  immer((set) => {
     const storeHelper = new StoreHelper<Therapists>([]);
 
     return {

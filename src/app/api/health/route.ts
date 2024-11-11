@@ -13,7 +13,7 @@ export async function GET() {
 			recipientEmail: email,
 		});
         return ApiResponse.success({data: "OK",message:"Every thing was fine",statusCode:202});
-    } catch (error:any) {
+    } catch (error) {
         return ApiResponse.error({message:error.message,statusCode:500});
     }
 
