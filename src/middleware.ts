@@ -20,6 +20,7 @@ export async function middleware(request: NextRequest) {
             (payload.role === 2 && pathname.startsWith("/dashboard/admin")) ||
             (payload.role === 0 && pathname.startsWith("/dashboard/user")) ||
             (payload.role === 1 && pathname.startsWith("/dashboard/therapist"))
+            //|| (payload.role && pathname.startsWith("/therapist/book"))
         ) {
             return NextResponse.next();
         } else {
@@ -32,5 +33,6 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: "/dashboard/:path*",
+    matcher: ["/dashboard/:path*"],
+    // matcher: ["/dashboard/:path*","/therapist/book/:path*"],
 };

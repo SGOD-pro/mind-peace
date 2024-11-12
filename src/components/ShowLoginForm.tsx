@@ -4,9 +4,10 @@ import { useLoginForm } from "@/store/LoginForm";
 import LoginForm from "@/components/login-form";
 
 
-function Main() {
+function ShowLoginForm() {
 	const isOpen = useLoginForm((state) => state.isOpen);
-	const setIsOpen = useLoginForm((state) => state.setIsOpen);
+	// const setIsOpen = useLoginForm((state) => state.setIsOpen);
+    const {setIsOpen} = useLoginForm();
 	const content = useRef<HTMLDivElement>(null);
 	
 	useEffect(() => {
@@ -17,6 +18,7 @@ function Main() {
 				!content.current.contains(target) &&
 				!target.classList.contains("login-btn") 
 			) {
+                console.log("false open")
 				setIsOpen(false);
 			}
 		};
@@ -45,4 +47,4 @@ function Main() {
 	);
 }
 
-export default memo(Main);
+export default memo(ShowLoginForm);

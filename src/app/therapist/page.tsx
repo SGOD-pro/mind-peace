@@ -31,7 +31,7 @@ function TherapistPage() {
 
 	return (
 		<>
-			<main className="p-8 pt-0 bg-[#EBFFFD] text-black">
+			<main className="p-4 pt-0 lg:p-8 lg:pt-0 bg-[#EBFFFD] text-black">
 				<Section1 />
 				<section className="py-10">
 					<h2 className="text-4xl font-lexend tracking-tighter">Top rated</h2>

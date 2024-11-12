@@ -6,11 +6,12 @@ const apiService = new ApiService("/api/auth/");
 import useAuthStore from "@/store/Auth";
 import ShowLoginForm from "@/components/ShowLoginForm";
 import LocomotiveScroll from "locomotive-scroll";
-function Main({ children }: { children: React.ReactNode }) {
-	const { user, ishydrated, setUser } = useAuthStore();
+function  Main({ children }: { children: React.ReactNode }) {
+	const { ishydrated, setUser } = useAuthStore();
 	const { Loader, setShow } = useShowLoader();
+
 	useEffect(() => {
-		async function sessioin() {
+		async function session() {
 			if (!ishydrated) {
 				setShow(true);
 				const res = await apiService.post<UserWithId>({
@@ -25,7 +26,7 @@ function Main({ children }: { children: React.ReactNode }) {
 				console.log(res);
 			}
 		}
-		sessioin();
+		session();
 	}, []);
 	// const loco = new LocomotiveScroll();
 	return (

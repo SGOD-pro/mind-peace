@@ -10,6 +10,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Loder from "@/components/layout/Loder";
 const apiService = new ApiService("/api/therapist");
 
+import {
+	Select,
+	SelectContent,
+	SelectGroup,
+	SelectItem,
+	SelectLabel,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 const filterOptions = [
 	{ label: "All", value: "all" },
 	{ label: "Psychiatrist", value: "psychiatrist" },
@@ -69,8 +78,8 @@ function AllSection() {
 	return (
 		<section className="">
 			<h2 className="text-4xl font-lexend tracking-tighter">All therapists</h2>
-			<nav className="flex mx-auto w-[90%] justify-end items-center">
-				<ul className="flex gap-4 flex-nowrap">
+			<nav className="flex mx-auto w-[90%] justify-end items-center mt-4">
+				<ul className="gap-4 flex-nowrap hidden md:flex">
 					{filterOptions.map((filter) => (
 						<FilterButton
 							key={filter.value}
@@ -80,7 +89,25 @@ function AllSection() {
 						/>
 					))}
 				</ul>
-				<Input className="w-[240px] ml-3" placeholder="Search.."></Input>
+				<Select
+					onValueChange={(e) => {
+						handleSelect(e);
+					}}
+					defaultValue={selected || "all"}
+				>
+					<SelectTrigger className="w-[180px] md:hidden">
+						<SelectValue placeholder="Filter by speciality" />
+					</SelectTrigger>
+					<SelectContent className="bg-white text-black">
+						<SelectGroup>
+							<SelectLabel>Speciality</SelectLabel>
+							{filterOptions.map((filter) => (
+								<SelectItem value={filter.value} className=" focus:bg-[#D3FFFB] focus:text-black">{filter.label}</SelectItem>
+							))}
+						</SelectGroup>
+					</SelectContent>
+				</Select>
+				<Input className="w-[240px] ml-3" placeholder="Search by name.."></Input>
 			</nav>
 
 			<div className="max-w-7xl m-auto mt-7">

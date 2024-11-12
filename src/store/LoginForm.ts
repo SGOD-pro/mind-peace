@@ -4,16 +4,23 @@ import { immer } from "zustand/middleware/immer";
 export type LoginFormState = {
   isOpen: boolean;
   setIsOpen: (isOpen: boolean) => void;
+  open: () => void  
 };
 
 const useLoginForm = create<LoginFormState>()(
   immer((set) => ({
     isOpen: false,
-    setIsOpen: (isOpen) => {
+    setIsOpen: (val) => {
       set((state) => {
-        state.isOpen = isOpen;
+        console.log(val)
+        state.isOpen = val;
       });
     },
+    open: () => {
+      set((state) => {
+        state.isOpen = true;
+      });
+    }
   }))
 );
 export  {useLoginForm};
