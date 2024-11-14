@@ -29,7 +29,7 @@ function LoginFormBtn() {
 					onClick={() => {setIsOpen(!isOpen)}}
 				>
 					<span className="hidden md:inline pointer-events-none login-text">Sign In/Up</span>
-					<LogIn className="md:hidden w-11 h-11 pointer-events-none login-text" />
+					<LogIn className="md:hidden w-11 h-11 pointer-events-none text-black" />
 				</Button>
 			) : (
 				<DropdownMenu>

@@ -34,7 +34,7 @@ import FileInput from "../ui/FileInput";
 import ApiService from "@/helper/ApiService";
 import { memo, useState } from "react";
 import useTherapistStore from "@/store/Therapist";
-
+const days=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 // Define Zod schema for validation
 const FormSchema = z.object({
 	name: z.string().min(2, { message: "Full Name is required" }),
@@ -51,7 +51,10 @@ const FormSchema = z.object({
 		from: z.string(),
 		to: z.string(),
 	}),
-	days: z.array(z.string()),
+	days: z.array(z.string()).transform((days) => {
+		const dayOrder = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+		return days.sort((a, b) => dayOrder.indexOf(a) - dayOrder.indexOf(b));
+	}),
 	clinicLocation: z.string().min(1, { message: "Clinic Location is required" }),
 	charges: z.number().min(1, { message: "Charges are required" }),
 	image: z.instanceof(File).optional(),
@@ -286,7 +289,7 @@ function AddTherapistForm({ defaultValues }: { defaultValues?: Therapists }) {
 								<DropdownMenuContent className="w-56">
 									<DropdownMenuLabel>Select Available Days</DropdownMenuLabel>
 									<DropdownMenuSeparator />
-									{["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map(
+									{days.map(
 										(day) => (
 											<FormField
 												key={day}

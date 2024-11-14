@@ -116,7 +116,7 @@ function Details({ id }: { id: string }) {
 				) : (
 					<Link
 						href={`/therapist/book/${id}`}
-						className="bg-blue-600 rounded-md px-4 py-2 text-white"
+						className="bg-blue-600 rounded-md px-4 py-2 text-white text-center"
 					>
 						Book
 					</Link>
