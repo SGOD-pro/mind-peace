@@ -7,12 +7,12 @@ interface CardProps {
 	bgColor?: string;
 }
 
-interface UserWithId{
-	email:string,
-	role:number,
-	id:string,
-	avatar:string
-	provider:string;
+interface UserWithId {
+	email: string;
+	role: number;
+	id: string;
+	avatar: string;
+	provider: string;
 }
 
 interface TherapistFormInterface {
@@ -33,4 +33,15 @@ interface TherapistFormInterface {
 }
 interface Therapists extends TherapistFormInterface {
 	_id: string;
+}
+
+interface TherapistBooking {
+	_id: string;
+	name: string;
+	speciality: string;
+	timing: string;
+	rating?: number;
+	charges: number;
+	image: string;
+	status?:"pending";
 }

@@ -1,12 +1,12 @@
 "use client";
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import Section1 from "./components/Section1";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import AllSection from "./components/AllSection";
-
+import LocomotiveScroll from "locomotive-scroll";
 
 function TherapistPage() {
 	gsap.registerPlugin(ScrollTrigger);
@@ -24,10 +24,16 @@ function TherapistPage() {
 				trigger: topRatedContainer.current,
 				start: "top 70%",
 				// markers: true,
+				toggleActions: "play reverse play reverse",
 			},
 		});
 	}, []);
-
+	useEffect(() => {
+		const loco = new LocomotiveScroll();
+		return () => {
+			loco.destroy();
+		};
+	}, []);
 
 	return (
 		<>
@@ -113,8 +119,8 @@ function TherapistPage() {
 						</div>
 					</div>
 				</section>
-				
-					<AllSection/>
+
+				<AllSection />
 			</main>
 		</>
 	);

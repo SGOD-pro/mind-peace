@@ -20,7 +20,7 @@ function DialogComp({
 			<DialogTrigger>
 				{children}
 			</DialogTrigger>
-			<DialogContent className="">
+			<DialogContent className="max-h-[80dvh] overflow-auto scrollbar">
 				<DialogHeader>
 					<DialogTitle>{title}</DialogTitle>
 				</DialogHeader>

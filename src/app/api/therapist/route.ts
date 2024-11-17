@@ -97,10 +97,10 @@ export async function POST(req: NextRequest) {
 			avatar: fileURL,
 			role: 1,
 		});
-		SendMail<string>({
-			type: "newTherapist",
-			data: password,
-			recipientEmail: email,
+		SendMail({
+			type: "newTherapist",    
+			data: password,          
+			recipientEmail: email,   
 		});
 		return ApiResponse.success({
 			statusCode: 200,

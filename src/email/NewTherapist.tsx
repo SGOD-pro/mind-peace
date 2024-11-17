@@ -15,7 +15,7 @@ import {
 import * as React from "react";
 
 
-	const NewTherapist = (data:any) => (
+	const NewTherapist = (data:string) => (
 		<Html>
 			<Head />
 			<Preview>Welcome to Mind Peace</Preview>

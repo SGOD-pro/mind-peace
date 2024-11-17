@@ -22,15 +22,14 @@ function Section4() {
 				opacity: 0,
 				y: 100,
 				duration: 0.5,
-				
+
 				scrollTrigger: {
 					trigger: child,
 					start: "top 80%",
-					scrub:true,
-					end: "10% 70%",
+					toggleActions: "play reverse play reverse",
 					// markers: true,
 				},
-			})
+			});
 		});
 	}, []);
 	return (
@@ -67,8 +66,11 @@ function Section4() {
 									{" "}
 									{card.title}
 								</h4>
-								<div className="" data-scroll
-									data-scroll-speed={(Math.random() * 0.08).toString()}>
+								<div
+									className=""
+									data-scroll
+									data-scroll-speed={(Math.random() * 0.08).toString()}
+								>
 									<Image
 										src={card.src}
 										alt="music"

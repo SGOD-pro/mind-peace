@@ -24,7 +24,7 @@ const ReviewCard = ({
 			)}
 		>
 			<div className="flex flex-row items-center gap-2 relative ">
-                <div className="absolute top-0 right-0 rounded-md px-2 py-1 bg-[#95d4ce] text-sm">4.0⭐</div>
+                <div className="absolute top-0 right-0 rounded-md px-2 py-1 bg-[#40c0b3] text-sm">4.0⭐</div>
 				<div className="w-12 h-12">
 					<Image
 						className="rounded-full w-full h-full object-cover object-top"
