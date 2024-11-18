@@ -1,14 +1,12 @@
 "use client";
-import Image from "next/image";
 import React from "react";
 
 function NotFound() {
 	return (
 		<div className="h-dvh overflow-hidden p-8 md:p-16 bg-background">
-			<Image
+			<img
 				src={"/not-found.png"}
-				width={2000}
-				height={2000}
+				property="1"
 				alt="Not Found"
 				className="w-full h-full object-contain"
 			/>

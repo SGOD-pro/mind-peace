@@ -15,7 +15,7 @@ import type {
 } from "canvas-confetti";
 import confetti from "canvas-confetti";
 
-import { Button, ButtonProps } from "@/components/ui/button";
+import {ButtonProps } from "@/components/ui/button";
 
 type Api = {
   fire: (options?: ConfettiOptions) => void;
@@ -92,15 +92,11 @@ const Confetti = forwardRef<ConfettiRef, Props>((props, ref) => {
     </ConfettiContext.Provider>
   );
 });
-
-interface ConfettiButtonProps extends ButtonProps {
-  options?: ConfettiOptions &
-    ConfettiGlobalOptions & { canvas?: HTMLCanvasElement };
-  children?: React.ReactNode;
-}
+Confetti.displayName = "Confetti";
 
 
-const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+
+const handleClick = (event?: React.MouseEvent<HTMLButtonElement>) => {
   const end = Date.now() + 3 * 1000; // 3 seconds
   const colors = ["#ffbe0b", "#fb5607", "#ff006e", "#8338ec"];
 

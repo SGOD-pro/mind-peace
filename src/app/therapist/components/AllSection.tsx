@@ -41,7 +41,6 @@ function AllSection() {
 		const childrens: HTMLDivElement[] = gsap.utils.toArray(
 			showTherapistContainer.current.children
 		);
-		console.log(childrens);
 		childrens.forEach((child) => {
 			gsap.from(child, {
 				opacity: 0,

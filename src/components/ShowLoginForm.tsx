@@ -18,7 +18,6 @@ function ShowLoginForm() {
 				!content.current.contains(target) &&
 				!target.classList.contains("login-btn") 
 			) {
-                console.log("false open")
 				setIsOpen(false);
 			}
 		};

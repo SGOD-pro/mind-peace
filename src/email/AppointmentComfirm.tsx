@@ -50,7 +50,7 @@ export const AppointmentComfirm = (data:{appointmentId:string,date:string}) => (
 						You order's is on its way. Use the link above to track its progress.
 					</Text>
 					<Text style={{ ...global.text, marginTop: 24 }}>
-						We´ve also charged your payment method for the cost of your order
+						We{`'`}ve also charged your payment method for the cost of your order
 						and will be removing any authorization holds. For payment details,
 						please visit your Orders page on Nike.com or in the Nike app.
 					</Text>

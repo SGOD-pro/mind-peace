@@ -6,7 +6,7 @@ interface IAppointment extends Document {
 	name: string;
 	age: number;
 	date: Date;
-	doctorId: Types.ObjectId;
+	therapistId: Types.ObjectId;
 	userId?: Types.ObjectId;
 	status: "PENDING" | "CANCEL" | "SUCCESS";
 	createdAt?: Date;
@@ -19,7 +19,7 @@ const appointmentSchema = new Schema<IAppointment>(
 		name: { type: String, required: true },
 		age: { type: Number, required: true },
 		date: { type: Date, required: true },
-		doctorId: { type: Schema.Types.ObjectId, ref: "therapists", required: true },
+		therapistId: { type: Schema.Types.ObjectId, ref: "therapists", required: true },
 		userId: { type: Schema.Types.ObjectId, ref: "auths" },
 		status: {
 			type: String,

@@ -5,7 +5,6 @@ import ApiService from "@/helper/ApiService";
 const apiService = new ApiService("/api/auth/");
 import useAuthStore from "@/store/Auth";
 import ShowLoginForm from "@/components/ShowLoginForm";
-import LocomotiveScroll from "locomotive-scroll";
 function  Main({ children }: { children: React.ReactNode }) {
 	const { ishydrated, setUser } = useAuthStore();
 	const { Loader, setShow } = useShowLoader();

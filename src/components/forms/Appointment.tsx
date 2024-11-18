@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { handleClick } from "@/components/ui/magic-ui/Confetti";
 import { Button } from "@/components/ui/button";
 import {
 	Form,
@@ -37,6 +38,7 @@ export default function AppointmentForm({charges,id}:{charges:number,id:string})
 	async function onSubmit(data: z.infer<typeof FormSchema>) {
 		const val={...data,therapistId:id,charges};
 		await apiService.post({data:val});
+		handleClick();
 	}
 
 	return (
@@ -65,7 +67,7 @@ export default function AppointmentForm({charges,id}:{charges:number,id:string})
 						<FormItem>
 							<FormLabel>Age</FormLabel>
 							<FormControl>
-								<Input placeholder="10" {...field} type="number" onChange={(e) => field.onChange(e.target.valueAsNumber)} min={10}/>
+								<Input placeholder="10" {...field} type="number" onChange={(e) => field.onChange(e.target.valueAsNumber)} min={10} max={100}/>
 							</FormControl>
 							<FormDescription>
 								Paitent Age
@@ -78,7 +80,7 @@ export default function AppointmentForm({charges,id}:{charges:number,id:string})
 				<Button
 					className="px-4 py-2 rounded-lg"
 					//onClick={(e) => handleClick(e)}
-					disabled={!form.formState.isValid || !form.formState.isSubmitting}
+					disabled={!form.formState.isValid || form.formState.isSubmitting}
 				>
 					PAY {charges}
 				</Button>

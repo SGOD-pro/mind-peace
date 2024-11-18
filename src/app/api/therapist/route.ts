@@ -30,8 +30,11 @@ export async function GET(_: NextRequest) {
 			message: "Therapist fetched successfully",
 			data: Therapist,
 		});
-	} catch (error: any) {
-		return ApiResponse.error({ message: error.message });
+	}catch (error) {
+		if (error instanceof Error) {
+			return ApiResponse.error({ message: error.message });
+		}
+		return ApiResponse.error({ message: "An unknown error occurred." });
 	}
 }
 export async function POST(req: NextRequest) {
@@ -142,8 +145,11 @@ export async function PUT(req: NextRequest) {
 			message: "success",
 			data: Therapist,
 		});
-	} catch (error: any) {
-		return ApiResponse.error({ message: error.message });
+	}catch (error) {
+		if (error instanceof Error) {
+			return ApiResponse.error({ message: error.message });
+		}
+		return ApiResponse.error({ message: "An unknown error occurred." });
 	}
 }
 
@@ -167,7 +173,10 @@ export async function DELETE(req: NextRequest) {
 			message: "success",
 			data: Therapist,
 		});
-	} catch (error: any) {
-		return ApiResponse.error({ message: error.message });
+	}catch (error) {
+		if (error instanceof Error) {
+			return ApiResponse.error({ message: error.message });
+		}
+		return ApiResponse.error({ message: "An unknown error occurred." });
 	}
 }

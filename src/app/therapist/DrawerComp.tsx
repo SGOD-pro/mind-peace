@@ -5,7 +5,6 @@ import {
 	DrawerContent,
 	DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
 
 function DrawerComp({
 	trigger,

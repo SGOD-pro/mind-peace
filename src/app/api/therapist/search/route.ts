@@ -3,9 +3,10 @@ import ApiResponse from "@/helper/ApiResponse";
 
 import TherapistModel from "@/schema/Therapist";
 import mongoose from "mongoose";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import Appointment from "@/schema/Appointment";
-export async function GET(req: Request) {
+import { NextRequest } from "next/server";
+export async function GET(req: NextRequest) {
 	await connectDb();
 	try {
 		const url = new URL(req.url);
@@ -55,16 +56,37 @@ export async function GET(req: Request) {
                 }
             }
 		]);
+		const token=req.cookies.get("accessToken")?.value;
+		if(!token){
+			return ApiResponse.error({ message: "Not authenticated", statusCode: 409 });
+		}
+		const data=(await jwt.verify(token,process.env.ACCESS_TOKEN!))as JwtPayload;
+		if(!data||!data._id){
+			return ApiResponse.error({ message: "Not authenticated", statusCode: 409 });
+		}
+		const isPending=await Appointment.aggregate([
+			{
+				$match: {
+					therapistId: new mongoose.Types.ObjectId(id),
+					status:"PENDING",
+					userId:new mongoose.Types.ObjectId(data._id),
+					date:{$gte:new Date()}
+				}
+			}
+		])
 		if (!Therapist[0]) {
 			return ApiResponse.error({ message: "Therapist not found", statusCode: 404 });
 		}
+		console.log(isPending)
 		return ApiResponse.success({
 			statusCode: 200,
 			message: "Therapist found successfully",
-			data: Therapist[0],
+			data: {therapist:Therapist[0],isPending:isPending.length>0},
 		});
-	} catch (error: any) {
-        console.log(error)
-		return ApiResponse.error({ message: error.message });
+	} catch (error) {
+		if (error instanceof Error) {
+			return ApiResponse.error({ message: error.message });
+		}
+		return ApiResponse.error({ message: "An unknown error occurred." });
 	}
 }

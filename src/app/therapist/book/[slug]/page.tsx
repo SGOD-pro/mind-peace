@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { handleClick } from "@/components/ui/magic-ui/Confetti";
 import Review from "./components/Review";
 import ApiService from "@/helper/ApiService";
 import Loading from "@/app/loading";
@@ -18,13 +17,20 @@ function BookingPage({ params }: { params: { slug: string } }) {
 	useEffect(() => {
 		const fetch = async () => {
 			setLoading(true);
-			const res = await apiService.get<TherapistBooking>({
+			const res = await apiService.get<{
+				therapist: TherapistBooking;
+				isPending: boolean;
+			}>({
 				endpoint: `?id=${params.slug}`,
 			});
 			setLoading(false);
 			if (res.data) {
-				setuser(res.data);
+				setuser(res.data.therapist);
+				if (!res.data.isPending) {
+					setDisable(false);
+				}
 			}
+
 			if (res.error) {
 				setError(true);
 			}
@@ -69,8 +75,11 @@ function BookingPage({ params }: { params: { slug: string } }) {
 								}
 								title="Book Appointment"
 							>
-								<button className="bg-[#95d4ce] hover:bg-[#5aaaa2] px-4 py-2 rounded-lg">
-									Book
+								<button
+									className="bg-[#95d4ce] hover:bg-[#5aaaa2] disabled:bg-slate-500 disabled:cursor-not-allowed px-4 py-2 rounded-lg"
+									disabled={disable}
+								>
+									{disable ? "Pending" : "Book"}
 								</button>
 							</DialogComp>
 							<button

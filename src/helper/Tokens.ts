@@ -67,7 +67,7 @@ export const verifyRole = (req: NextRequest): number | null => {
 	try {
 		const payload = jwt.verify(token, process.env.ACCESS_TOKEN!) as JwtPayload;
 		return payload.role;
-	} catch (_) {
+	} catch (error) {
 		return null;
 	}
 };

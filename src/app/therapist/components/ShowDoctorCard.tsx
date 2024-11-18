@@ -1,4 +1,4 @@
-import DialogComp from "@/components/DialogComp";
+
 import Image from "next/image";
 import React, { memo } from "react";
 import DrawerComp from "../DrawerComp";

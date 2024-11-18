@@ -18,6 +18,7 @@ const generateAppointmentId = (lastId: string | null) => {
 	const numericPart = parseInt(lastId.replace(prefix, ""), 10);
 
 	const newNumericPart = numericPart + 1;
+	console.log(newNumericPart);
 	return `${prefix}${newNumericPart.toString().padStart(4, "0")}`;
 };
 export async function POST(req: NextRequest) {
@@ -31,6 +32,7 @@ export async function POST(req: NextRequest) {
 				statusCode: 409,
 			});
 		}
+		console.log("token", token);
 		const data = (await jwt.verify(
 			token,
 			process.env.ACCESS_TOKEN!
@@ -58,6 +60,11 @@ export async function POST(req: NextRequest) {
 			},
 			{ $sort: { createdAt: -1 } },
 		]);
+		console.log(existingBookings)
+		const appointmentId = generateAppointmentId(
+			existingBookings[0]?.appointmentId || null
+		);
+		console.log(appointmentId);
 		const body = {
 			name,
 			age,
@@ -65,18 +72,19 @@ export async function POST(req: NextRequest) {
 			userId: data._id,
 			date,
 			status: "PENDING",
-			appointmentId: generateAppointmentId(
-				existingBookings[0].appointmentId || null
-			),
+			appointmentId,
 		};
 
 		const Appointment = await AppointmentModel.create(body);
+
 		return ApiResponse.success({
 			statusCode: 200,
 			message: "Appointment added successfully",
 			data: Appointment,
 		});
+
 	} catch (error) {
+		console.log(error)
 		if (error instanceof Error) {
 			return ApiResponse.error({ message: error.message });
 		}
