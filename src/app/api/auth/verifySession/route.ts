@@ -28,15 +28,21 @@ export async function POST(req: NextRequest) {
 		)) as DecodedToken;
 
 		const userId = decodedToken?._id;
-		const user = await AuthModel.findById(userId).select("-password");
 		if (!userId) {
 			return NextResponse.json(
 				{ message: "Invalid refresh token" },
 				{ status: 404 }
 			);
 		}
+		const user = await AuthModel.findById(userId).select("-password");
 		if (user?.refreshToken !== token) {
-			return NextResponse.json({ message: "Token not valid" }, { status: 401 });
+			const res = NextResponse.json(
+				{ message: "Token not valid" },
+				{ status: 401 }
+			);
+			// res.cookies.delete("accessToken");
+			// res.cookies.delete("refreshToken");
+			return res;
 		}
 		const { accToken, refreshToken } = await generateTokens(userId);
 

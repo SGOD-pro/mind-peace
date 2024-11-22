@@ -1,3 +1,4 @@
+"use client";
 import DialogComp from "@/components/DialogComp";
 import AddTherapistForm from "@/components/forms/AddTherapistForm";
 import { DeleteIcon } from "@/components/icons/DeleteIcon";
@@ -20,7 +21,7 @@ const apiService = new ApiService("/api/therapist");
 
 function AllTherapistTable() {
 	const { setAllItems } = useTherapistStore();
-	const getAllUsers = useTherapistStore((state) => state.getAllUsers);
+	const getAllUsers = useTherapistStore((state) => state.data);
 	const removeItem = useTherapistStore((state) => state.removeItem);
 	const hydrated = useTherapistStore((state) => state.hydrated);
 	// const [users, setUsers] = useState<Therapists[]>(getAllUsers());
@@ -96,7 +97,7 @@ Rows.displayName="Rows"
 				</TableRow>
 			</TableHeader>
 			<TableBody>
-				{getAllUsers().map((data) => (
+				{getAllUsers.map((data) => (
 					<Rows key={data._id} data={data} />
 				))}
 			</TableBody>

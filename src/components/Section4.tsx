@@ -22,7 +22,6 @@ function Section4() {
 				opacity: 0,
 				y: 100,
 				duration: 0.5,
-
 				scrollTrigger: {
 					trigger: child,
 					start: "top 80%",

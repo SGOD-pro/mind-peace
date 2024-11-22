@@ -1,9 +1,19 @@
 import Image from "next/image";
 import React from "react";
 
-function TopRatedCards({name,speciality,image,rating}:{name:string,speciality:string,image:string,rating?:number}) {
+function TopRatedCards({
+	name,
+	speciality,
+	image,
+	rating,
+}: {
+	name: string;
+	speciality: string;
+	image: string;
+	rating?: number;
+}) {
 	return (
-		<div className="w-64  h-96 p-2 top-rated-card rounded-xl flex-shrink-0">
+		<div className="w-64  h-96 p-2 top-rated-card rounded-xl flex-shrink-0 relative">
 			<div className="h-[70%] overflow-hidden w-full rounded-lg mb-4">
 				<Image
 					src={image}
@@ -18,7 +28,7 @@ function TopRatedCards({name,speciality,image,rating}:{name:string,speciality:st
 			</h4>
 			<p>{speciality}</p>
 			<span className="absolute text-lg px-3 rounded-md bg-[#f9f9f9] bottom-2 right-2 pr-0">
-				4.0 ⭐{rating}
+				{rating||"4.0"} ⭐
 			</span>
 		</div>
 	);

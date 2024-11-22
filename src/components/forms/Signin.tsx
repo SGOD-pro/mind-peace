@@ -13,10 +13,11 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
 import ApiService from "@/helper/ApiService";
 import useAuthStore from "@/store/Auth";
 const apiService = new ApiService("/api/auth/");
+import {useLoginForm} from "@/store/LoginForm"
+import { useState } from "react";
 const FormSchema = z.object({
 	email: z.string().email({ message: "Invalid email address." }),
 	password: z.string().min(6, {
@@ -25,7 +26,7 @@ const FormSchema = z.object({
 });
 
 function Signin() {
-	const router = useRouter();
+	const setIsOpen=useLoginForm(state=>state.setIsOpen);
 	const setUser = useAuthStore((state) => state.setUser);
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
@@ -33,6 +34,7 @@ function Signin() {
 			email: "",
 		},
 	});
+	const [key, setKey] = useState(0)
 
 	async function onSubmit(data: z.infer<typeof FormSchema>) {
 		const res = await apiService.post<UserWithId>({
@@ -41,6 +43,9 @@ function Signin() {
 		});
 		if (res.data) {
 			setUser(res.data);
+			setIsOpen(false);
+			form.reset();
+			setKey(key + 1);
 		}
 	}
 	return (
@@ -48,6 +53,7 @@ function Signin() {
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="grid gap-4 w-full font-lexend flex-1"
+				key={key}
 			>
 				<h1 className="text-3xl font-bold text-center tracking-wider">
 					SIGN IN

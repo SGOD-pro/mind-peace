@@ -5,8 +5,10 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
-import AllSection from "./components/AllSection";
+import AllSection from "./components/AllTherapistSection";
 import LocomotiveScroll from "locomotive-scroll";
+import TopRatedCards from "./components/TopRatedCards";
+import FetchTherapist from "@/hooks/FetchTherapist";
 
 function TherapistPage() {
 	gsap.registerPlugin(ScrollTrigger);
@@ -45,82 +47,35 @@ function TherapistPage() {
 						className="p-3 flex gap-5 overflow-x-auto flex-nowrap [scrollbar-width:none] "
 						ref={topRatedContainer}
 					>
-						<div className="w-64  h-96 p-2 top-rated-card rounded-xl flex-shrink-0">
-							<div className="h-[70%] overflow-hidden w-full rounded-lg mb-4">
-								<Image
-									src={"/doc/doc5.png"}
-									alt="doc1"
-									width={400}
-									height={500}
-									className="w-full h-full object-cover object-top"
-								></Image>
-							</div>
-							<h4 className="text-xl">
-								<span>Dr.</span>Modhumita sen
-							</h4>
-							<p>Neoropsych</p>
-							<span className="absolute text-lg px-3 rounded-md bg-[#f9f9f9] bottom-2 right-2 pr-0">
-								4.0 ⭐
-							</span>
-						</div>
-						<div className="w-64  h-96 p-2 top-rated-card rounded-xl flex-shrink-0">
-							<div className="h-[70%] overflow-hidden w-full rounded-lg mb-4">
-								<Image
-									src={"/doc/doc2.png"}
-									alt="doc1"
-									width={400}
-									height={500}
-									className="w-full h-full object-cover object-top"
-								></Image>
-							</div>
-							<h4 className="text-xl">
-								<span>Dr.</span>Modhumita sen
-							</h4>
-							<p>Neoropsych</p>
-							<span className="absolute text-lg px-3 rounded-md bg-[#f9f9f9] bottom-2 right-2 pr-0">
-								4.0 ⭐
-							</span>
-						</div>
-						<div className="w-64  h-96 p-2 top-rated-card rounded-xl flex-shrink-0">
-							<div className="h-[70%] overflow-hidden w-full rounded-lg mb-4">
-								<Image
-									src={"/doc/doc3.png"}
-									alt="doc1"
-									width={400}
-									height={500}
-									className="w-full h-full object-cover object-top"
-								></Image>
-							</div>
-							<h4 className="text-xl">
-								<span>Dr.</span>Modhumita sen
-							</h4>
-							<p>Neoropsych</p>
-							<span className="absolute text-lg px-3 rounded-md bg-[#f9f9f9] bottom-2 right-2 pr-0">
-								4.0 ⭐
-							</span>
-						</div>
-						<div className="w-64  h-96 p-2 top-rated-card rounded-xl flex-shrink-0">
-							<div className="h-[70%] overflow-hidden w-full rounded-lg mb-4">
-								<Image
-									src={"/doc/doc4.png"}
-									alt="doc1"
-									width={400}
-									height={500}
-									className="w-full h-full object-cover object-top"
-								></Image>
-							</div>
-							<h4 className="text-xl">
-								<span>Dr.</span>Modhumita sen
-							</h4>
-							<p>Neoropsych</p>
-							<span className="absolute text-lg px-3 rounded-md bg-[#f9f9f9] bottom-2 right-2">
-								4.0 ⭐
-							</span>
-						</div>
+						<TopRatedCards
+							name="Modhumita sen"
+							speciality="Neoropsych"
+							image="/doc/doc5.png"
+							rating={4.0}
+						/>
+						<TopRatedCards
+							name="Modhumita sen"
+							speciality="Neoropsych"
+							image="/doc/doc2.png"
+							rating={4.0}
+						/>
+						<TopRatedCards
+							name="Modhumita sen"
+							speciality="Neoropsych"
+							image="/doc/doc3.png"
+							rating={4.0}
+						/>
+						<TopRatedCards
+							name="Modhumita sen"
+							speciality="Neoropsych"
+							image="/doc/doc4.png"
+							rating={4.0}
+						/>
 					</div>
 				</section>
-
-				<AllSection />
+				<FetchTherapist>
+					<AllSection />
+				</FetchTherapist>
 			</main>
 		</>
 	);

@@ -49,9 +49,9 @@ export async function cookieResponse(user: any) {
 	return response;
 }
 
-export const verifyAccessToken = async (token: string) => {
+export const verifyAccessToken = async (token: string):Promise<JwtPayload|null> => {
 	try {
-		return jwt.verify(token, process.env.ACCESS_TOKEN!);
+		return await jwt.verify(token, process.env.ACCESS_TOKEN!) as JwtPayload;
 	} catch (_) {
 		return null;
 	}

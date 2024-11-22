@@ -12,11 +12,16 @@ import {
 import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
 import ApiService from "@/helper/ApiService";
+import useAuthStore from "@/store/Auth";
+import { useLoginForm } from "@/store/LoginForm";
 
 const apiService = new ApiService("/api/therapist/details");
 
 function Details({ id }: { id: string }) {
-	const [user, setUser] = useState<Therapists | null>(null);
+	const { user } = useAuthStore();
+	const setIsOpen = useLoginForm((state) => state.setIsOpen);
+
+	const [therapist, setUser] = useState<Therapists | null>(null);
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
@@ -41,7 +46,7 @@ function Details({ id }: { id: string }) {
 						<Skeleton className="bg-[#56ecda] w-full h-full" />
 					) : (
 						<Image
-							src={user?.image || "/doc1.png"}
+							src={therapist?.image || "/doc1.png"}
 							width={400}
 							height={400}
 							alt="Doc"
@@ -55,10 +60,10 @@ function Details({ id }: { id: string }) {
 							<Skeleton className="bg-[#69e7d8] h-8 w-48" />
 						) : (
 							<>
-								{user?.name}{" "}
+								{therapist?.name}{" "}
 								<span className="text-base">
 									{"("}
-									{user?.qualification}
+									{therapist?.qualification}
 									{")"}
 								</span>
 							</>
@@ -68,7 +73,7 @@ function Details({ id }: { id: string }) {
 						{loading ? (
 							<Skeleton className="bg-[#69e7d8] h-5 w-40 mt-2" />
 						) : (
-							user?.email
+							therapist?.email
 						)}
 					</p>
 					<div className="mt-4 text-lg space-y-1 font-lexend-exa">
@@ -84,25 +89,27 @@ function Details({ id }: { id: string }) {
 							<>
 								<p className="flex items-center">
 									<UserRoundCheck />
-									{user?.speciality}
+									{therapist?.speciality}
 								</p>
 								<p className="flex items-center">
 									<Phone />
-									<Link href={`tel:+91${user?.contactNo}`} className="">
-										{user?.contactNo}
+									<Link href={`tel:+91${therapist?.contactNo}`} className="">
+										{therapist?.contactNo}
 									</Link>
 								</p>
 								<p className="flex items-center">
 									<MapPin />
-									<span className=" capitalize">{user?.clinicLocation}</span>
+									<span className=" capitalize">
+										{therapist?.clinicLocation}
+									</span>
 								</p>
 								<p className="flex items-center">
 									<BriefcaseMedical />
-									<span className="">{user?.experience} Y</span>
+									<span className="">{therapist?.experience} Y</span>
 								</p>
 								<p className="flex items-center">
 									<IndianRupee />
-									<span className="">{user?.charges}</span>
+									<span className="">{therapist?.charges}</span>
 								</p>
 							</>
 						)}
@@ -113,6 +120,15 @@ function Details({ id }: { id: string }) {
 			<DrawerFooter>
 				{loading ? (
 					<Skeleton className="bg-[#69e7d8] h-10 w-20 rounded-md" />
+				) : !user ? (
+					<DrawerClose className="mt-1">
+						<button
+							className="bg-blue-600 rounded-md px-4 py-2 text-white text-center login-btn"
+							onClick={() => setIsOpen(true)}
+						>
+							Login
+						</button>
+					</DrawerClose>
 				) : (
 					<Link
 						href={`/therapist/book/${id}`}

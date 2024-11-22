@@ -18,7 +18,6 @@ function DrawerComp({
 			<DrawerTrigger>{trigger}</DrawerTrigger>
 			<DrawerContent >
 				{content}
-				
 			</DrawerContent>
 		</Drawer>
 	);

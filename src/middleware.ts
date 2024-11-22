@@ -9,7 +9,7 @@ export async function middleware(request: NextRequest) {
 		request.headers.get("Authorization")?.replace("Bearer ", "");
 
 	if (!token) {
-		return NextResponse.redirect(new URL("/404", request.url));
+		return NextResponse.redirect(new URL("/", request.url));
 	}
 
 	try {
@@ -18,7 +18,6 @@ export async function middleware(request: NextRequest) {
 			new TextEncoder().encode(process.env.ACCESS_TOKEN!)
 		);
 		const pathname = request.nextUrl.pathname;
-		console.log("pathName: ", pathname);
 		if (
 			([0, 1, 2].includes(payload.role) &&
 				pathname.startsWith("/therapist/book")) || 
@@ -38,7 +37,7 @@ export async function middleware(request: NextRequest) {
 		}
 	} catch (error) {
 		console.error("Token verification failed:", error);
-		return NextResponse.redirect(new URL("/404", request.url));
+		return NextResponse.redirect(new URL("/", request.url));
 	}
 }
 

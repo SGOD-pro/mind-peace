@@ -26,7 +26,7 @@ export default function DashboardLayout({
 			<SidebarProvider>
 				<AppSidebar className="" />
 				<SidebarInset className="h-[calc(100%-16px)] w-full">
-					<header className="flex h-16 shrink-0 items-center gap-2 ">
+					<header className="flex h-16 shrink-0 items-center gap-2 bg-background/40 backdrop-blur-sm border-b border-border">
 						<div className="flex items-center gap-2 px-4 ">
 							<SidebarTrigger className="-ml-1" />
 							<Separator orientation="vertical" className="mr-2 h-4" />
@@ -48,7 +48,7 @@ export default function DashboardLayout({
 							</Breadcrumb>
 						</div>
 					</header>
-					<div className="p-4 pt-0  w-full relative overflow-auto">
+					<div className="p-4 pt-0 h-[calc(100dvh-5.2rem)] scrollbar w-full relative overflow-auto">
 						{children}
 					</div>
 				</SidebarInset>

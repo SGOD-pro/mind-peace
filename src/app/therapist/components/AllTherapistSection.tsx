@@ -1,15 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import ShowDoctorCard from "./ShowDoctorCard";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
 import { Input } from "@/components/ui/input";
 import useTherapistStore from "@/store/Therapist";
-import ApiService from "@/helper/ApiService";
 import FilterButton from "./FilterButon";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Loder from "@/components/layout/Loder";
-const apiService = new ApiService("/api/therapist");
-
 import {
 	Select,
 	SelectContent,
@@ -19,6 +14,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import FadeIn from "@/hooks/FadIn";
 
 const filterOptions = [
 	{ label: "All", value: "all" },
@@ -29,51 +25,14 @@ const filterOptions = [
 ];
 
 function AllSection() {
-	gsap.registerPlugin(ScrollTrigger);
-	const allitems = useTherapistStore((state) => state.getAllUsers);
-	const setItems = useTherapistStore((state) => state.setAllItems);
 	const hydrated = useTherapistStore((state) => state.hydrated);
-	const showTherapistContainer = useRef<HTMLDivElement>(null);
-	useGSAP(() => {
-		if (!showTherapistContainer.current) {
-			return;
-		}
-		const childrens: HTMLDivElement[] = gsap.utils.toArray(
-			showTherapistContainer.current.children
-		);
-		childrens.forEach((child) => {
-			gsap.from(child, {
-				opacity: 0,
-				duration: 0.4,
-				y: 50,
-				scrollTrigger: {
-					trigger: child,
-					start: "top 80%",
-					// markers: true,
-					toggleActions: "play reverse play reverse",
-				},
-			});
-		});
-	}, [hydrated]);
+
 	const [selected, setSelected] = useState<string | null>("all");
 
 	const handleSelect = (label: string) => {
 		setSelected(label);
 	};
-	useEffect(() => {
-		if (hydrated) {
-			return;
-		}
-		async function fetch() {
-			const res = await apiService.get<Therapists[]>({
-				showSuccessToast: false,
-			});
-			if (res.data) {
-				setItems(res.data);
-			}
-		}
-		fetch();
-	}, []);
+	const data = useTherapistStore((state) => state.data);
 
 	return (
 		<section className="">
@@ -125,11 +84,8 @@ function AllSection() {
 						<Loder />
 					</div>
 				)}
-				<div
-					className="grid md:grid-cols-2 lg:grid-cols-3 gap-4"
-					ref={showTherapistContainer}
-				>
-					{allitems().map((item) => (
+				<FadeIn className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+					{data.map((item) => (
 						<ShowDoctorCard
 							name={item.name}
 							speciality={item.speciality}
@@ -138,7 +94,7 @@ function AllSection() {
 							key={item._id}
 						/>
 					))}
-				</div>
+				</FadeIn>
 			</div>
 		</section>
 	);

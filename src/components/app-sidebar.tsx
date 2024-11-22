@@ -12,6 +12,7 @@ import {
 	Calendar,
 	MessageSquare,
 	Clock,
+	
 } from "lucide-react";
 
 import { NavMain } from "@/components/nav-main";
@@ -47,43 +48,42 @@ const data = {
 		},
 	],
 };
-
 const userLinks = [
 	{
-		title: "Profile",
-		url: "/dashboard/admin",
-		icon: User, // Profile icon
+		title: "Home",
+		url: "/dashboard/user",
+		icon: Home, // Profile icon
 	},
 	{
 		title: "New Appointment",
-		url: "/dashboard/admin",
+		url: "/dashboard/user/newAppointment",
 		icon: Calendar, // Appointment icon
 	},
 	{
 		title: "Feedback",
-		url: "/dashboard/admin",
+		url: "/dashboard/user/feedback",
 		icon: MessageSquare, // Feedback icon
 	},
 	{
 		title: "Schedules",
-		url: "/dashboard/admin",
+		url: "/dashboard/user/schedules",
 		icon: Clock, // Schedule icon
 	},
 ];
 const therapistLinks = [
 	{
 		title: "Profile",
-		url: "/dashboard/admin",
+		url: "/dashboard/therapist",
 		icon: User, // Profile icon
 	},
 	{
 		title: "Appointments",
-		url: "/dashboard/admin",
+		url: "/dashboard/appointments",
 		icon: Calendar, // Appointment icon
 	},
 	{
 		title: "Feedbacks",
-		url: "/dashboard/admin",
+		url: "/dashboard/feedbacks",
 		icon: MessageSquare, // Feedback icon
 	},
 ];

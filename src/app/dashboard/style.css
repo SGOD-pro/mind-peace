@@ -1,0 +1,3 @@
+.side-cards{
+    @apply  aspect-video bg-muted/70 rounded-xl p-3 font-lexend flex flex-col justify-between
+}

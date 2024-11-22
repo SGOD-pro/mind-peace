@@ -23,7 +23,7 @@ function ShowDoctorCard({
 	image: string;
 }) {
 	return (
-		<div className="relative rounded-lg shadow shadow-black/50 hover:scale-105  hover:shadow-md p-4">
+		<div className="relative rounded-lg shadow shadow-black/50 hover:shadow-md p-4">
 			<div className="rounded-full overflow-hidden border w-44 h-44 p-2 m-auto border-blue-500">
 				<Image
 					src={image}

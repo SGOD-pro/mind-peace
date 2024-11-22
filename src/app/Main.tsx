@@ -19,7 +19,6 @@ function  Main({ children }: { children: React.ReactNode }) {
 				});
 				if (res.data) {
 					setUser(res.data);
-					console.log(res.data);
 				}
 				setShow(false);
 				console.log(res);
@@ -27,7 +26,6 @@ function  Main({ children }: { children: React.ReactNode }) {
 		}
 		session();
 	}, []);
-	// const loco = new LocomotiveScroll();
 	return (
 		<main className="bg-[#F9F9F9] w-full min-h-dvh">
 			<Loader />

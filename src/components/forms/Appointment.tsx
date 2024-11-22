@@ -26,7 +26,7 @@ const FormSchema = z.object({
     age: z.number().nonnegative({ message: "Age must be a positive number." }),
 });
 
-export default function AppointmentForm({charges,id}:{charges:number,id:string}) {
+export default function AppointmentForm({charges,id}:{charges:number,id:string;}) {
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {

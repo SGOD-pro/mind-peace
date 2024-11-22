@@ -15,7 +15,10 @@ import {
 import { Input } from "@/components/ui/input";
 import ApiService from "@/helper/ApiService";
 import useAuthStore from "@/store/Auth";
+import { useState } from "react";
 const apiService = new ApiService("/api/auth/");
+
+import {useLoginForm} from "@/store/LoginForm"
 const passwordRegex =
 	/^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{6,}$/;
 
@@ -38,6 +41,7 @@ const FormSchema = z
 		path: ["confirmPassword"],
 	});
 function Signup() {
+	const setIsOpen=useLoginForm(state=>state.setIsOpen);
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -46,6 +50,7 @@ function Signup() {
 	});
 
 	const setUser=useAuthStore((state)=>state.setUser);
+	const [key, setKey] = useState(0);
 	async function onSubmit(data: z.infer<typeof FormSchema>) {
 		const res = await apiService.post<UserWithId>({
 			data: data,
@@ -53,6 +58,9 @@ function Signup() {
 		});
 		if (res.data) {
 			setUser(res.data);
+			form.reset();
+			setIsOpen(false);
+			setKey(key + 1);
 		}
 	}
 	return (
@@ -60,6 +68,7 @@ function Signup() {
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="grid gap-4 w-full font-lexend flex-1 px-4"
+				key={key}
 			>
 				<h1 className="text-3xl font-bold text-center tracking-wider">
 					SIGN UP

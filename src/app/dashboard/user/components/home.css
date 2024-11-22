@@ -1,0 +1,16 @@
+.profile-container {
+	@apply rounded-xl h-[40dvh] flex flex-col justify-between relative;
+}
+
+.content-container{
+    @apply flex items-center justify-between h-full p-5
+}
+.joke{
+   @apply absolute top-4 left-4 w-[90%]
+}
+.footer-text{
+    @apply text-gray-100 absolute bottom-4 left-4
+}
+.greeting{
+    @apply text-5xl font-bold text-white text-center
+}

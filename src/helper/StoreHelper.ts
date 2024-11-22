@@ -1,4 +1,3 @@
-// StoreHelper.ts
 export default class StoreHelper<T extends { _id: string }> {
 	private items: T[] = [];
   
@@ -6,21 +5,27 @@ export default class StoreHelper<T extends { _id: string }> {
 	  this.items = initialItems;
 	}
   
-	addItem(item: T): void {
+	addItem(item: T): T[] {
 	  this.items.push(item);
+	  return this.items;
 	}
   
-	removeItem(id: string): void {
-	  this.items = this.items.filter((item: T) => item._id !== id); // Assumes items have an `id` field
+	removeItem(id: string): T[] {
+	  this.items = this.items.filter((item: T) => item._id !== id);
+	  return this.items;
 	}
   
-	updateItem(updatedItem: T): void {
+	updateItem(updatedItem: T): T[] {
 	  const index = this.items.findIndex((item: T) => item._id === updatedItem._id);
-	  if (index !== -1) this.items[index] = updatedItem;
+	  if (index !== -1) {
+		this.items[index] = updatedItem;
+	  }
+	  return this.items;
 	}
   
-	setItems(items: T[]): void {
+	setItems(items: T[]): T[] {
 	  this.items = items;
+	  return this.items;
 	}
   
 	getItems(): T[] {

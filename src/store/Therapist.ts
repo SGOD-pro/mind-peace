@@ -2,14 +2,14 @@ import StoreHelper from "@/helper/StoreHelper";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
+
 interface ExampleState {
-  storeHelper: StoreHelper<Therapists>;
+  data: Therapists[]; // This will be updated via StoreHelper
   hydrated: boolean;
-  addItem: (data: Therapists) => void;
+  addItem: (item: Therapists) => void;
   removeItem: (id: string) => void;
-  updateItem: (data: Therapists) => void;
+  updateItem: (item: Therapists) => void;
   setAllItems: (items: Therapists[]) => void;
-  getAllUsers: () => Therapists[];
 }
 
 const useTherapistStore = create<ExampleState>()(
@@ -17,46 +17,39 @@ const useTherapistStore = create<ExampleState>()(
     const storeHelper = new StoreHelper<Therapists>([]);
 
     return {
-      storeHelper,
+      data: storeHelper.getItems(),
       hydrated: false,
 
-      addItem: (item: Therapists) => {
-        storeHelper.addItem(item);
+      addItem: (item) => {
+        const updatedData = storeHelper.addItem(item);
         set((state) => {
-          state.storeHelper = new StoreHelper<Therapists>(storeHelper.getItems());
+          state.data = updatedData;
         });
       },
 
-      removeItem: (id: string) => {
-        console.log(storeHelper.getItems());
-        storeHelper.removeItem(id);
+      removeItem: (id) => {
+        const updatedData = storeHelper.removeItem(id);
         set((state) => {
-          state.storeHelper = new StoreHelper<Therapists>(storeHelper.getItems());
-        });
-        console.log(storeHelper.getItems());
-      },
-
-      updateItem: (updatedItem: Therapists) => {
-        storeHelper.updateItem(updatedItem);
-        set((state) => {
-          state.storeHelper = new StoreHelper<Therapists>(storeHelper.getItems());
+          state.data = updatedData;
         });
       },
 
-      setAllItems: (items: Therapists[]) => {
-        storeHelper.setItems(items);
+      updateItem: (item) => {
+        const updatedData = storeHelper.updateItem(item);
         set((state) => {
-          state.storeHelper = new StoreHelper<Therapists>(storeHelper.getItems());
+          state.data = updatedData;
+        });
+      },
+
+      setAllItems: (items) => {
+        const updatedData = storeHelper.setItems(items);
+        set((state) => {
+          state.data = items;
           state.hydrated = true;
         });
-      },
-
-      getAllUsers: () => {
-        return storeHelper.getItems();
       },
     };
   })
 );
 
 export default useTherapistStore;
-export const useTherapist = () => useTherapistStore.getState();
