@@ -44,7 +44,7 @@ function Navbar() {
 		const linksRef = useRef<HTMLAnchorElement[]>([]);
 
 		useGSAP(() => {
-			if (!showNav||!isMobile) {
+			if (!showNav || !isMobile) {
 				return;
 			}
 
@@ -62,7 +62,7 @@ function Navbar() {
 				});
 			});
 		}, []);
-Links.displayName = "Links";
+		Links.displayName = "Links";
 		const maxLabelLength = Math.max(...links.map((link) => link.label.length));
 
 		const padLabel = (label: string) => label.padEnd(maxLabelLength, " ");
@@ -115,11 +115,11 @@ Links.displayName = "Links";
 			});
 		}
 	}, [showNav]);
-useEffect(() => {
-  if (showNav) {
-	setShowNav(false);
-  }
-}, [pathname])
+	useEffect(() => {
+		if (showNav) {
+			setShowNav(false);
+		}
+	}, [pathname]);
 
 	return (
 		<>

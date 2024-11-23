@@ -36,7 +36,7 @@ function Main({ children }: { children: React.ReactNode }) {
 		<main className="bg-[#F9F9F9] w-full min-h-dvh">
 			{loading && <Loading />}
 			<ShowLoginForm />
-			{showNavbarAndFooter && <Navbar />}
+			{/* {showNavbarAndFooter && <Navbar />} */}
 			{children}
 			{showNavbarAndFooter && <Footer />}
 		</main>
