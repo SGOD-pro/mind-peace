@@ -118,7 +118,7 @@ const cards: CardProps[] = [
 	},
 	{
 		title: "Connect with Others",
-		src: "/withother.jpg",
+		src: "/friend.jpg",
 		description: "Strengthens social bonds",
 		bgColor: "#FFA990",
 		content: () => (
