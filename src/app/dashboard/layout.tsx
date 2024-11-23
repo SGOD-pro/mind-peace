@@ -35,7 +35,7 @@ export default function DashboardLayout({
 									{pathName.split("/").map((item, index) => (
 										<>
 											{index !== 0 && (
-												<BreadcrumbSeparator className="hidden md:block" />
+												<BreadcrumbSeparator className="hidden md:block" key={index}/>
 											)}
 											<BreadcrumbItem className="hidden md:block" key={index}>
 												<BreadcrumbLink href="#" className="capitalize">
