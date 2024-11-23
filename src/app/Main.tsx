@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, {  useEffect, useState } from "react";
 import ApiService from "@/helper/ApiService";
 const apiService = new ApiService("/api/auth/");
 import useAuthStore from "@/store/Auth";
@@ -11,7 +11,7 @@ import Footer from "@/components/layout/Footer";
 import Loading from "./loading";
 
 function Main({ children }: { children: React.ReactNode }) {
-	const pathname = typeof window !== "undefined" ? usePathname() : "/";
+	const pathname =usePathname();
 	const showNavbarAndFooter = ["/", "/therapist", "/about"].includes(pathname);
 	const { ishydrated, setUser } = useAuthStore();
 	const [loading, setLoading] = useState(true);

@@ -6,6 +6,6 @@
     "@typescript-eslint/explicit-function-return-type": "off",  // Optionally disable return types for functions
     "@typescript-eslint/no-empty-object-type": "off",  // Allow empty object types
     "@typescript-eslint/no-unsafe-function-type": "off",  // Allow unsafe function types
-    " @typescript-eslint/no-unused-vars":"on"
+    "@typescript-eslint/no-unused-vars":"off"
   }
 }
