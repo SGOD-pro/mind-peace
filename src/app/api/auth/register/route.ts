@@ -2,7 +2,6 @@ import connectDb from "@/db";
 import AuthModel from "@/schema/Auth";
 import { NextRequest, NextResponse } from "next/server";
 import { cookieResponse } from "@/helper/Tokens";
-
 export async function POST(req: NextRequest) {
 	await connectDb();
 	try {

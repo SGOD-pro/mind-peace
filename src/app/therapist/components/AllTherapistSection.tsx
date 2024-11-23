@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import ShowDoctorCard from "./ShowDoctorCard";
 import { Input } from "@/components/ui/input";
 import useTherapistStore from "@/store/Therapist";

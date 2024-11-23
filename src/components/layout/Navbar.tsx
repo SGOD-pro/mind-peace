@@ -1,13 +1,13 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import React, { memo, useEffect, useRef, useState } from "react";
 import LoginFormBtn from "@/components/LoginFormBtn";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { MenuIcon } from "../icons/MenuIcon";
+import { usePathname } from "next/navigation";
 import { links } from "@/constants";
 const Icon = memo(() => {
 	return (
@@ -26,14 +26,7 @@ const Icon = memo(() => {
 Icon.displayName = "LogoIcon";
 function Navbar() {
 	const pathname = usePathname();
-	if (
-		pathname.includes("/dashboard") ||
-		pathname.includes("/admin") ||
-		pathname.includes("/not-authorized") ||
-		pathname === "/404"
-	) {
-		return null;
-	}
+
 	const isMobile = useIsMobile();
 	const nav = useRef(null);
 	useGSAP(() => {
@@ -55,7 +48,7 @@ function Navbar() {
 				return;
 			}
 
-			linksRef.current.forEach((link, index) => {
+			linksRef.current.forEach((link) => {
 				console.log(link);
 				gsap.from(link.children, {
 					y: -20,
@@ -69,7 +62,7 @@ function Navbar() {
 				});
 			});
 		}, []);
-
+Links.displayName = "Links";
 		const maxLabelLength = Math.max(...links.map((link) => link.label.length));
 
 		const padLabel = (label: string) => label.padEnd(maxLabelLength, " ");
@@ -77,7 +70,7 @@ function Navbar() {
 		return (
 			<ul className="flex gap-8 text-4xl md:text-2xl md:flex-row flex-col">
 				{links.map((link, linkIndex) => (
-					<li key={link.href}>
+					<li key={linkIndex}>
 						<Link
 							className={`${
 								pathname === link.href ? "opacity-100" : "opacity-60"

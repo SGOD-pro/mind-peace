@@ -5,13 +5,13 @@ import Image from "next/image";
 const ReviewCard = ({
 	img,
 	name,
-	username,
 	body,
+	userEmail
 }: {
 	img: string;
 	name: string;
-	username: string;
 	body: string;
+	userEmail: string;
 }) => {
 	return (
 		<figure

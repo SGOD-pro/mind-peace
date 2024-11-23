@@ -5,7 +5,7 @@ const apiService = new ApiService("/api");
 import useAuthStore from "@/store/Auth";
 import { Button } from "./ui/button";
 import { LoaderCircle } from "lucide-react";
-const ProfileEdit = memo(() => {
+const ProfileEdit = () => {
 	const [disable, setDisable] = useState(false);
 	const user = useAuthStore((state) => state.user);
 	const setUser = useAuthStore((state) => state.setUser);
@@ -20,7 +20,9 @@ const ProfileEdit = memo(() => {
 			isMultipart: true,
 			data: { file },
 		});
-		res.data && setUser(res.data);
+		if (res.data) {
+			setUser(res.data);
+		}
 		setDisable(false);
 	}
 	return (
@@ -70,6 +72,6 @@ const ProfileEdit = memo(() => {
 			</div>
 		</div>
 	);
-});
+};
 
-export default ProfileEdit;
+export default memo(ProfileEdit);

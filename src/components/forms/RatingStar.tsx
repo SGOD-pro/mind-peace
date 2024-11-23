@@ -13,6 +13,7 @@ const RatingComponent = ({ id }: { id: string }) => {
 		const selectedRating = parseInt(event.target.value, 10);
 		setRating(selectedRating);
 		console.log("Selected rating:", selectedRating);
+		console.log(id,rating)
 	};
 
 	return (
@@ -105,7 +106,7 @@ const RatingComponent = ({ id }: { id: string }) => {
 				</label>
 			</div>
 			<div className="flex gap-2 items-end">
-				<Textarea className="bg-background" />
+				<Textarea className="bg-background" placeholder="Your valuable comment..!"/>
 				<Button variant={"outline"}><Send /></Button>
 			</div>
 		</>

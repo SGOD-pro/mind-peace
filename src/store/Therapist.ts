@@ -44,7 +44,7 @@ const useTherapistStore = create<ExampleState>()(
       setAllItems: (items) => {
         const updatedData = storeHelper.setItems(items);
         set((state) => {
-          state.data = items;
+          state.data = updatedData;
           state.hydrated = true;
         });
       },

@@ -2,7 +2,7 @@ import mongoose, { Document, Schema, Model } from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-interface AuthSchemaInterface extends Document {
+export interface AuthSchemaInterface extends Document {
 	email: string;
 	password?: string;
 	role: number;

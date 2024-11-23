@@ -32,7 +32,9 @@ function Details({ id }: { id: string }) {
 				showErrorToast: true,
 				showSuccessToast: false,
 			});
-			res.data && setUser(res.data);
+			if (res.data) {
+				setUser(res.data);
+			}
 			setLoading(false);
 		}
 		fetch();

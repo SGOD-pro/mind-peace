@@ -45,9 +45,9 @@ export const AppointmentComfirm = (data:{appointmentId:string,date:string}) => (
 						alt="Nike"
 						style={{ margin: "auto" }}
 					/>
-					<Heading style={global.heading}>It's On Its Way.</Heading>
+					<Heading style={global.heading}>It{`'`}s On Its Way.</Heading>
 					<Text style={global.text}>
-						You order's is on its way. Use the link above to track its progress.
+						You order{`'`}s is on its way. Use the link above to track its progress.
 					</Text>
 					<Text style={{ ...global.text, marginTop: 24 }}>
 						We{`'`}ve also charged your payment method for the cost of your order
@@ -77,7 +77,7 @@ export const AppointmentComfirm = (data:{appointmentId:string,date:string}) => (
 						</Column>
 						<Column style={{ verticalAlign: "top", paddingLeft: "12px" }}>
 							<Text style={{ ...paragraph, fontWeight: "500" }}>
-								Brazil 2022/23 Stadium Away Women's Nike Dri-FIT Soccer Jersey
+								Brazil 2022/23 Stadium Away Women{`'`}s Nike Dri-FIT Soccer Jersey
 							</Text>
 							<Text style={global.text}>Size L (12–14)</Text>
 						</Column>

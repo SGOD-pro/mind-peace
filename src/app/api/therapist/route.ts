@@ -19,7 +19,7 @@ function generateCustomPassword(): string {
 	}).join("");
 	return `MP-${numberPart}${mixedPart}`;
 }
-export async function GET(_: NextRequest) {
+export async function GET() {
 	await connectDb();
 	try {
 		const Therapist = await TherapistModel.aggregate([
@@ -110,14 +110,18 @@ export async function POST(req: NextRequest) {
 			message: "success",
 			data: Therapist,
 		});
-	} catch (error: any) {
-		if (error.code === 11000) {
-			console.log(`Duplicate key error: ${error.message}`);
-			return ApiResponse.error({ message: "This email is already in use." });
-		} else {
-			console.log(error);
-			return ApiResponse.error({ message: error.message });
+	} catch (error) {
+		if (error instanceof Error) {
+			const errWithCode = error as { code?: number; message: string };
+			if (errWithCode.code === 11000) {
+				console.log(`Duplicate key error: ${errWithCode.message}`);
+				return ApiResponse.error({ message: "This email is already in use." });
+			} else {
+				console.log(errWithCode);
+				return ApiResponse.error({ message: errWithCode.message });
+			}
 		}
+		return ApiResponse.error({ message: "An unknown error occurred." });
 	}
 }
 
@@ -159,11 +163,11 @@ export async function DELETE(req: NextRequest) {
 	if (role !== 2) {
 		return ApiResponse.error({ message: "Unauthorized" });
 	}
-	return ApiResponse.success({
-		statusCode: 200,
-		message: "success",
-		data: {},
-	});
+	// return ApiResponse.success({
+	// 	statusCode: 200,
+	// 	message: "success",
+	// 	data: {},
+	// });
 	try {
 		const url = new URL(req.url);
 		const id = url.searchParams.get("id");

@@ -11,6 +11,7 @@ const TriggerButton = memo(() => {
 		</button>
 	);
 });
+TriggerButton.displayName = "TriggerButton";
 function ShowDoctorCard({
 	name,
 	_id,

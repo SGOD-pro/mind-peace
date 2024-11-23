@@ -5,7 +5,6 @@ import ApiService from "@/helper/ApiService";
 const apiService = new ApiService("/api/therapist");
 function FetchTherapist({ children }: { children: React.ReactNode }) {
 	const {setAllItems} = useTherapistStore();
-	const data = useTherapistStore((state) => state.data);
 	const hydrated = useTherapistStore((state) => state.hydrated);
 	useEffect(() => {
 		if (hydrated) {

@@ -7,7 +7,8 @@ interface ApiServicesResponse<T> {
 	message?: string;
 	error?: Error;
 }
-class ApiService{
+
+class ApiService {
 	private baseUrl: string;
 	private axiosInstance: AxiosInstance;
 
@@ -60,22 +61,25 @@ class ApiService{
 				});
 			return result;
 		} catch (error: any) {
-			console.log(error.response.data);
+			console.log(error.response?.data);
 			console.log(error.message);
+
 			const result = {
 				success: false,
 				error: new Error(
-					error.response.data.error ||
+					error.response?.data?.error ||
 						error.message ||
 						"An unknown error occurred"
 				),
 			};
-			if (showErrorToast)
+
+			if (showErrorToast) {
 				this.showToast({
 					success: result.success,
 					message: result.error.message,
 					action,
 				});
+			}
 			return result;
 		}
 	}

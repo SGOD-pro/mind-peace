@@ -6,7 +6,7 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import { NextRequest } from "next/server";
 import { getNextDayDate } from "@/helper/DateTime";
 import TherapistModel from "@/schema/Therapist";
-import { SendMail } from "@/helper/SendMail";
+//import { SendMail } from "@/helper/SendMail";
 
 const generateAppointmentId = (lastId: string | null) => {
 	const prefix = "MP";

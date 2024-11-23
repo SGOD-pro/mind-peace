@@ -1,15 +1,14 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
 interface IFeedback extends Document {
-  feedback: string;
+  comment: string;
   appointmentId: mongoose.Types.ObjectId;
   createdAt: Date;
   updatedAt: Date;
   rating: number
 }
-
 const feedbackSchema: Schema<IFeedback> = new Schema({
-  feedback: {
+  comment: {
     type: String,
     required: true
   },

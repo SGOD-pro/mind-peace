@@ -29,7 +29,7 @@ function FadeIn({
 					trigger: child,
 					start: "top 80%",
 					toggleActions: "play reverse play reverse",
-					markers: true,
+					//markers: true,
 				},
 			});
 		});

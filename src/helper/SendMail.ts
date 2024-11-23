@@ -4,26 +4,28 @@ import NewTherapist from "@/email/NewTherapist";
 import AppointmentComfirm from "@/email/AppointmentComfirm";
 
 const handleNewTherapist = async (data:string): Promise<string> => {
-    return render(NewTherapist(data)); 
+    return await render(NewTherapist(data)); 
 };
 
-const handleNewUser = async (data: any): Promise<string> => {
-    // return render(NewUser(data));
-	return ""
-};
+// const handleNewUser = async (data: string): Promise<string> => {
+//     // return render(NewUser(data));
+//     console.log(data)
+// 	return ""
+// };
 
-const handleResetPassword = async (data: any): Promise<string> => {
-    // return render(ResetPassword(data)); 
-	return ""
-};
+// const handleResetPassword = async (data: string): Promise<string> => {
+//     // return render(ResetPassword(data)); 
+//     console.log(data)
+// 	return ""
+// };
 
 const handleNewAppointment = async (data: any): Promise<string> => {
-    return render(AppointmentComfirm(data)); 
+    return await render(AppointmentComfirm(data)); 
 };
 type EmailDataMap = {
     newTherapist: string; 
-    newUser: { name: string; email: string }; 
-    resetPassword: { token: string }; 
+    // newUser: { name: string; email: string }; 
+    // resetPassword: { token: string }; 
     newAppointment: { appointmentId: string; date: string };
 };
 
@@ -38,8 +40,8 @@ const emailHandlers: {
     [K in keyof EmailDataMap]: (data: EmailDataMap[K]) => Promise<string>;
 } = {
     newTherapist: handleNewTherapist,
-    newUser: handleNewUser,
-    resetPassword: handleResetPassword,
+    // newUser: handleNewUser,
+    // resetPassword: handleResetPassword,
     newAppointment: handleNewAppointment,
 };;
 export async function SendMail<T extends keyof EmailDataMap>({

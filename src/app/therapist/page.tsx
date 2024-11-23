@@ -4,7 +4,6 @@ import Section1 from "./components/Section1";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Image from "next/image";
 import AllSection from "./components/AllTherapistSection";
 import LocomotiveScroll from "locomotive-scroll";
 import TopRatedCards from "./components/TopRatedCards";

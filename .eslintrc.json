@@ -1,3 +1,11 @@
 {
-  "extends": ["next/core-web-vitals", "next/typescript"]
+  "extends": ["next/core-web-vitals", "next/typescript"],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",  // Allow the use of 'any' type
+    "@typescript-eslint/explicit-module-boundary-types": "off",  // Optionally disable explicit return types for functions
+    "@typescript-eslint/explicit-function-return-type": "off",  // Optionally disable return types for functions
+    "@typescript-eslint/no-empty-object-type": "off",  // Allow empty object types
+    "@typescript-eslint/no-unsafe-function-type": "off",  // Allow unsafe function types
+    " @typescript-eslint/no-unused-vars":"on"
+  }
 }

@@ -15,7 +15,6 @@ import type {
 } from "canvas-confetti";
 import confetti from "canvas-confetti";
 
-import {ButtonProps } from "@/components/ui/button";
 
 type Api = {
   fire: (options?: ConfettiOptions) => void;
@@ -96,7 +95,7 @@ Confetti.displayName = "Confetti";
 
 
 
-const handleClick = (event?: React.MouseEvent<HTMLButtonElement>) => {
+const handleClick = () => {
   const end = Date.now() + 3 * 1000; // 3 seconds
   const colors = ["#ffbe0b", "#fb5607", "#ff006e", "#8338ec"];
 

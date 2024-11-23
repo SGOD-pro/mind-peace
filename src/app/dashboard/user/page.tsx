@@ -1,5 +1,5 @@
 "use client";
-import React, { memo, useState } from "react";
+import React, { memo } from "react";
 import SheetComp from "./components/SheetComp";
 import { SettingsIcon } from "@/components/icons/SettingsIcon";
 import { Button } from "@/components/ui/button";
@@ -26,9 +26,9 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
-import ApiService from "@/helper/ApiService";
-const apiService = new ApiService("/api/auth");
-import { IndianRupee } from "lucide-react";
+//import ApiService from "@/helper/ApiService";
+//const apiService = new ApiService("/api/auth");
+//import { IndianRupee } from "lucide-react";
 
 import HomeProfile from "./components/HomeProfile";
 import "../style.css";
@@ -65,7 +65,9 @@ function User() {
 		const form = useForm<z.infer<typeof FormSchema>>({
 			resolver: zodResolver(FormSchema),
 		});
-		function onSubmit(data: z.infer<typeof FormSchema>) {}
+		function onSubmit(data: z.infer<typeof FormSchema>) {
+			console.log(data)
+		}
 		return (
 			<>
 				<ProfileEdit />

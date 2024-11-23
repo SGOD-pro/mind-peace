@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import AuthModel from "@/schema/Auth";
 import { options } from "@/constants";
 import jwt, { JwtPayload } from "jsonwebtoken";
+
+import {AuthSchemaInterface} from "@/schema/Auth"
 export const generateTokens = async (
 	userId: string
 ): Promise<{ accToken: string; refreshToken: string }> => {
@@ -15,13 +17,14 @@ export const generateTokens = async (
 		user.refreshToken = refreshToken;
 		await user.save({ validateBeforeSave: false });
 		return { accToken, refreshToken };
-	} catch (_) {
+	} catch (error) {
+		console.log(error)
 		throw new Error("Something went wrong during token generation");
 	}
 };
 
-export async function cookieResponse(user: any) {
-	const { accToken, refreshToken } = await generateTokens(user._id);
+export async function cookieResponse(user:AuthSchemaInterface) {
+	const { accToken, refreshToken } = await generateTokens(user.id);
 	if (!accToken) {
 		return NextResponse.json(
 			{ message: "Token generation failed" },
@@ -49,10 +52,13 @@ export async function cookieResponse(user: any) {
 	return response;
 }
 
-export const verifyAccessToken = async (token: string):Promise<JwtPayload|null> => {
+export const verifyAccessToken = async (
+	token: string
+): Promise<JwtPayload | null> => {
 	try {
-		return await jwt.verify(token, process.env.ACCESS_TOKEN!) as JwtPayload;
-	} catch (_) {
+		return (await jwt.verify(token, process.env.ACCESS_TOKEN!)) as JwtPayload;
+	} catch (error) {
+		console.log(error);
 		return null;
 	}
 };
@@ -68,6 +74,7 @@ export const verifyRole = (req: NextRequest): number | null => {
 		const payload = jwt.verify(token, process.env.ACCESS_TOKEN!) as JwtPayload;
 		return payload.role;
 	} catch (error) {
+		console.log(error)
 		return null;
 	}
 };
