@@ -26,14 +26,6 @@ const Icon = memo(() => {
 Icon.displayName = "LogoIcon";
 function Navbar() {
 	const pathname = usePathname();
-	if (
-		pathname.includes("/dashboard") ||
-		pathname.includes("/admin") ||
-		pathname.includes("/not-authorized") ||
-		pathname === "/404"
-	) {
-		return null;
-	}
 	const isMobile = useIsMobile();
 
 	const Links = memo(() => {
@@ -88,6 +80,7 @@ function Navbar() {
 			</ul>
 		);
 	});
+	Links.displayName = "Links";
 	const mobNav = useRef<HTMLDivElement>(null);
 	const [showNav, setShowNav] = useState(false);
 	useGSAP(() => {
