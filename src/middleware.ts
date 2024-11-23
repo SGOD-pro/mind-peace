@@ -27,12 +27,6 @@ export async function middleware(request: NextRequest) {
 		) {
 			return NextResponse.next();
 		} else {
-			console.log(
-				"Unauthorized access attempt for path:",
-				pathname,
-				"with role:",
-				payload.role
-			);
 			return NextResponse.redirect(new URL("/not-authorized", request.url));
 		}
 	} catch (error) {

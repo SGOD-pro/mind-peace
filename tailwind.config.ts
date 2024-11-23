@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss";
-
+import tailwindcssAnimate from "tailwindcss-animate";
 const config: Config = {
 	darkMode: ["class"],
 	content: [
@@ -62,8 +62,8 @@ const config: Config = {
 				},
 			},
 			boxShadow: {
-				'custom': '3px 6px 11px -2px rgba(0, 0, 0, 0.28)',
-			  },
+				custom: "3px 6px 11px -2px rgba(0, 0, 0, 0.28)",
+			},
 			borderRadius: {
 				lg: "var(--radius)",
 				md: "calc(var(--radius) - 2px)",
@@ -80,6 +80,6 @@ const config: Config = {
 			},
 		},
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [tailwindcssAnimate],
 };
 export default config;
