@@ -41,9 +41,9 @@ function Details({ id }: { id: string }) {
 	}, [id]);
 
 	return (
-		<div className="flex items-center justify-between p-5">
-			<div className="flex gap-4">
-				<div className="w-72 h-72 rounded-lg overflow-hidden">
+		<div className="p-3 sm:p-5">
+			<div className="flex gap-4 flex-col sm:flex-row">
+				<div className="w-56 h-56 sm:w-72 sm:h-72 rounded-lg overflow-hidden m-auto sm:m-0">
 					{loading ? (
 						<Skeleton className="bg-[#56ecda] w-full h-full" />
 					) : (
@@ -56,93 +56,94 @@ function Details({ id }: { id: string }) {
 						/>
 					)}
 				</div>
-				<div className="m-2 ">
-					<h2 className="text-5xl font-lexend leading-none">
-						{loading ? (
-							<Skeleton className="bg-[#69e7d8] h-8 w-48" />
-						) : (
-							<>
-								{therapist?.name}{" "}
-								<span className="text-base">
-									{"("}
-									{therapist?.qualification}
-									{")"}
-								</span>
-							</>
-						)}
-					</h2>
-					<p className="opacity-70">
-						{loading ? (
-							<Skeleton className="bg-[#69e7d8] h-5 w-40 mt-2" />
-						) : (
-							therapist?.email
-						)}
-					</p>
-					<div className="mt-4 text-lg space-y-1 font-lexend-exa">
-						{loading ? (
-							<>
-								<Skeleton className="bg-[#69e7d8] h-5 w-32" />
-								<Skeleton className="bg-[#69e7d8] h-5 w-32" />
-								<Skeleton className="bg-[#69e7d8] h-5 w-32" />
-								<Skeleton className="bg-[#69e7d8] h-5 w-32" />
-								<Skeleton className="bg-[#69e7d8] h-5 w-32" />
-							</>
-						) : (
-							<>
-								<p className="flex items-center">
-									<UserRoundCheck />
-									{therapist?.speciality}
-								</p>
-								<p className="flex items-center">
-									<Phone />
-									<Link href={`tel:+91${therapist?.contactNo}`} className="">
-										{therapist?.contactNo}
-									</Link>
-								</p>
-								<p className="flex items-center">
-									<MapPin />
-									<span className=" capitalize">
-										{therapist?.clinicLocation}
+				<div className="flex justify-between sm:w-[calc(100%-18rem)] relative sm:flex-row flex-col">
+					<div className="m-2">
+						<h2 className="text-3xl lg:text-5xl font-lexend leading-none flex sm:items-end sm:flex-row flex-col">
+							{loading ? (
+								<Skeleton className="bg-[#69e7d8] h-8 w-48" />
+							) : (
+								<>
+									{therapist?.name}{" "}
+									<span className="text-xs lg:text-base">
+										{"("}
+										{therapist?.qualification}
+										{")"}
 									</span>
-								</p>
-								<p className="flex items-center">
-									<BriefcaseMedical />
-									<span className="">{therapist?.experience} Y</span>
-								</p>
-								<p className="flex items-center">
-									<IndianRupee />
-									<span className="">{therapist?.charges}</span>
-								</p>
-							</>
-						)}
+								</>
+							)}
+						</h2>
+						<p className="opacity-70">
+							{loading ? (
+								<Skeleton className="bg-[#69e7d8] h-5 w-40 mt-2 text-xs lg:text-base" />
+							) : (
+								therapist?.email
+							)}
+						</p>
+						<div className="mt-4 text-sm lg:text-lg space-y-1 font-lexend-exa flex flex-wrap lg:block gap-x-3">
+							{loading ? (
+								<>
+									<Skeleton className="bg-[#69e7d8] h-5 w-32" />
+									<Skeleton className="bg-[#69e7d8] h-5 w-32" />
+									<Skeleton className="bg-[#69e7d8] h-5 w-32" />
+									<Skeleton className="bg-[#69e7d8] h-5 w-32" />
+									<Skeleton className="bg-[#69e7d8] h-5 w-32" />
+								</>
+							) : (
+								<>
+									<p className="flex items-center gap-2">
+										<UserRoundCheck className="w-5 h-5"/>
+										{therapist?.speciality}
+									</p>
+									<p className="flex items-center gap-2">
+										<Phone className="w-5 h-5"/>
+										<Link href={`tel:+91${therapist?.contactNo}`} className="">
+											{therapist?.contactNo}
+										</Link>
+									</p>
+									<p className="flex items-center gap-2">
+										<MapPin className="w-5 h-5"/>
+										<span className=" capitalize">
+											{therapist?.clinicLocation}
+										</span>
+									</p>
+									<p className="flex items-center gap-2">
+										<BriefcaseMedical className="w-5 h-5"/>
+										<span className="">{therapist?.experience} Y</span>
+									</p>
+									<p className="flex items-center gap-2">
+										<IndianRupee className="w-5 h-5"/>
+										<span className="">{therapist?.charges}</span>
+									</p>
+								</>
+							)}
+						</div>
 					</div>
+					<DrawerFooter className=" flex flex-row sm:flex-col gap-2 p-0">
+						<div className="flex-grow">
+							{loading ? (
+								<Skeleton className="bg-[#69e7d8] h-10 w-20 rounded-md" />
+							) : !user ? (
+								<button
+									className="bg-blue-600 w-full rounded-md px-4 py-1.5 text-white text-center login-btn"
+									onClick={() => setIsOpen(true)}
+								>
+									Login
+								</button>
+							) : (
+								<Link
+									href={`/therapist/book/${id}`}
+									className="bg-blue-600 rounded-md px-4 py-1.5 text-white text-center"
+								>
+									Book
+								</Link>
+							)}
+						</div>
+						<DrawerClose className="flex-grow">
+							<Button className="w-full" variant={"ghost"}>Cancel</Button>
+						</DrawerClose>
+					</DrawerFooter>
 				</div>
 			</div>
-
-			<DrawerFooter>
-				{loading ? (
-					<Skeleton className="bg-[#69e7d8] h-10 w-20 rounded-md" />
-				) : !user ? (
-					<DrawerClose className="mt-1">
-						<button
-							className="bg-blue-600 rounded-md px-4 py-2 text-white text-center login-btn"
-							onClick={() => setIsOpen(true)}
-						>
-							Login
-						</button>
-					</DrawerClose>
-				) : (
-					<Link
-						href={`/therapist/book/${id}`}
-						className="bg-blue-600 rounded-md px-4 py-2 text-white text-center"
-					>
-						Book
-					</Link>
-				)}
-				<DrawerClose className="mt-1">
-					<Button variant={"ghost"}>Cancel</Button>
-				</DrawerClose>
-			</DrawerFooter>
 		</div>
 	);
 }

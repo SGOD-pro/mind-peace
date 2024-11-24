@@ -20,27 +20,9 @@ import { memo, useCallback, useEffect } from "react";
 const apiService = new ApiService("/api/therapist");
 
 function AllTherapistTable() {
-	const { setAllItems } = useTherapistStore();
 	const getAllUsers = useTherapistStore((state) => state.data);
 	const removeItem = useTherapistStore((state) => state.removeItem);
-	const hydrated = useTherapistStore((state) => state.hydrated);
-	// const [users, setUsers] = useState<Therapists[]>(getAllUsers());
-	useEffect(() => {
-		if (!hydrated) {
-			const getData = async () => {
-				const res = await apiService.get<Therapists[]>({});
-				if (res.data) {
-					setAllItems(res.data);
-					// setUsers(res.data);
-				}
-			};
-			getData();
-		}
-	}, [hydrated, setAllItems]);
 
-	// useEffect(() => {
-	// 	setUsers(getAllUsers());
-	// }, [getAllUsers]);
 	const Rows = memo(({ data }: { data: Therapists }) => {
 		const remove = useCallback(
 			async (id: string) => {
@@ -49,7 +31,6 @@ function AllTherapistTable() {
 				});
 				if (res.success) {
 					removeItem(id);
-					// setUsers(getAllUsers());
 				}
 			},
 			[removeItem]
@@ -84,7 +65,7 @@ function AllTherapistTable() {
 			</TableRow>
 		);
 	});
-Rows.displayName="Rows"
+	Rows.displayName = "Rows";
 	return (
 		<Table>
 			<TableHeader>
@@ -97,7 +78,7 @@ Rows.displayName="Rows"
 				</TableRow>
 			</TableHeader>
 			<TableBody>
-				{getAllUsers.map((data) => (
+				{getAllUsers.slice(0, 5).map((data) => (
 					<Rows key={data._id} data={data} />
 				))}
 			</TableBody>

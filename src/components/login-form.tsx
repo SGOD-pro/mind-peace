@@ -4,10 +4,16 @@ import { memo, useState } from "react";
 import Signin from "./forms/Signin";
 import Signup from "./forms/Signup";
 import { signInWithGoogle } from "@/helper/LoginWithGoogle";
-
+import { useLoginForm } from "@/store/LoginForm";
 function LoginForm() {
 	const [isCreateAccount, setIsCreateAccount] = useState(false);
-
+	const setIsOpen = useLoginForm((state) => state.setIsOpen);
+	async function gooleSignin() {
+		const res = await signInWithGoogle();
+		if (res) {
+			setIsOpen(false);
+		}
+	}
 	return (
 		<div className="relative max-w-[400px] bg-[#ffe8ea] rounded-3xl min-h-96 px-6 py-9 overflow-hidden shadow-md shadow-black/60 text-black">
 			<div className="w-full h-full ">
@@ -25,7 +31,7 @@ function LoginForm() {
 				<button
 					type="button"
 					className="bg-[#ffffff] shadow shadow-black/20 hover:shadow-none transition-colors rounded-xl flex items-center justify-center gap-2 h-9 px-4 py-2 w-full"
-					onClick={signInWithGoogle}
+					onClick={gooleSignin}
 				>
 					<Image src={"/google.svg"} alt="Google" width={20} height={20} />
 					<span>Google</span>

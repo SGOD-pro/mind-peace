@@ -35,7 +35,7 @@ function AllSection() {
 	const data = useTherapistStore((state) => state.data);
 
 	return (
-		<section className="">
+		<section className="pb-5">
 			<h2 className="text-4xl font-lexend tracking-tighter">All therapists</h2>
 			<nav className="flex mx-auto w-[90%] justify-end items-center mt-4">
 				<ul className="gap-4 flex-nowrap hidden md:flex">

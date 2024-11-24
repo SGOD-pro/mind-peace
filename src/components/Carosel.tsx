@@ -61,13 +61,13 @@ const Carousel = () => {
 					<div className="h-[calc(2.75rem*2)] overflow-hidden" data-scroll data-scroll-speed=".02">
 						<div className="h-full"  ref={slideHeadingRef}>
 							<div className="font-lemon pl-1 flex flex-col ">
-								<h2 className="text-4xl leading-tighter py-1 h-[calc(2.75rem*2)]">
+								<h2 className="text-2xl sm:text-4xl leading-tighter py-1 h-[calc(2.75rem*2)]">
 									{h1s[0]}
 								</h2>
-								<h2 className="text-4xl leading-tighter py-1 h-[calc(2.75rem*2)]">
+								<h2 className="text-2xl sm:text-4xl leading-tighter py-1 h-[calc(2.75rem*2)]">
 									{h1s[1]}
 								</h2>
-								<h2 className="text-4xl leading-tighter py-1 h-[calc(2.75rem*2)]">
+								<h2 className="text-2xl sm:text-4xl leading-tighter py-1 h-[calc(2.75rem*2)]">
 									{h1s[2]}
 								</h2>
 							</div>

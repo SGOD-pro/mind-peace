@@ -2,7 +2,9 @@
 import React, { useEffect } from "react";
 import useTherapistStore from "@/store/Therapist";
 import ApiService from "@/helper/ApiService";
+import Loading from "@/app/loading";
 const apiService = new ApiService("/api/therapist");
+
 function FetchTherapist({ children }: { children: React.ReactNode }) {
 	const {setAllItems} = useTherapistStore();
 	const hydrated = useTherapistStore((state) => state.hydrated);

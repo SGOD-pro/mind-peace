@@ -1,7 +1,7 @@
 // app/api/auth/refreshToken.ts
 
 import { NextRequest, NextResponse } from "next/server";
-import { generateTokens } from "@/helper/Tokens"; // Adjust the path as needed
+import { cookieResponse } from "@/helper/Tokens"; // Adjust the path as needed
 import connectDb from "@/db";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import AuthModel from "@/schema/Auth";
@@ -16,6 +16,7 @@ export async function POST(req: NextRequest) {
 	await connectDb();
 	try {
 		const token = req.cookies.get("refreshToken")?.value;
+		console.log(token)
 		if (!token) {
 			return NextResponse.json(
 				{ message: "Refresh token missing" },
@@ -36,45 +37,17 @@ export async function POST(req: NextRequest) {
 		}
 		const user = await AuthModel.findById(userId).select("-password");
 		if (user?.refreshToken !== token) {
+			console.log("not valid")
 			const res = NextResponse.json(
 				{ message: "Token not valid" },
 				{ status: 401 }
 			);
-			// res.cookies.delete("accessToken");
-			// res.cookies.delete("refreshToken");
+			res.cookies.delete("accessToken");
+			res.cookies.delete("refreshToken");
 			return res;
 		}
-		const { accToken, refreshToken } = await generateTokens(userId);
+		const response = await cookieResponse(user);
 
-		if (!accToken || !refreshToken) {
-			return NextResponse.json(
-				{ message: "Token generation failed" },
-				{ status: 500 }
-			);
-		}
-
-		const response = NextResponse.json(
-			{
-				message: "Token refreshed successfully",
-				success: true,
-				data: {
-					email: user.email,
-					avatar: user.avatar,
-					provider: user.provider,
-					role: user.role,
-					_id: user._id,
-				},
-			},
-			{ status: 200 }
-		);
-
-		// Set new access and refresh tokens in cookies
-		response.cookies.set("accessToken", accToken, options);
-
-		response.cookies.set("refreshToken", refreshToken, {
-			...options,
-			maxAge: 60 * 60 * 24 * 7,
-		});
 
 		return response;
 	} catch (error) {

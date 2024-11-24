@@ -1,3 +1,4 @@
+"use client"
 import {
 	onAuthStateChanged,
 	signInWithPopup,
@@ -9,7 +10,7 @@ import ApiService from "./ApiService";
 const apiservise = new ApiService("/api/auth/");
 import { getAuthStore } from "@/store/Auth";
 const authStore = getAuthStore();
-export async function signInWithGoogle() {
+export async function signInWithGoogle():Promise<boolean> {
 	const provider = new GoogleAuthProvider();
 	try {
 		const result = await signInWithPopup(auth, provider);
@@ -27,11 +28,11 @@ export async function signInWithGoogle() {
 		if (res.data) {
 			authStore.setUser(res.data);
 		}
-		console.log(res);
-		return user;
+		
+		return true;
 	} catch (error) {
 		console.error("Error during Google Sign-In:", error);
-		return { success: false, error: error as Error };
+		return false;
 	}
 }
 export async function verifySession() {

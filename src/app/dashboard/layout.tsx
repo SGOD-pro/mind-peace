@@ -33,13 +33,13 @@ export default function DashboardLayout({
 							<Breadcrumb>
 								<BreadcrumbList>
 									{pathName.split("/").map((item, index) => (
-										<div key={index} className="hidden md:block">
-											{index !== 0 && <BreadcrumbSeparator />}
+										<div key={index} className="flex items-center gap-2">
 											<BreadcrumbItem>
 												<BreadcrumbLink href="#" className="capitalize">
 													{item}
 												</BreadcrumbLink>
 											</BreadcrumbItem>
+											{index !== 0 && <BreadcrumbSeparator />}
 										</div>
 									))}
 								</BreadcrumbList>

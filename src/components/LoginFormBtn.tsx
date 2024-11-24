@@ -16,8 +16,6 @@ import useAuthStore from "@/store/Auth";
 import LogoutBtn from "./LogoutBtn";
 import Link from "next/link";
 function LoginFormBtn() {
-	// const isOpen = useLoginForm((state) => state.isOpen);
-	// const setIsOpen = useLoginForm((state) => state.setIsOpen);
 	const { isOpen,setIsOpen } = useLoginForm();
 	const { user } = useAuthStore();
 	return (
@@ -38,8 +36,7 @@ function LoginFormBtn() {
 							{user.avatar ? (
 								<Image
 									src={
-										user?.avatar ||
-										"https://imgs.search.brave.com/MMkxHwgzwk6QqSayQnY2xfHf-25v5f1EDRPuclBEydQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/cHJlbWl1bS1waG90/by9waWN0dXJlLWRv/Y3Rvci13aXRoLWds/YXNzZXMtc3RldGhv/c2NvcGVfMTEwMzI5/MC0xMTI4NTEuanBn/P3NpemU9NjI2JmV4/dD1qcGc"
+										user.avatar 
 									}
 									alt="logo"
 									width={50}

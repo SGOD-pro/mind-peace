@@ -7,6 +7,7 @@ import { CirclePlus } from "lucide-react";
 
 import AddTherapistForm from "@/components/forms/AddTherapistForm";
 import DialogComp from "@/components/DialogComp";
+import FetchTherapist from "@/hooks/FetchTherapist";
 
 function Admin() {
 	return (
@@ -55,7 +56,10 @@ function Admin() {
 					</DialogComp>
 				</div>
 				<div className=" border rounded-lg mt-4">
+					<FetchTherapist >
+
 					<AllTherapistTable />
+					</FetchTherapist>
 				</div>
 			</div>
 		</div>

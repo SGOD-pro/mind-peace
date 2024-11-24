@@ -30,7 +30,6 @@ export function NavUser({
 	};
 }) {
 	const { isMobile } = useSidebar();
-	console.log(user.avatar);
 	const Picture = memo(() => {
 		return (
 			<div className="h-8 w-8 rounded-lg overflow-hidden">

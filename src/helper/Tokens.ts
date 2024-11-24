@@ -2,8 +2,7 @@ import { NextResponse } from "next/server";
 import AuthModel from "@/schema/Auth";
 import { options } from "@/constants";
 import jwt, { JwtPayload } from "jsonwebtoken";
-
-import {AuthSchemaInterface} from "@/schema/Auth"
+import { AuthSchemaInterface } from "@/schema/Auth";
 export const generateTokens = async (
 	userId: string
 ): Promise<{ accToken: string; refreshToken: string }> => {
@@ -18,14 +17,14 @@ export const generateTokens = async (
 		await user.save({ validateBeforeSave: false });
 		return { accToken, refreshToken };
 	} catch (error) {
-		console.log(error)
+		console.log(error);
 		throw new Error("Something went wrong during token generation");
 	}
 };
 
-export async function cookieResponse(user:AuthSchemaInterface) {
+export async function cookieResponse(user: AuthSchemaInterface) {
 	const { accToken, refreshToken } = await generateTokens(user.id);
-	if (!accToken) {
+	if (!accToken || !refreshToken) {
 		return NextResponse.json(
 			{ message: "Token generation failed" },
 			{ status: 500 }
@@ -38,7 +37,13 @@ export async function cookieResponse(user:AuthSchemaInterface) {
 				user.provider === "google"
 					? "Google login successful"
 					: "Registration successful",
-			data: user,
+			data: {
+				email: user.email,
+				avatar: user.avatar,
+				provider: user.provider,
+				role: user.role,
+				_id: user._id,
+			},
 			success: true,
 		},
 		{ status: 201 }
@@ -74,7 +79,7 @@ export const verifyRole = (req: NextRequest): number | null => {
 		const payload = jwt.verify(token, process.env.ACCESS_TOKEN!) as JwtPayload;
 		return payload.role;
 	} catch (error) {
-		console.log(error)
+		console.log(error);
 		return null;
 	}
 };
