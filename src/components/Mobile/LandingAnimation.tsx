@@ -1,4 +1,5 @@
 "use client";
+import { animationStore } from "@/store/Animation";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Image from "next/image";
@@ -75,6 +76,7 @@ function LandingAnimation() {
 			display: "none",
 			onComplete: () => {
 				t1.set(main.current, { display: "none" });
+				animationStore.setLandingAnimation(true);
 			},
 		});
 		const masterTimeline = gsap.timeline();

@@ -1,8 +1,10 @@
 "use client";
+import { animationStore } from "@/store/Animation";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import Image from "next/image";
 import React, { useRef } from "react";
+
 function LandingAnimation() {
 	const iconContainer = useRef<HTMLDivElement>(null);
 	const yellowScreen = useRef<HTMLDivElement>(null);
@@ -125,6 +127,7 @@ function LandingAnimation() {
 			display: "none",
 			onComplete: () => {
 				t1.set(main.current, { display: "none" });
+				animationStore.setLandingAnimation(true);
 			},
 		});
 		const masterTimeline = gsap.timeline();

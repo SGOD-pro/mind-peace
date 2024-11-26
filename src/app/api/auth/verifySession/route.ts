@@ -38,6 +38,7 @@ export async function POST(req: NextRequest) {
 		const user = await AuthModel.findById(userId).select("-password");
 		if (user?.refreshToken !== token) {
 			console.log("not valid")
+			console.log(user?.refreshToken)
 			const res = NextResponse.json(
 				{ message: "Token not valid" },
 				{ status: 401 }

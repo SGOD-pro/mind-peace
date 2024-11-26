@@ -9,6 +9,8 @@ import gsap from "gsap";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { MenuIcon } from "../icons/MenuIcon";
 import { links } from "@/constants";
+import { animationStore } from "@/store/Animation";
+
 const Icon = memo(() => {
 	return (
 		<div className="w-12 h-12">
@@ -32,7 +34,7 @@ function Navbar() {
 		const linksRef = useRef<HTMLAnchorElement[]>([]);
 
 		useGSAP(() => {
-			if (!showNav || !isMobile) {
+			if (!showNav || !isMobile||!animationStore.navbarLinks) {
 				return;
 			}
 
@@ -47,6 +49,9 @@ function Navbar() {
 					},
 					duration: 0.55,
 					ease: "power2.inOut",
+					onComplete: () => {
+						animationStore.setIsNavbarLinks(true);
+					}
 				});
 			});
 		}, []);

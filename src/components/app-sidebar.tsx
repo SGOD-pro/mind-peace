@@ -78,12 +78,12 @@ const therapistLinks = [
 	},
 	{
 		title: "Appointments",
-		url: "/dashboard/appointments",
+		url: "/dashboard/therapist/appointments",
 		icon: Calendar, // Appointment icon
 	},
 	{
 		title: "Feedbacks",
-		url: "/dashboard/feedbacks",
+		url: "/dashboard/therapist/feedbacks",
 		icon: MessageSquare, // Feedback icon
 	},
 ];

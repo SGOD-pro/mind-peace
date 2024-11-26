@@ -9,6 +9,7 @@ import Carousel from "@/components/Carosel";
 import { lazy, Suspense, useEffect } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import LocomotiveScroll from "locomotive-scroll";
+import { animationStore } from "@/store/Animation";
 // import Section1 from "@/components/Section1";
 
 export default function Home() {
@@ -21,10 +22,10 @@ export default function Home() {
 
 	return (
 		<main className="bg-[#F9F9F9] scrollbar relative text-black">
-			<LandingAnimation/>
+			{!animationStore.landingAnimation && <LandingAnimation />}
 			<section className="flex lg:flex-row flex-col lg:h-dvh w-full items-center font-leagueSpartan relative">
 				<Suspense fallback={<Skeleton className="w-full h-full" />}>
-				<Section1 />
+					<Section1 />
 				</Suspense>
 			</section>
 
