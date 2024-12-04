@@ -26,7 +26,7 @@ export default function DashboardLayout({
 			<SidebarProvider>
 				<AppSidebar className="" />
 				<SidebarInset className="h-[calc(100%-16px)] w-full">
-					<header className="flex h-16 shrink-0 items-center gap-2 bg-background/40 backdrop-blur-sm border-b border-border">
+					<header className="flex h-16 shrink-0 items-center gap-2 border-b border-border">
 						<div className="flex items-center gap-2 px-4 ">
 							<SidebarTrigger className="-ml-1" />
 							<Separator orientation="vertical" className="mr-2 h-4" />

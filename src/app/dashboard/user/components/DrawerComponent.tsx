@@ -29,10 +29,10 @@ function DrawerComponent({
 	}
 	return (
 		<Dialog onOpenChange={setOpen} open={open}>
-			<DialogContent className="lg:w-[70vw] lg:max-w-fit">
-				<div className="flex gap-5">
-					<div className="">
-						<div className="w-[16rem] h-72 rounded-lg overflow-hidden">
+			<DialogContent className="lg:w-[70vw] lg:max-w-fit overflow-auto max-h-[90dvh]">
+				<div className="md:flex gap-5 h-full overflow-auto">
+					<div className="h-fit">
+						<div className="w-[16rem] h-72 rounded-lg overflow-hidden m-auto md:m-0">
 							{user?.image ? (
 								<Image
 									src={user?.image}
@@ -77,8 +77,10 @@ function DrawerComponent({
 							</div>
 						</div>
 					</div>
-					<Separator orientation="vertical" />
-					<Appointment charges={user?.charges || 0} id={user?._id || ""} />
+					<Separator orientation="vertical" className="hidden" />
+					<div className="h-fit mt-5">
+						<Appointment charges={user?.charges || 0} id={user?._id || ""} />
+					</div>
 				</div>
 			</DialogContent>
 		</Dialog>

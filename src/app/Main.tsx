@@ -5,6 +5,7 @@ import ShowLoginForm from "@/components/ShowLoginForm";
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import VerifySession from "@/hooks/VerifySession";
 
 function Main({ children }: { children: React.ReactNode }) {
 	const pathname = usePathname();
@@ -35,10 +36,9 @@ function Main({ children }: { children: React.ReactNode }) {
 
 	return (
 		<main className="bg-[#F9F9F9] w-full min-h-dvh">
-			
 			<ShowLoginForm />
-			{showNavbarAndFooter && <Navbar />}0
-			{children}
+			{showNavbarAndFooter && <Navbar />}
+			<VerifySession>{children}</VerifySession>
 			{showNavbarAndFooter && <Footer />}
 		</main>
 	);

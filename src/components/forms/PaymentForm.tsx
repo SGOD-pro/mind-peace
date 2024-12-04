@@ -17,7 +17,7 @@ import {IconBrandPaypalFilled,IconBrandAppleFilled} from "@tabler/icons-react"
 export function PaymentForm() {
   return (
     <Card className="border-none p-0">
-      <CardContent className="grid gap-6 p-0">
+      <CardContent className="grid gap-4 p-0">
         <RadioGroup defaultValue="card" className="grid grid-cols-3 gap-4">
           <div>
             <RadioGroupItem value="card" id="card" className="peer sr-only" />

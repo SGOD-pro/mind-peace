@@ -11,7 +11,7 @@ import FetchTherapist from "@/hooks/FetchTherapist";
 
 function Admin() {
 	return (
-		<div className="flex flex-1 flex-col gap-4">
+		<div className="flex flex-1 flex-col gap-4 mt-4">
 			<div className="grid auto-rows-min gap-4 md:grid-cols-3 font-lexend-deca">
 				<div className="rounded-xl bg-muted/50 p-3 relative">
 					<h2 className="text-4xl">Therapists</h2>

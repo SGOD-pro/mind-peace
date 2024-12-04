@@ -4,7 +4,7 @@ const apiService = new ApiService("/api/auth/");
 import useAuthStore from "@/store/Auth";
 import Loading from "@/app/loading";
 function VerifySession({ children }: { children: React.ReactNode }) {
-    const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(true);
 	const { ishydrated, setUser } = useAuthStore();
 	useEffect(() => {
 		async function session() {
@@ -26,7 +26,7 @@ function VerifySession({ children }: { children: React.ReactNode }) {
 	if (loading) {
 		return <Loading />;
 	}
-	return { children };
+	return <>{children}</>;
 }
 
 export default VerifySession;

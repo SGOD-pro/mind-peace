@@ -30,7 +30,7 @@ const ProfileEdit = () => {
 			<div className="flex gap-4 items-center">
 				<label
 					htmlFor="picture"
-					className="w-36 h-36 p-2 border-2 border-muted-foreground overflow-hidden rounded-full relative cursor-pointer "
+					className="w-24 h-24 sm:w-36 sm:h-36 p-2 border-2 border-muted-foreground overflow-hidden rounded-full relative cursor-pointer "
 				>
 					{user?.avatar ? (
 						<Image
@@ -62,9 +62,9 @@ const ProfileEdit = () => {
 						</div>
 					)}
 				</label>
-				<div className="">
+				<div className="w-[54%]">
 					<p className="text-sm leading-none">Email:</p>
-					<h2 className="text-xl text-center leading-none">{user?.email}</h2>
+					<h2 className="text-xl text-center leading-none flex flex-wrap">{user?.email.split("").map((char, i) => <p key={i}>{char}</p>)}</h2>
 					<label htmlFor="picture" className="cursor-pointer">
 						<Button className="mt-4 pointer-events-none">Change Photo</Button>
 					</label>

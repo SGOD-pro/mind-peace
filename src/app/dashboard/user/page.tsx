@@ -53,8 +53,8 @@ const FormSchema = z
 function User() {
 	const ProfileTriggerBtn = memo(() => {
 		return (
-			<Button variant={"outline"}>
-				<span className="">Edit profile</span>
+			<Button variant={"outline"} className="bg-transparent md:bg-muted">
+				<span className="hidden lg:block">Edit profile</span>
 				<SettingsIcon />
 			</Button>
 		);
@@ -66,7 +66,7 @@ function User() {
 			resolver: zodResolver(FormSchema),
 		});
 		function onSubmit(data: z.infer<typeof FormSchema>) {
-			console.log(data)
+			console.log(data);
 		}
 		return (
 			<>
@@ -154,10 +154,41 @@ function User() {
 
 	return (
 		<>
-			<div className="grid grid-cols-[3fr,1fr] w-full gap-6 mt-4">
+			<div className="grid lg:grid-cols-[3fr,1fr] w-full gap-6 mt-4">
 				<div className="space-y-6 font-lexend-deca">
-					<HomeProfile />
-					<section className="">
+					<div className="relative ">
+						<div className="absolute right-4 bottom-3 z-10 lg:hidden">
+							<SheetComp
+								trigger={<ProfileTriggerBtn />}
+								content={<Content />}
+							/>
+						</div>
+						<HomeProfile />
+					</div>
+					<aside className="lg:hidden flex gap-4 flex-wrap w-full">
+						<div className="side-cards text-sky-600 flex-grow basis-48 max-h-[180px]">
+							<h4 className="text-2xl">Appointments</h4>
+							<h2 className="font-lexend-exa text-7xl text-center">07</h2>
+							<p className="text-sm text-muted-foreground text-right">
+								Joinin:- 26/09/24
+							</p>
+						</div>
+						<div className="side-cards text-green-600 flex-grow basis-48 max-h-[180px]">
+							<h4 className="text-2xl">Spend</h4>
+							<h2 className="font-lexend-exa text-7xl text-center">07</h2>
+							<p className="text-sm text-muted-foreground text-right">
+								Joinin:- 26/09/24
+							</p>
+						</div>
+						<div className="side-cards text-rose-600 flex-grow basis-48 max-h-[180px]">
+							<h4 className="text-2xl">Canceled</h4>
+							<h2 className="font-lexend-exa text-7xl text-center">07</h2>
+							<p className="text-sm text-muted-foreground text-right">
+								Joinin:- 26/09/24
+							</p>
+						</div>
+					</aside>
+					<section className="w-[calc(100svw-3rem)] md:w-full">
 						<h2 className="text-2xl">Any Appointment?</h2>
 						<div className="relative hidden">
 							<div className="w-fit h-fit m-auto">
@@ -173,36 +204,40 @@ function User() {
 								Nothing💗
 							</div>
 						</div>
-						<Table>
-							<TableCaption>
-								Your appointments {`(`}Last 7days{`)`}
-							</TableCaption>
-							<TableHeader>
-								<TableRow>
-									<TableHead className="">Patient Name</TableHead>
-									<TableHead className="">Therapist</TableHead>
-									<TableHead>Date</TableHead>
-									<TableHead>Time</TableHead>
-									<TableHead className="text-right">Status</TableHead>
-								</TableRow>
-							</TableHeader>
-							<TableBody>
-								<TableRow>
-									<TableCell className="font-medium capitalize">
-										Souvik karmakar
-									</TableCell>
-									<TableCell>Dr. Simpal Kharel</TableCell>
-									<TableCell>07/07/2005</TableCell>
-									<TableCell className="">10:00 AM</TableCell>
-									<TableCell className="text-right uppercase text-green-500">
-										Pending
-									</TableCell>
-								</TableRow>
-							</TableBody>
-						</Table>
+						<section className="overflow-auto ">
+							<div className="min-w-[460px]">
+								<Table>
+									<TableCaption>
+										Your appointments {`(`}Last 7days{`)`}
+									</TableCaption>
+									<TableHeader>
+										<TableRow>
+											<TableHead className="">Patient Name</TableHead>
+											<TableHead className="">Therapist</TableHead>
+											<TableHead>Date</TableHead>
+											<TableHead>Time</TableHead>
+											<TableHead className="text-right">Status</TableHead>
+										</TableRow>
+									</TableHeader>
+									<TableBody>
+										<TableRow>
+											<TableCell className="font-medium capitalize">
+												Souvik karmakar
+											</TableCell>
+											<TableCell>Dr. Simpal Kharel</TableCell>
+											<TableCell>07/07/2005</TableCell>
+											<TableCell className="">10:00 AM</TableCell>
+											<TableCell className="text-right uppercase text-green-500">
+												Pending
+											</TableCell>
+										</TableRow>
+									</TableBody>
+								</Table>
+							</div>
+						</section>
 					</section>
 				</div>
-				<aside className="space-y-4">
+				<aside className="space-y-4 hidden lg:block">
 					<div className="text-right">
 						<SheetComp trigger={<ProfileTriggerBtn />} content={<Content />} />
 					</div>

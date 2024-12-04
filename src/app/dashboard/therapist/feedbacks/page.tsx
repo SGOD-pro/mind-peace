@@ -1,9 +1,9 @@
-import React from 'react'
+"use client";
+import Review from "@/app/therapist/book/[slug]/components/Review";
+import React from "react";
 
 function TherapistFeedBackPage() {
-  return (
-    <div>TherapistFeedBackPage</div>
-  )
+	return <Review />;
 }
 
-export default TherapistFeedBackPage
+export default TherapistFeedBackPage;

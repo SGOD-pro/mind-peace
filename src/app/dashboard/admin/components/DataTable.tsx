@@ -73,7 +73,7 @@ export function TherapistTable({ data }: { data: Therapists[] }) {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [specialityFilter, setSpecialityFilter] = React.useState<string | undefined>();
-
+console.log(data.length)
   const table = useReactTable({
     data,
     columns,
@@ -88,6 +88,10 @@ export function TherapistTable({ data }: { data: Therapists[] }) {
       sorting,
       columnFilters,
       columnVisibility,
+      pagination: {
+        pageIndex: 0,
+        pageSize: data.length,
+      }
     },
   });
 

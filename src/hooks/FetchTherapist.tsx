@@ -26,7 +26,7 @@ function FetchTherapist({ children }: { children: React.ReactNode }) {
 		}
 		fetch();
 	}, []);
-	return <div>{children}</div>;
+	return <>{children}</>;
 }
 
 export default FetchTherapist;

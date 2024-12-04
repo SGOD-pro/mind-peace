@@ -7,6 +7,19 @@ export async function POST(req: Request) {
 	await connectDb();
 	try {
 		const body = await req.json();
+		// NOTE: check if the id is present in feedback model then update else create new
+		const url=new URL(req.url)
+		const id = url.searchParams.get("id");
+		if (id && mongoose.Types.ObjectId.isValid(id)) {
+			const Feedback = await FeedbackModel.findByIdAndUpdate(id, body, {
+				new: true,
+			});
+			return ApiResponse.success({
+				statusCode: 200,
+				message: "Feedback updated successfully",
+				data: Feedback,
+			});
+		}
 		const Feedback = await FeedbackModel.create(body);
 		return ApiResponse.success({
 			statusCode: 200,
@@ -22,6 +35,9 @@ export async function POST(req: Request) {
 export async function GET(req: Request) {
 	await connectDb();
 	try {
+		
+		//NOTE: verify the token and the get the role if the role is 0 fetch by userid if 1 fetch by doctorid if 2 fetch all because its admin.
+
 		const url = new URL(req.url);
 		const id = url.searchParams.get("id");
 		const pipeline: PipelineStage[] = [];
@@ -30,7 +46,6 @@ export async function GET(req: Request) {
 				$match: { doctorId: new mongoose.Types.ObjectId(id) },
 			});
 		}
-
 		pipeline.push({
 			$sort: {
 				createdAt: -1,

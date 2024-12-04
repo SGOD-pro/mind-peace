@@ -78,7 +78,7 @@ function AllTherapistTable() {
 				</TableRow>
 			</TableHeader>
 			<TableBody>
-				{getAllUsers.slice(0, 5).map((data) => (
+				{getAllUsers.slice(0, 6).map((data) => (
 					<Rows key={data._id} data={data} />
 				))}
 			</TableBody>

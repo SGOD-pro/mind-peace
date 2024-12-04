@@ -13,7 +13,7 @@ import { UserRound } from "lucide-react";
 function DoctorCard({ user,onclickFunction }: { user: Therapists,onclickFunction:(user:Therapists)=>void }) {
 	return (
 		<div className="border rounded-lg p-3 overflow-hidden flex flex-col items-center cursor-pointer hover:bg-muted/50 transition-colors" onClick={()=>onclickFunction(user)}>
-			<div className="w-full h-auto max-h-96 rounded-lg overflow-hidden">
+			<div className="w-full h-auto max-h-64 md:max-h-96 rounded-lg overflow-hidden">
 				{user.image ? (
 					<Image
 						src={user.image}
@@ -29,7 +29,7 @@ function DoctorCard({ user,onclickFunction }: { user: Therapists,onclickFunction
 				)}
 			</div>
 			<div className="mt-4 font-lexend mx-auto">
-				<h3 className="md:text-3xl text-xl md:text-center capitalize">{user.name}</h3>
+				<h3 className="md:text-3xl text-xl text-center capitalize">{user.name}</h3>
 				<div className="text-muted-foreground flex gap-4 py-2">
 					<div className="space-y-1">
 						<p className="text-sm leading-tight flex items-center">

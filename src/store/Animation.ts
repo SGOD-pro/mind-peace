@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { persist } from 'zustand/middleware'
+// import { persist } from 'zustand/middleware'
 
 interface AnimationState {
     landingAnimation: boolean;
@@ -10,7 +10,7 @@ interface AnimationState {
 }
 
 export const useAnimationStore = create<AnimationState>()(
-    persist(
+    // persist(
         immer((set) => ({
             landingAnimation: false,
             navbarLinks:false,
@@ -25,10 +25,10 @@ export const useAnimationStore = create<AnimationState>()(
                 });
             },
         })),
-        {
-            name: "animation",
-        }
-    )
+    //     {
+    //         name: "animation",
+    //     }
+    // )
 )
 
 export const animationStore=useAnimationStore.getState();

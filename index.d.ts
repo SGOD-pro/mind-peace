@@ -45,3 +45,14 @@ interface TherapistBooking {
 	image: string;
 	status?:"pending";
 }
+interface TiltDiv extends HTMLDivElement {
+	vanillaTilt?: {
+		destroy: () => void;
+	};
+}
+interface AccessTokenPayload extends JwtPayload {
+	_id: string;
+	role: number;
+	email: string;
+	provider: string;
+}

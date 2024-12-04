@@ -4,11 +4,7 @@ import { greetings, jokes } from "@/constants";
 import Image from "next/image";
 import "./home.css";
 import VanillaTilt from "vanilla-tilt";
-interface TiltDiv extends HTMLDivElement {
-	vanillaTilt?: {
-		destroy: () => void;
-	};
-}
+
 const getRandomJoke = () => {
 	// Get a random joke excluding the first one
 	const randomIndex = Math.floor(Math.random() * (jokes.length - 1)) + 1;
@@ -26,7 +22,7 @@ const HomeProfile = () => {
 					<p className="text-slate-800 joke">{getRandomJoke()}</p>
 					<div className="content-container">
 						<h2 className="greeting">{greetings.morning}</h2>
-						<div className="w-fit">
+						<div className="w-fit hidden sm:block">
 							<Image
 								src="/greetings/Alarm_Ringing.svg"
 								alt="Alarm Ringing"
@@ -51,7 +47,7 @@ const HomeProfile = () => {
 					<p className="text-slate-800 joke">{getRandomJoke()}</p>
 					<div className="content-container">
 						<h2 className="greeting">{greetings.workingHours}</h2>
-						<div className="w-fit">
+						<div className="w-fit hidden sm:block">
 							<Image
 								src="/greetings/Office_Work.svg"
 								alt="Office Work"
@@ -74,7 +70,7 @@ const HomeProfile = () => {
 					<p className="text-slate-100 joke">{getRandomJoke()}</p>
 					<div className="content-container">
 						<h2 className="greeting">{greetings.evening}</h2>
-						<div className="w-fit">
+						<div className="w-fit hidden sm:block">
 							<Image
 								src="/greetings/Book_Lover.svg"
 								alt="Evening Relaxation"
@@ -97,7 +93,7 @@ const HomeProfile = () => {
 					<p className="text-slate-100 joke">{getRandomJoke()}</p>
 					<div className="content-container">
 						<h2 className="greeting">{greetings.night}</h2>
-						<div className="w-80">
+						<div className="w-80 hidden sm:block">
 							<Image
 								src="/greetings/Dream.svg"
 								alt="Night Dreaming"
@@ -132,7 +128,7 @@ const HomeProfile = () => {
 		};
 	}, []);
 	return (
-		<section className=" rounded-xl overflow-hidden" ref={div}>
+		<section className="rounded-xl overflow-hidden w-full" ref={div}>
 			{renderDivBasedOnTime()}
 		</section>
 	);

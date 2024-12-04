@@ -59,9 +59,9 @@ export async function cookieResponse(user: AuthSchemaInterface) {
 
 export const verifyAccessToken = async (
 	token: string
-): Promise<JwtPayload | null> => {
+): Promise<AccessTokenPayload | null> => {
 	try {
-		return (await jwt.verify(token, process.env.ACCESS_TOKEN!)) as JwtPayload;
+		return (await jwt.verify(token, process.env.ACCESS_TOKEN!)) as AccessTokenPayload;
 	} catch (error) {
 		console.log(error);
 		return null;

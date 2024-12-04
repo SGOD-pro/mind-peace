@@ -1,16 +1,16 @@
 .profile-container {
-	@apply rounded-xl h-[40dvh] flex flex-col justify-between relative;
+	@apply rounded-xl h-[40dvh] max-h-[250px] md:max-h-[400px] flex flex-col justify-between relative;
 }
 
 .content-container{
-    @apply flex items-center justify-between h-full p-5
+    @apply flex items-center justify-between h-full p-3 xl:p-5 
 }
 .joke{
-   @apply absolute top-4 left-4 w-[90%]
+   @apply absolute top-4 left-4 w-[90%] text-sm sm:text-base
 }
 .footer-text{
-    @apply text-gray-100 absolute bottom-4 left-4
+    @apply text-gray-100 absolute bottom-4 left-4 leading-none text-sm sm:text-base w-[70%] sm:w-full
 }
 .greeting{
-    @apply text-5xl font-bold text-white text-center
+    @apply text-3xl xl:text-5xl font-bold text-white
 }
