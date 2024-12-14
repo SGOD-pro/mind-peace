@@ -20,6 +20,7 @@ function TherapistHomePage() {
 			</Button>
 		);
 	});
+	ProfileTriggerBtn.displayName = "ProfileTriggerBtn";
 	const Content = memo(() => {
 		return (
 			<div className="space-y-3">
@@ -28,7 +29,7 @@ function TherapistHomePage() {
 			</div>
 		);
 	});
-	ProfileTriggerBtn.displayName = "ProfileTriggerBtn";
+	Content.displayName = "Content";
 	const Rows = memo(({ data }: { data: any }) => {
 		const [disable, setDisable] = useState(false);
 		return (
@@ -45,6 +46,7 @@ function TherapistHomePage() {
 			</li>
 		);
 	});
+	Rows.displayName = "Rows";
 	return (
 		<div className="font-lexend-deca mt-4 grid grid-cols-[2.1fr,.9fr] gap-4 h-[calc(100%-1rem)]">
 			<div className=" space-y-4">

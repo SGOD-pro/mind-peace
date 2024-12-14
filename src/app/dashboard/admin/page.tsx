@@ -13,7 +13,7 @@ function Admin() {
 	return (
 		<div className="flex flex-1 flex-col gap-4 mt-4">
 			<div className="grid auto-rows-min gap-4 md:grid-cols-3 font-lexend-deca">
-				<div className="rounded-xl bg-muted/50 p-3 relative">
+				<div className="rounded-xl bg-muted p-3 relative">
 					<h2 className="text-4xl">Therapists</h2>
 					<p className="font-lexend-exa text-7xl text-center text-orange-500">
 						07
@@ -24,7 +24,7 @@ function Admin() {
 						</span>
 					</div>
 				</div>
-				<div className="rounded-xl bg-muted/50 p-3 relative">
+				<div className="rounded-xl bg-muted p-3 relative">
 					<h2 className="text-4xl">Profit</h2>
 					<p className="font-lexend-exa text-7xl text-center text-blue-500">
 						07
@@ -35,7 +35,7 @@ function Admin() {
 						</span>
 					</div>
 				</div>
-				<div className="rounded-xl bg-muted/50 p-3 relative">
+				<div className="rounded-xl bg-muted p-3 relative">
 					<h2 className="text-4xl">Reviews</h2>
 					<p className="font-lexend-exa text-7xl text-center text-lime-500">
 						07
@@ -47,12 +47,12 @@ function Admin() {
 					</div>
 				</div>
 			</div>
-			<div className="flex-1 rounded-xl bg-muted/50 md:min-h-min p-4">
+			<div className="flex-1 rounded-xl bg-muted md:min-h-min p-4">
 				<div className="text-right">
 					<DialogComp content={<AddTherapistForm />} title="Add new therapist">
-						<Button>
+						<div className="flex gap-2 items-center rounded-md px-3 py-2 border hover:bg-muted">
 							Add new <CirclePlus />
-						</Button>
+						</div>
 					</DialogComp>
 				</div>
 				<div className=" border rounded-lg mt-4">

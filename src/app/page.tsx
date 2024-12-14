@@ -10,7 +10,6 @@ import { lazy, Suspense, useEffect } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import LocomotiveScroll from "locomotive-scroll";
 import { animationStore } from "@/store/Animation";
-// import Section1 from "@/components/Section1";
 
 export default function Home() {
 	useEffect(() => {

@@ -24,7 +24,6 @@ function Main({ children }: { children: React.ReactNode }) {
 	}, []);
 	useEffect(() => {
 		const selectionCopy = (e: ClipboardEvent) => {
-			// const selectedData=window.getSelection()?.toString()
 			e.clipboardData?.setData("text/plain", "Hey noob. Get out from here..!");
 			e.preventDefault();
 		};

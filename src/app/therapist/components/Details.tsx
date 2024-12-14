@@ -91,27 +91,27 @@ function Details({ id }: { id: string }) {
 							) : (
 								<>
 									<p className="flex items-center gap-2">
-										<UserRoundCheck className="w-5 h-5"/>
+										<UserRoundCheck className="w-5 h-5" />
 										{therapist?.speciality}
 									</p>
 									<p className="flex items-center gap-2">
-										<Phone className="w-5 h-5"/>
+										<Phone className="w-5 h-5" />
 										<Link href={`tel:+91${therapist?.contactNo}`} className="">
 											{therapist?.contactNo}
 										</Link>
 									</p>
 									<p className="flex items-center gap-2">
-										<MapPin className="w-5 h-5"/>
+										<MapPin className="w-5 h-5" />
 										<span className=" capitalize">
 											{therapist?.clinicLocation}
 										</span>
 									</p>
 									<p className="flex items-center gap-2">
-										<BriefcaseMedical className="w-5 h-5"/>
+										<BriefcaseMedical className="w-5 h-5" />
 										<span className="">{therapist?.experience} Y</span>
 									</p>
 									<p className="flex items-center gap-2">
-										<IndianRupee className="w-5 h-5"/>
+										<IndianRupee className="w-5 h-5" />
 										<span className="">{therapist?.charges}</span>
 									</p>
 								</>
@@ -123,12 +123,14 @@ function Details({ id }: { id: string }) {
 							{loading ? (
 								<Skeleton className="bg-[#69e7d8] h-10 w-20 rounded-md" />
 							) : !user ? (
-								<button
-									className="bg-blue-600 w-full rounded-md px-4 py-1.5 text-white text-center login-btn"
-									onClick={() => setIsOpen(true)}
-								>
-									Login
-								</button>
+								<DrawerClose className="flex-grow">
+									<button
+										className="bg-blue-600 w-full rounded-md px-4 py-1.5 text-white text-center login-btn"
+										onClick={() => setIsOpen(true)}
+									>
+										Login
+									</button>
+								</DrawerClose>
 							) : (
 								<Link
 									href={`/therapist/book/${id}`}
@@ -139,7 +141,9 @@ function Details({ id }: { id: string }) {
 							)}
 						</div>
 						<DrawerClose className="flex-grow">
-							<Button className="w-full" variant={"ghost"}>Cancel</Button>
+							<Button className="w-full" variant={"ghost"}>
+								Cancel
+							</Button>
 						</DrawerClose>
 					</DrawerFooter>
 				</div>
