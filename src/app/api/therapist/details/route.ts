@@ -1,6 +1,6 @@
 import connectDb from "@/db";
 import ApiResponse from "@/helper/ApiResponse";
-import TherapistModel from "@/schema/Therapist";
+import TherapistModel from "@/models/Therapist";
 
 export async function GET(req: Request) {
 	await connectDb();

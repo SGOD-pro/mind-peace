@@ -3,8 +3,8 @@ import ApiResponse from "@/helper/ApiResponse";
 import { SendMail } from "@/helper/SendMail";
 import { verifyRole } from "@/helper/Tokens";
 import uploadFile from "@/helper/UploadFiles";
-import AuthModel from "@/schema/Auth";
-import TherapistModel from "@/schema/Therapist";
+import AuthModel from "@/models/Auth";
+import TherapistModel from "@/models/Therapist";
 import { NextRequest } from "next/server";
 function generateCustomPassword(): string {
 	const numbers = "0123456789";

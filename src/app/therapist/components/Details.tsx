@@ -118,30 +118,30 @@ function Details({ id }: { id: string }) {
 							)}
 						</div>
 					</div>
-					<DrawerFooter className=" flex flex-row sm:flex-col gap-2 p-0">
-						<div className="flex-grow">
+					<DrawerFooter className=" flex flex-row-reverse sm:flex-col gap-2 p-0">
+						<DrawerClose className="flex-grow">
 							{loading ? (
 								<Skeleton className="bg-[#69e7d8] h-10 w-20 rounded-md" />
 							) : !user ? (
-								<DrawerClose className="flex-grow">
-									<button
-										className="bg-blue-600 w-full rounded-md px-4 py-1.5 text-white text-center login-btn"
-										onClick={() => setIsOpen(true)}
-									>
-										Login
-									</button>
-								</DrawerClose>
-							) : (
-								<Link
-									href={`/therapist/book/${id}`}
-									className="bg-blue-600 rounded-md px-4 py-1.5 text-white text-center"
+								<button
+									className="bg-blue-600 w-full rounded-md px-4 py-1.5 text-white text-center login-btn"
+									onClick={() => setIsOpen(true)}
 								>
-									Book
-								</Link>
+									Login
+								</button>
+							) : (
+								<div className="w-full h-full bg-blue-600 rounded-md text-white text-center flex items-stretch">
+									<Link
+										href={`/therapist/book/${id}`}
+										className="w-full h-full text-center flex items-center justify-center"
+									>
+										<div className="flex items-center px-4 py-1.5">Book</div>
+									</Link>
+								</div>
 							)}
-						</div>
+						</DrawerClose>
 						<DrawerClose className="flex-grow">
-							<Button className="w-full" variant={"ghost"}>
+							<Button className="w-full bg-slate-200" variant={"ghost"}>
 								Cancel
 							</Button>
 						</DrawerClose>

@@ -1,5 +1,5 @@
 import connectDb from "@/db";
-import AuthModel from "@/schema/Auth";
+import AuthModel from "@/models/Auth";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { NextResponse, NextRequest } from "next/server";
 

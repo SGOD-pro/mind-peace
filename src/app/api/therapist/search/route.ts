@@ -1,10 +1,10 @@
 import connectDb from "@/db";
 import ApiResponse from "@/helper/ApiResponse";
 
-import TherapistModel from "@/schema/Therapist";
+import TherapistModel from "@/models/Therapist";
 import mongoose from "mongoose";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import Appointment from "@/schema/Appointment";
+import Appointment from "@/models/Appointment";
 import { NextRequest } from "next/server";
 export async function GET(req: NextRequest) {
 	await connectDb();

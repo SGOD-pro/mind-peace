@@ -1,6 +1,6 @@
 import connectDb from "@/db";
 import ApiResponse from "@/helper/ApiResponse";
-import FeedbackModel from "@/schema/Feedback";
+import FeedbackModel from "@/models/Feedback";
 import mongoose, { PipelineStage } from "mongoose";
 
 export async function POST(req: Request) {

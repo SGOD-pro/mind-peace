@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import AuthModel from "@/schema/Auth";
+import AuthModel from "@/models/Auth";
 import { options } from "@/constants";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import { AuthSchemaInterface } from "@/schema/Auth";
+import { AuthSchemaInterface } from "@/models/Auth";
 export const generateTokens = async (
 	userId: string
 ): Promise<{ accToken: string; refreshToken: string }> => {

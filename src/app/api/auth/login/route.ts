@@ -1,4 +1,4 @@
-import AuthModel from "@/schema/Auth";
+import AuthModel from "@/models/Auth";
 import { generateTokens,cookieResponse } from "@/helper/Tokens";
 import connectDb from "@/db";
 import { NextRequest, NextResponse } from "next/server";

@@ -1,7 +1,7 @@
 import connectDb from "@/db";
 import ApiResponse from "@/helper/ApiResponse";
 import { verifyAccessToken } from "@/helper/Tokens";
-import TherapistModel from "@/schema/Therapist";
+import TherapistModel from "@/models/Therapist";
 import { NextRequest } from "next/server";
 
 export async function GET(req: NextRequest) {

@@ -2,10 +2,10 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { cookieResponse } from "@/helper/Tokens"; // Adjust the path as needed
+// Function to establish a connection to the database
 import connectDb from "@/db";
 import jwt, { JwtPayload } from "jsonwebtoken";
-import AuthModel from "@/schema/Auth";
-import { options } from "@/constants";
+import AuthModel from "@/models/Auth";
 interface DecodedToken extends JwtPayload {
 	_id: string; // or whatever fields you expect in your token
 	exp?: number; // optional: expiration time if you're including it in your token
@@ -48,8 +48,6 @@ export async function POST(req: NextRequest) {
 			return res;
 		}
 		const response = await cookieResponse(user);
-
-
 		return response;
 	} catch (error) {
 		console.error("Error in refresh token handler:", error);

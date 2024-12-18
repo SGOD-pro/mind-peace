@@ -1,5 +1,5 @@
 import uploadFile from "@/helper/UploadFiles";
-import AuthModel from "@/schema/Auth";
+import AuthModel from "@/models/Auth";
 import connectDb from "@/db";
 import ApiResponse from "@/helper/ApiResponse";
 import { NextRequest } from "next/server";

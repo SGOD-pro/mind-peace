@@ -34,12 +34,14 @@ function Main({ children }: { children: React.ReactNode }) {
 	}, []);
 
 	return (
-		<main className="bg-[#F9F9F9] w-full min-h-dvh">
-			<ShowLoginForm />
-			{showNavbarAndFooter && <Navbar />}
-			<VerifySession>{children}</VerifySession>
-			{showNavbarAndFooter && <Footer />}
-		</main>
+		<VerifySession>
+			<main className="bg-[#F9F9F9] w-full min-h-dvh">
+				<ShowLoginForm />
+				{showNavbarAndFooter && <Navbar />}
+				{children}
+				{showNavbarAndFooter && <Footer />}
+			</main>
+		</VerifySession>
 	);
 }
 

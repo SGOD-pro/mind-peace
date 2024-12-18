@@ -1,11 +1,11 @@
 import connectDb from "@/db";
 import ApiResponse from "@/helper/ApiResponse";
-import AppointmentModel from "@/schema/Appointment";
+import AppointmentModel from "@/models/Appointment";
 import mongoose from "mongoose";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import { NextRequest } from "next/server";
 import { getNextDayDate } from "@/helper/DateTime";
-import TherapistModel from "@/schema/Therapist";
+import TherapistModel from "@/models/Therapist";
 //import { SendMail } from "@/helper/SendMail";
 
 const generateAppointmentId = (lastId: string | null) => {
